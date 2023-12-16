@@ -1,0 +1,301 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-path-edits</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+
+div.background {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+}
+</style>
+<body>
+<div class="background">
+<h1>ofn-path-edits</h1>
+
+<p>This script/plug-in contains a set of functions to perform path and stroke editing.
+The user is assumed to be somewhat familiar with the path editor and with some concepts
+underlying Gimp paths. If necessary a short write-up can be found on
+<a href="http://www.gimp-forum.net/Thread-Paths-Basics">http://www.gimp-forum.net/Thread-Paths-Basics</a>.</p>
+
+<p>All the functions act on an existing path, and are accessed via the &ldquo;Edit&rdquo; sub-menu of the right-click menu
+in the Paths list dialog.</p>
+
+<p><img src="ofn-path-edits-menu.png" alt="Menu location" /></p>
+
+<h2>Path summary</h2>
+
+<p><code>Path summary</code> is useful to determine path and stroke characteristics that cannot be checked
+visually, such as the actual number of strokes, and their direction and closure. This function
+produces a message which, depending on the Gimp setup, is either displayed in a dialog or is just
+added to the error console. The message contains:</p>
+
+<ul>
+<li>The name of the path, and the number of strokes</li>
+<li><p>And for each stroke:</p>
+
+<ul>
+<li>The X,Y position of the first anchor</li>
+<li>The total number of anchors in the stroke</li>
+<li>The length of the stroke</li>
+<li>The state of the stroke:
+
+<ul>
+<li>Open (&lsquo;OPN&rsquo;)</li>
+<li>Closed and running clockwise(&lsquo;CW&rsquo;)</li>
+<li>Closed and running counter-clockwise(&lsquo;CCW&rsquo;)</li>
+</ul>
+</li>
+<li>The X,Y position of the last anchor</li>
+</ul>
+</li>
+</ul>
+
+
+<p>For instance:</p>
+
+<p><img src="Summary.png" alt="Summary Example" /></p>
+
+<pre><code>Path "Example" [4]:
+(138.0, 296.0) &lt;- 4 : 495.4 : OPN -&gt; (237.0, 15.0)
+(229.0, 124.0) &lt;- 3 : 707.3 : CW  -&gt; (265.0, 278.0)
+(48.0, 254.0) &lt;- 2 : 123.8 : OPN -&gt; (126.0, 259.0)
+(323.2, 7.6) &lt;- 4 : 256.3 : OPN -&gt; (323.2, 7.6)
+</code></pre>
+
+<p>Note that:</p>
+
+<ul>
+<li>The 2nd stroke (bottom potato) is a normally closed stroke since its extremities have different coordinates.
+The summary reports three anchors and a &ldquo;closed&rdquo; flag.</li>
+<li>The last stroke (top potato) looks closed only because its extremities overlap. The summary reports 4 anchors
+(while only three are distinguishable), no &ldquo;closed&rdquo; flag, and identical coordinates for it extremities.</li>
+</ul>
+
+
+<h2>Reverse strokes</h2>
+
+<p><code>Reverse strokes</code> swaps the ends of the strokes in the selection.
+A stroke is in the selection if at least one of its anchors is in the selection.
+If there is no selection, all the strokes are reversed (in practice this means
+that a selection is not needed when there is only one stroke in the path).</p>
+
+<p>The reversed stroke is visually identical to the original stroke.
+The only way to check the result is to use the <code>Path summary</code> function above
+and check that the coordinates of the extremities have been swapped.
+Stroke direction is of course important in several cases:</p>
+
+<ul>
+<li>Stroking the path with fade-related dynamics or with a gradient</li>
+<li>Stroking the path with tools that are sensitive to the direction (<code>Ink</code> tool, for instance)</li>
+<li>Using some path-related functionality (<code>Text along path</code>)</li>
+</ul>
+
+
+<h2>Extract strokes &amp; Delete strokes</h2>
+
+<p><code>Extract strokes</code> and <code>Delete strokes</code> remove strokes from the path. <code>Extract strokes</code> removes all but the
+selected strokes, and <code>Delete strokes</code> removes the selected strokes.</p>
+
+<p>Different selection methods can be used, closed strokes where anchors are difficult to spot can be framed
+by a rectangle or ellipse selection, open strokes are easily selected by just selecting one of their extremities.</p>
+
+<p>After selection:</p>
+
+<p><img src="Delete-Extract-Strokes-Initial.png" alt="Delete-Extract-Strokes-Initial" /></p>
+
+<p>After <code>Delete strokes</code>:</p>
+
+<p><img src="Delete-Extract-Strokes-Deleted.png" alt="Delete-Extract-Strokes-Deleted" /></p>
+
+<p>After <code>Extract strokes</code>:</p>
+
+<p><img src="Delete-Extract-Strokes-Extracted.png" alt="Delete-Extract-Strokes-Extracted" /></p>
+
+<h2>Extract anchors &amp; Delete anchors</h2>
+
+<p><code>Extract anchors</code> and <code>Delete anchors</code> remove anchors from the path strokes.
+<code>Extract anchors</code> removes all but the selected anchors,
+and <code>Delete anchors</code> removes the selected anchors.
+The remainging anchors of a stroke remain connected as a single stroke
+(deleted anchors are replaced by a segment).</p>
+
+<p>After selection:</p>
+
+<p><img src="Delete-Extract-Anchors-Initial.png" alt="Delete-Extract-Anchors-Initial" /></p>
+
+<p>After <code>Delete strokes</code>:</p>
+
+<p><img src="Delete-Extract-Anchors-Deleted.png" alt="Delete-Extract-Anchors-Deleted" /></p>
+
+<p>After <code>Extract strokes</code>:</p>
+
+<p><img src="Delete-Extract-Anchors-Extracted.png" alt="Delete-Extract-Anchors-Extracted" /></p>
+
+<h2>Break path apart</h2>
+
+<p><code>Break path apart</code> copies each stroke in the path to a new path. The individual paths are produced in the order of the
+strokes in the path, which may have nothing to do with their actual relationships.</p>
+
+<h2>Break text path apart</h2>
+
+<p><code>Break text path apart</code> works like <code>Break path part</code> but attempts to keep together in the same path
+strokes that come from the same character, so that the end result is hopefully one path per letter.
+In practice it keeps together strokes that are nested, so parts of letters that are non-contiguous
+(diacritics marks such as the dot on <code>i</code> with standard fonts, and character parts in decorative fonts)
+end up in distinct paths.
+The individual paths are produced in the order of the strokes in the path,
+which may have nothing to do with their actual relationships.</p>
+
+<p><img src="BreakTextPathApart.png" alt="BreakTextPathApart" /></p>
+
+<p>The current algorithm has been tested with convoluted decorative fonts. In case it fails on some fonts,
+try increasing the number of anchors with the <code>Densify anchors</code> function.</p>
+
+<h2>Break path apart by nesting order</h2>
+
+<p><code>Break path apart by nesting order</code> creates paths that contain all the strokes at the same nesting level (the first level
+contains all the strokes that are not enclosed in any other stroke). The first level is at the bottom of the stack so that
+processes that work up the stack (such as animations and related scripts) put the nested levels last,
+where they won&rsquo;t be masked by the enclosing ones.</p>
+
+<p>For instance a path like this:</p>
+
+<p><img src="BreakPathApartNestedSource.png" alt="BreakPathApartNestedSource" /></p>
+
+<p>Produces three paths (delineating the blue, dark green and light green areas):</p>
+
+<p><img src="BreakPathApartNestedResult.png" alt="BreakPathApartNestedResult" /></p>
+
+<h2>Sort strokes horizontally/vertically</h2>
+
+<p>These two functions reorder the strokes in the path in the order of the center of their bounding boxes. There is no visual difference,
+but having the right order can be important when using the path for animations.</p>
+
+<h2>Join strokes</h2>
+
+<p><code>Join strokes</code> splices together strokes that have extremities that are close enough to each other (X and Y coordinates
+differ by less than one tenth of a pixel). It will also properly close strokes that look closed only because
+they have overlapping extremities. The result of <code>Join strokes</code> is visually identical to the initial path.
+<code>Path summary</code> will of course show the difference, but having a single stroke is also important in other
+occasions;</p>
+
+<ul>
+<li>the stroke can be moved as whole (and independently of others) in the Path editor</li>
+<li>the join enforces a coherent direction of the strokes which is required for some
+functionality such as <code>Text to path</code></li>
+<li>some paint tools (for instance, <code>Ink</code>) are sensitive to the end of strokes and won&rsquo;t give
+the same results on two disjoint strokes as on a single stroke.</li>
+</ul>
+
+
+<p>A good use case is producing symmetrical closed strokes:</p>
+
+<p>Create one half of the path, with extremities along the middle axis:</p>
+
+<p><img src="Symmetry-join-initial.png" alt="Symmetry-join-initial" /></p>
+
+<p>Duplicate the path and flip it with the Flip tool in &ldquo;Path&rdquo; mode:</p>
+
+<p><img src="Symmetry-join-duplicated-flipped.png" alt="Symmetry-join-duplicated-flipped" /></p>
+
+<p>Merge the two paths (<code>Merge visible paths</code> in the Paths menu):</p>
+
+<p><img src="Symmetry-join-merged.png" alt="Symmetry-join-merged" /></p>
+
+<p>At that point there are still two strokes:</p>
+
+<pre><code>Path "Spade" [2]:                               
+(150.0, 50.0) &lt;- 5 : 533.2 : O -&gt; (150.0, 250.0)
+(150.0, 50.0) &lt;- 5 : 533.2 : O -&gt; (150.0, 250.0)
+</code></pre>
+
+<p>Apply <code>Join strokes</code>, the path still looks the same, but there is only one stroke:</p>
+
+<pre><code>Path "Spade" [1]:                                 
+(150.0, 250.0) &lt;- 8 : 1066.4 : C -&gt; (250.0, 250.0)
+</code></pre>
+
+<p>The anchor in the middle of the foot is superfluous and can be removed (Ctrl-Shift-Click):</p>
+
+<p><img src="Symmetry-join-cleaned.png" alt="Symmetry-join-cleaned.png" /></p>
+
+<pre><code>Path "Spade" [1]:                                
+(50.0, 250.0) &lt;- 7 : 1066.4 : C -&gt; (250.0, 250.0)
+</code></pre>
+
+<h2>Disjoin strokes</h2>
+
+<p><code>Disjoin strokes</code> is the opposite of <code>Join strokes</code>: it cuts strokes on the selected anchors to
+make two strokes with overlapping extremities. If the stroke is a closed stroke, it is replaced by
+a pseudo-closed stroke: one anchor is added at one end to overlap the anchor at the other end and
+the stroke is marked open.</p>
+
+<h2>Densify anchors</h2>
+
+<p><code>Densify anchors</code> doubles the number of anchors in a path, by adding one anchor between each pair of anchors.
+<strong>This does not change the shape of the path</strong>, but merely makes it more resilient to abuse or mistreatment.
+For instance, <code>Break text path apart</code> can more accurately identify nested strokes if there are more anchors.</p>
+</div></body></html>

@@ -1,0 +1,411 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-hatching</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+
+div.background {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+}
+</style>
+<body>
+<div class="background">
+<a name="ofn-2d-hatching"></a>
+<h1>ofn-hatching</h1>
+
+<a name="Contents"></a>
+<h2>Contents</h2>
+
+<ul>
+<li><a href="#Purpose">Purpose</a></li>
+<li><a href="#Operation">Operation</a>
+
+<ul>
+<li><a href="#Base-lines">Base lines</a></li>
+<li><a href="#Rendering">Rendering</a></li>
+</ul>
+</li>
+<li><a href="#Using-the-script">Using the script</a></li>
+<li><a href="#Defining-styles">Defining styles</a>
+
+<ul>
+<li><a href="#Location-and-reloading-of-the-configuration-file">Location and reloading of the configuration file</a>
+
+<ul>
+<li><a href="#Registration">Registration</a></li>
+</ul>
+</li>
+<li><a href="#Contents-of-the-configuration-file">Contents of the configuration file</a>
+
+<ul>
+<li><a href="#Configuration-object">Configuration object</a></li>
+<li><a href="#Style-objects">Style objects</a></li>
+<li><a href="#DashPattern-objects">DashPattern objects</a></li>
+</ul>
+</li>
+<li><a href="#Checking-the-configuration-file">Checking the configuration file</a></li>
+</ul>
+</li>
+</ul>
+
+
+<a name="Purpose"></a>
+<h2>Purpose</h2>
+
+<p>This script/plug-in produces nice and clean hatchings. Complex and preset hatchings can be achieved with a configuration
+file.</p>
+
+<p><img src="SampleHatching.png" alt="Sample" /></p>
+
+<p>The menu entry for the script is <code>Filters&gt;Render&gt;Patterns&gt;Hatching...</code></p>
+
+<a name="Operation"></a>
+<h2>Operation</h2>
+
+<a name="Base-lines"></a>
+<h3>Base lines</h3>
+
+<ul>
+<li>The script generates a set of parallel lines using an <code>angle</code> and a <code>spacing</code>.</li>
+<li>The origins of the lines are aligned on a perpendicular to the lines (this feature is important
+when defining dashes)</li>
+<li>There is always an odd number of lines, the middle line goes exactly through the center of the target
+layer, layer mask or channel.</li>
+</ul>
+
+
+<p><img src="BaseLines.png" alt="BaseLines" /></p>
+
+<a name="Rendering"></a>
+<h3>Rendering</h3>
+
+<p>The lines are added to a path and the path is stroked in <code>Line</code> mode using the foreground color.
+The lines can be made of dashes. There are five parameters:</p>
+
+<ul>
+<li>The <code>width</code> (or thickness) of the line. This width can be:
+
+<ul>
+<li>absolute: it is expressed in pixels</li>
+<li>relative: it is expressed as a percentage of the spacing, <code>100%</code> being the width of the spacing</li>
+</ul>
+</li>
+<li>The <code>dash period</code>: the length between the beginning of two consecutive dashes. <strong>The dash period is expressed as
+a multiple of the line width</strong>.</li>
+<li>The <code>dash ratio</code>: the ratio of the length of the drawn dash to the dash period. This is expressed as a percentage,
+with <code>0%</code> making an invisible line (or sparsely dotted, depending on line endings), and 100% making a continuous line.</li>
+<li>The <code>dash offset</code>: the shift of the beginning of the drawn dash. This is expressed as a percentage
+of the dash period with, <code>0%</code> making the first dash begin at the beginning of the base line. If there is a single line
+specification the dash offset is not important, it is best used to shift the dashes of one group of lines relative to
+the others.</li>
+<li>The <code>cap type</code>: how the dash are terminated. There are the same options as the &ldquo;Cap Style&rdquo; used in <code>Edit&gt;Stroke path</code>.
+Note that &ldquo;round&rdquo; and &ldquo;square&rdquo; caps are added to the actual lenght of the dash, so a dash of length 0 will appear as a circle with round caps and a square with square caps. In other words, dash period and dash offset don&rsquo;t take them in account. &ldquo;Square&rdquo; caps are provided for completeness and aren&rsquo;t very useful here
+since their appearance is the same as &ldquo;butt&rdquo;.</li>
+</ul>
+
+
+<p><img src="Parameters.png" alt="Parameters" /></p>
+
+<p>In the example above:</p>
+
+<ul>
+<li>The <code>width</code> is <code>20px</code></li>
+<li>The <code>dash period</code> is <code>10</code>, so it it is: <code>width20px × 10 = 20px × 10 = 200px</code></li>
+<li>The <code>dash ratio</code> is <code>60%</code>, so the dashes are: <code>200px × 60% = 120px</code></li>
+<li>Assuming the first line has no dash offset, the second line has a dash offset of <code>20%</code>,
+so its offset is: <code>200px × 20% = 40px</code>.</li>
+</ul>
+
+
+<p>Keep in mind that all these values are related, and increasing/decreasing the width of the lines
+scales up/down everything else accordingly. In addition, using a relative line width makes the hatching auto-scale
+with the spacing.</p>
+
+<a name="Using-the-script"></a>
+<h2>Using the script</h2>
+
+<p>The script is started by <code>Filters&gt;Render&gt;Pattern&gt;Hatching...</code></p>
+
+<p>This script requires Gimp 2.10 or later.</p>
+
+<p>The first two styles in the list correspond to hatchings where all lines are identical and take all their dash parameters
+from the values in the dialog. One style uses lines with an absolute width, and the other uses a relative width.</p>
+
+<a name="Styles"></a>
+<h3>Styles</h3>
+
+<p>Styles are convenient ways to keep together hatching parameters:</p>
+
+<ul>
+<li>The angle</li>
+<li>The spacing</li>
+<li>Line rendering parameters, kept together as a &ldquo;dash patterns&rdquo;.</li>
+</ul>
+
+
+<p>A style can contain several dash patterns, that are applied to lines in a round robin fashion. For instances,
+with three patterns</p>
+
+<ul>
+<li>The first pattern is applied to lines 1, 4, 7 &hellip;</li>
+<li>The second pattern is applied to lines 2, 5, 8 &hellip;</li>
+<li>The third pattern is applied to lines 3, 6, 9 &hellip;</li>
+</ul>
+
+
+<p>Parameters are defined using a hierarchy:</p>
+
+<ul>
+<li>Angle and spacing can be defined by the style or come from the parameters dialog.</li>
+<li>Line width (absolute or relative) and dash characteristics can be defined by
+the dash pattern, the style, or come from the parameters dialog. For instance you
+can have a style where:
+
+<ul>
+<li>the line width, the dash period and the dash ratio are defined by the style,</li>
+<li>the dash patterns only define various dash offsets,</li>
+<li>the remaining parameters (angle and spacing) are taken from the parameters dialog.</li>
+</ul>
+</li>
+</ul>
+
+
+<a name="Defining-styles"></a>
+<h2>Defining styles</h2>
+
+<p>Personal styles can be defined using a configuration file.</p>
+
+<a name="Location-and-reloading-of-the-configuration-file"></a>
+<h3>Location and reloading of the configuration file</h3>
+
+<p>The configuration file should be put in the same directory as the plugin.</p>
+
+<a name="Registration"></a>
+<h4>Registration</h4>
+
+<p>Gimp creates the plugin dialog from data obtained by a &ldquo;registration&rdquo; process.</p>
+
+<p>This registration process occurs when Gimp notices a new plugin executable,
+or when an already registered executable changes (according to the file change date).
+Changing the list of styles in the dialog requires Gimp to update its registration data,
+but since the plugin file itself has not changed Gimp will not notice it.</p>
+
+<p>You can force Gimp to re-acquire the registration data using one the three methods below:</p>
+
+<ul>
+<li>Editing the <code>pluginrc</code> file in the Gimp profile, locating the line starting with
+<code>(plug-in-def</code> that bears the plugin file name, and delete the file contents from that line up to
+and not including the next <code>(plug-in-def</code>.</li>
+<li>Deleting the <code>pluginrc</code> file, but this makes Gimp re-run all the plugins for registration the next time it starts.</li>
+<li>Temporarily remove the plugin file, start Gimp, put the file back, and restart Gimp.</li>
+</ul>
+
+
+<p>This is only necessary if you add, delete, or rename a style, otherwise changes in a style are taken in account
+instantly (you won&rsquo;t even need to restart Gimp for this).</p>
+
+<a name="Contents-of-the-configuration-file"></a>
+<h3>Contents of the configuration file</h3>
+
+<p>The configuration files follows the JSON format. This format is very popular to exchange structured
+data and is well documented on the Internet. JSON syntax checkers are available online. <code>ofn-hatching</code>
+only looks for specific keys, other keys can be used, for instance to hold comments (there is no provision
+for comments in JSON).</p>
+
+<a name="Configuration-object"></a>
+<h4>Configuration object</h4>
+
+<p>The configuration file contains a single JSON object. This object&rsquo;s keys are Style names, and
+the corresponding values are Style objects. Configuration objects</p>
+
+<a name="Style-objects"></a>
+<h4>Style objects</h4>
+
+<p>All keys in a Style are optional, and the values are numeric unless stated otherwise:</p>
+
+<p>A first group of keys pertain to the style itself:</p>
+
+<ul>
+<li><code>order</code>: a numeric sort order. This sort order determines the order of the style in the style selector drop-down.
+Styles with the same order value are sorted alphabetically. Styles without an order are assigned the 99 value.</li>
+<li><code>angle</code>: the numeric angle. If left unspecified the angle from the parameters dialog will be used.</li>
+<li><code>spacing</code>: the numeric angle. If left unspecified the angle from the paramaters dialog will be used.</li>
+<li><code>dashes</code>: a list of DashPattern objects, in the order in which groups should be rendered.
+If this list is missing or empty, it is assumed to contains a single DashPattern with all default values.</li>
+</ul>
+
+
+<p>A second group sets default values for the DashPattern objects:</p>
+
+<ul>
+<li><code>widthType</code>: the absolute or relative width. A value of <code>0</code> or <code>"ABSOLUTE"</code> or a missing value means an absolute width,
+any other numeric value or <code>"RELATIVE"</code> means a relative width.</li>
+<li><code>relWidth</code>: a relative width value</li>
+<li><code>absWidth</code>: an absolute width value</li>
+<li><code>dashPeriod</code>: the dash period</li>
+<li><code>dashRatio</code>: the dash ratio</li>
+<li><code>dashOffset</code>: the dash offset</li>
+<li><code>capType</code>: the cap endings. Possible values are <code>"BUTT"</code> or <code>0</code>, <code>"ROUND"</code> or <code>1</code>, <code>"SQUARE"</code> or <code>2</code>.</li>
+</ul>
+
+
+<p>For all keys except <code>widthType</code>, a missing key or a key set to <code>null</code> are given the value of the corresponding parameter
+in the input dialog.</p>
+
+<a name="DashPattern-objects"></a>
+<h4>DashPattern objects</h4>
+
+<p>Dash pattern objects set the rendering of the groups of lines. They can contains the following keys:</p>
+
+<ul>
+<li><code>widthType</code>: the absolute or relative width. A value of <code>0</code> or <code>"ABSOLUTE"</code> or a missing value means an absolute width,
+any other numeric value or <code>"RELATIVE"</code> means a relative width.</li>
+<li><code>relWidth</code>: a relative width value</li>
+<li><code>absWidth</code>: an absolute width value</li>
+<li><code>dashPeriod</code>: the dash period</li>
+<li><code>dashRatio</code>: the dash ratio</li>
+<li><code>dashOffset</code>: the dash offset</li>
+<li><code>capType</code>: the cap endings. Possible values are <code>"BUTT"</code> or <code>0</code>, <code>"ROUND"</code> or <code>1</code>, <code>"SQUARE"</code> or <code>2</code>.</li>
+</ul>
+
+
+<p>For all keys except <code>widthType</code>,</p>
+
+<ul>
+<li>a missing key is given the value set in the Style,  which can in turn have been specified by the Style
+or been inherited from the input dialog)</li>
+<li>a key set to <code>null</code> is given the value of the corresponding parameter in the input dialog. This allows a Style
+to define some fixed value for most DashPattern while having some dash patterns to use the value from the input dialog.</li>
+</ul>
+
+
+<a name="Checking-the-configuration-file"></a>
+<h3>Checking the configuration file</h3>
+
+<p>A bad configuration file can make the plugin unable to register. You can check your configuration
+file using the plugin itself:</p>
+
+<ul>
+<li>Start a command prompt, and navigate to the directory with the plugin PY and JSON files.</li>
+<li>Then run the plugin outside of Gimp, passing at least the configuration file as a parameter:</li>
+</ul>
+
+
+<pre><code>/path/to/interpreter/python ./ofn-hatching.py ofn-hatching.json [dummy dialog inputs]
+</code></pre>
+
+<p>The dialog inputs can be provided as positional parameters, in the order:
+<code>angle</code>, <code>spacing</code>, <code>absWidth</code>, <code>relWidth</code>, <code>dashPeriod</code>, <code>dashRatio</code>, <code>dashOffset</code>. Unspecified values
+are replaced by default values, respectively: <code>25</code>, <code>10</code>, <code>3</code>, <code>40</code>, <code>100</code>, <code>60</code>, <code>30</code>.</p>
+
+<pre><code>python ./ofn-hatching.py ofn-hatching.json 30 20 5 50
+</code></pre>
+
+<p>This calls every style in the configuration with dummy dialog parameters, and lists the
+final result:</p>
+
+<pre><code>Reading configuration file ./ofn-hatching.json
+Configuration file ./ofn-hatching.json read successfully
+Using: angle: 25.0, spacing: 10.0, absWidth: 3.0, relWidth: 40.0, 
+dashPeriod: 100.0, dashRatio: 60.0, dashOffset: 30.0
+*---
+Simple lines, absolute width: Angle: 25, Spacing: 10, Dashes: 1
+    {period: 100, ratio: 60, offset: 30, width: 3, capType: Butt}
+*---
+Simple lines, relative width: Angle: 25, Spacing: 10, Dashes: 1
+    {period: 100, ratio: 60, offset: 30, width: 4.0, capType: Round}
+*---
+4-phase pseudo random hatching, absolute: Angle: 25, Spacing: 10, Dashes: 4
+    {period: 100, ratio: 60, offset: 0, width: 3, capType: Butt}
+    {period: 100, ratio: 60, offset: 25, width: 3, capType: Butt}
+    {period: 100, ratio: 60, offset: 75, width: 3, capType: Butt}
+    {period: 100, ratio: 60, offset: 50, width: 3, capType: Butt}
+*---
+4-phase pseudo random hatching, relative: Angle: 25, Spacing: 10, Dashes: 4
+    {period: 100, ratio: 60, offset: 0, width: 4.0, capType: Butt}
+    {period: 100, ratio: 60, offset: 25, width: 4.0, capType: Butt}
+    {period: 100, ratio: 60, offset: 75, width: 4.0, capType: Butt}
+    {period: 100, ratio: 60, offset: 50, width: 4.0, capType: Butt}
+*---
+Cap styles: Angle: 25, Spacing: 10, Dashes: 3
+    {period: 100, ratio: 60, offset: 0, width: 3, capType: Butt}
+    {period: 100, ratio: 60, offset: 33, width: 3, capType: Round}
+    {period: 100, ratio: 60, offset: 66, width: 3, capType: Square}
+*---
+Complex: Angle: 45, Spacing: 10, Dashes: 5
+    {period: 20, ratio: 100, offset: 0, width: 2.0, capType: Butt}
+    {period: 4, ratio: 50, offset: 0, width: 2.0, capType: Butt}
+    {period: 100, ratio: 50, offset: 0, width: 3, capType: Butt}
+    {period: 4, ratio: 50, offset: 0, width: 2.0, capType: Butt}
+    {period: 20, ratio: 100, offset: 0, width: 2.0, capType: Butt}
+*---
+Simple: Angle: 25, Spacing: 10, Dashes: 2
+    {period: 10, ratio: 60, offset: 30, width: 3, capType: Butt}
+    {period: 10, ratio: 60, offset: 50, width: 3, capType: Butt}
+</code></pre>
+
+
+</div></body></html>

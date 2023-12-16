@@ -1,0 +1,571 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-path-to-shape</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { color: #000000; background: #ffffd0; }
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-path-to-shape</h1>
+
+<p>ofn-path-to-shape has been spurred by:</p>
+
+<ul>
+<li>the inability to obtain paths in the Gfig filter</li>
+<li>the cumbersome entry of point coordinates in other scripts (such as the shape-path.scm classic)</li>
+</ul>
+
+<p>So this script takes a different approach: points coordinates come from anchors in an existing path. 
+In other words, a path, drawn by hand or obtained bya previous script execution, is used to specify another path.</p>
+
+<p>Functions in this script are divided in three groups:</p>
+
+<ul>
+<li><strong>Shapes on strokes</strong>: each stroke in the path is interpreted to fully describe a shape: position, size, orientation, number of sides, etc.... 
+These functions do not take additional parameters, since everything is specified in the strokes.</li>
+<li><strong>Shapes on segments</strong>: the successive anchors in strokes are interpreted as the ends of segments.
+An additional dialog asks for shape parameters (orientation, number of sides, etc...)</li>
+<li>a third group contains functions that don't fit any other group (such as drawing tangents)</li>
+</ul>
+
+<p>The functions are accessed in a <em>Shapes</em> sub-menu, at the bottom of the right-click menu in the Paths list:</p>
+
+<p><img src="menu-location.png" alt="menu-location" title=""></p>
+
+<p><strong>Note:</strong> You need at least one path in that list before you can right-click on something.</p>
+
+<p>Since a schematic is worth a thousands words, functions are mostly documented with graphics.
+The source path (the one on which the script is called) is in blue <img src="SourcePath.png" alt="source" title="">, 
+and the result path is in red <img src="ResultPath.png" alt="result" title="">.</p>
+
+<hr>
+
+<h2>Functions on strokes</h2>
+
+<p>The general rules of functions on strokes are:</p>
+
+<ul>
+<li>The script creates one shape per stroke in the path. So avoid incomplete strokes and stray points.</li>
+<li>The first point of a stroke is the position of the shape. 
+Where it matters, the shape is guaranteed to pass through that point (or to be exactly centered on it)</li>
+<li>The second point gives a size and/or the orientation</li>
+<li>More points usually determine a count</li>
+<li>There are of course exceptions...</li>
+</ul>
+
+<hr>
+
+<h3>Circles</h3>
+
+<p><strong>Note:</strong> Constructing a circle from a center and a radius or from a diameter is a function on segments (see below)</p>
+
+<h4>Circumcircle</h4>
+
+<p>This function draws the circle going through three points. In practice it finds the center and radius of the circle, 
+and draws an approximation of the circle with Bezier splines, which may not go exactly through all three points, 
+but by construction the first point is guaranteed to be on the circle.</p>
+
+<p><img src="strokes-circles-circumcircle.png" alt="circumcircle" title=""></p>
+
+<p>For best accuracy, the three points should be as much spread apart as possible.</p>
+
+<h4>Crosshair</h4>
+
+<p>This function draws two perpendicular diameters of the circumcircle, one of them going through the first point of the stroke.
+Although it has its uses to draw accurate diameters, it is mostly handy to determine the center of the circle 
+for various purposes, including many that won't even involve paths, such as the starting point for a radial gradient.</p>
+
+<p><img src="strokes-circles-crosshair.png" alt="crosshair" title=""></p>
+
+<hr>
+
+<h3>Lines</h3>
+
+<h4>Divide segment</h4>
+
+<p>The straight lines that goes through the two ends of the stroke is divided in as many sub-segments. 
+In other words, the intermediate anchors in the source stokes are repositioned to equally divide the stroke.</p>
+
+<p><img src="strokes-lines-divide.png" alt="divide" title=""></p>
+
+<h4>Multiply segment</h4>
+
+<p>The straight line segment that goes through the first two points of the stroke is extended with as many aligned sub-segments. 
+In other words, the subsequent anchors are realigned with the first two and equally spaced.</p>
+
+<p><img src="strokes-lines-multiply.png" alt="multiply" title=""></p>
+
+<hr>
+
+<h3>Polygons</h3>
+
+<h4>Polygon from circumradius</h4>
+
+<p>The circumradius is the line between the center of the polygon and a corner. The stroke points are:</p>
+
+<ol>
+<li>The center, </li>
+<li>The first corner, </li>
+<li>More points indicates the other corners, so that the whole stroke has one
+more anchor than the required number of corners. </li>
+</ol>
+
+<p><img src="strokes-polygons-circumradius-1.png" alt="circumradius-1" title=""></p>
+
+<p>Note that if corner points can be roughly positioned on the image, which
+may help determine the needed number of corners, this is not mandatory 
+and this would work just as well:</p>
+
+<p><img src="strokes-polygons-circumradius-2.png" alt="circumradius-2" title=""></p>
+
+<h4>Polygon from apothem</h4>
+
+<p>The apothem is the line between the center of the polygon and the middle of a side. 
+The stroke points are:</p>
+
+<ol>
+<li>The center, </li>
+<li>The middle of the first side, </li>
+<li>More points indicate the other sides, so that the whole stroke has one
+more anchor than the required number of sides. </li>
+</ol>
+
+<p><img src="strokes-polygons-apothem.png" alt="apothem" title=""></p>
+
+<h4>Polygon from side</h4>
+
+<p>The stroke points are:</p>
+
+<ol>
+<li>The beginning of the first side of the polygon,</li>
+<li>The end of the first side of the polygon,</li>
+<li>The first additional side. This point also indicates on which side of 
+the initial segment the polygon should be.</li>
+<li>More points indicate the number of sides.</li>
+</ol>
+
+<p><img src="strokes-polygons-side.png" alt="side" title=""></p>
+
+<hr>
+
+<h3>Rounded polygons</h3>
+
+<p>Rounded polygons are polygons with rounded corners. In the functions described below:</p>
+
+<ul>
+<li>The radius is the line between the polygon center and the midpoint of a circle arc in a corner 
+(in blue in the image below). It is <em>not</em> the radius of the "pointy" polygon than encloses the rounded one.</li>
+<li>The <em>roundness</em> or amount of rounding is expressed as percentage (from 0 to 100%), 
+and is the ratio of the radius of the circles arcs in the corners (in orange) to the radius of the rounded 
+polygon as defined above. A rounded polygon  is a "pointy" polygon with a roundness of 0, and a circle with a roundness of 100%.</li>
+</ul>
+
+<p><img src="roundness-radius.png" alt="roudness" title=""></p>
+
+<p>Rounded polygons (blue) can be seen as having an inner "support" polygon (green), whose corners are used
+as the center or the circles arcs. Between the two lies a strip of constant width (orange):</p>
+
+<p><img src="rounded-polygon-support.png" alt="rounded-polygon-support" title=""></p>
+
+<h4>Rounded polygon from circumradius</h4>
+
+<p>The stroke points are:</p>
+
+<ol>
+<li>The center, </li>
+<li>The center of the rounding arc for the first corner,</li>
+<li>The midpoint of the arc of the first corner</li>
+<li>More points indicates the other corners, so that the whole stroke has two
+more anchors than the required number of corners. </li>
+</ol>
+
+<p><img src="strokes-rounded-polygons-circumradius.png" alt="strokes rounded-poligon-circumradius" title=""></p>
+
+<p><strong>Remark</strong>: the "support" polygon can be easily be constructed by deleting the third point of the
+stroke and using the function "Polygon from circumradius"</p>
+
+<h4>Rounded polygon from apothem</h4>
+
+<p>The stroke points are:</p>
+
+<ol>
+<li>The center, </li>
+<li>The radius of the rounding arc for the corners (th width of the orange strip in 
+the picture above)</li>
+<li>The middle of the first side, </li>
+<li>More points indicate the other sides, so that the whole stroke has two
+more anchors than the required number of sides. </li>
+</ol>
+
+<p><img src="strokes-rounded-polygons-apothem.png" alt="strokes-rounded-polygons-apothem" title=""></p>
+
+<h4>Rounded polygon from side</h4>
+
+<p>The stroke points are:</p>
+
+<ol>
+<li>The beginning of the first side of the <em>enclosing</em> "pointy" polygon (yellow),</li>
+<li>The beginning of the rounding arc,</li>
+<li>The end of the first side of the <em>enclosing</em> "pointy" polygon,</li>
+<li>The first additional side. This point also indicates on which side of 
+the initial segment the polygon should be.</li>
+<li>More points indicate the number of sides, so that the whole stroke has one
+more anchor than the required number of sides.</li>
+</ol>
+
+<p><img src="strokes-rounded-polygons-side.png" alt="strokes-rounded-polygons-side" title=""></p>
+
+<hr>
+
+<h3>Stars</h3>
+
+<h4>Spokes</h4>
+
+<p>The stroke points are:</p>
+
+<ol>
+<li>The center, </li>
+<li>The end of the first spoke, </li>
+<li>Any additional points indicate additional spokes.</li>
+</ol>
+
+<p><img src="strokes-stars-spokes.png" alt="spokes" title=""></p>
+
+<h4>Star</h4>
+
+<p>The stroke points are:</p>
+
+<ol>
+<li>The center, </li>
+<li>The first outer ray, </li>
+<li>The radius for the inner corners, </li>
+<li>Additional points indicate the required number of rays.</li>
+</ol>
+
+<p><img src="strokes-stars-star.png" alt="star" title=""></p>
+
+<h4>Double star</h4>
+
+<p>The stroke points are:</p>
+
+<ol>
+<li>The center, </li>
+<li>The first outer ray, </li>
+<li>The radius for the inner corners, </li>
+<li>The radius for the secondary rays,</li>
+<li>Additional points indicate the required main rays.</li>
+</ol>
+
+<p><img src="strokes-stars-doublestar.png" alt="doublestar" title=""></p>
+
+<hr>
+
+<h3>Rectangle</h3>
+
+<p>Unlike the other constructs, the stroke points do not define the orientation. The rectangle is always upright, 
+with vertical and horizontal sides.</p>
+
+<p>The stroke points are:</p>
+
+<ol>
+<li>One corner of the rectangle,</li>
+<li>The opposite corner of the rectangle,</li>
+<li>Optionally the radius of the rounded corners, </li>
+</ol>
+
+<p><img src="strokes-rectangle-rectangle.png" alt="rectangle" title="">
+<img src="strokes-rectangle-roundedrectangle.png" alt="roundedrectangle" title=""></p>
+
+<hr>
+
+<h2>Functions on segments</h2>
+
+<p>Functions on segments build a shape using intervals between anchors in each stroke. The intervals 
+only define the position, size and orientation of the shapes, everything else is specified in a dialog.</p>
+
+<p>There are two ways to obtain segments from the stroke (in blue):</p>
+
+<ul>
+<li><em>overlapping</em> segments (in green) originate on the first anchor of the stroke, and end on each of
+the other anchors.</li>
+<li><em>consecutive</em> segments (in red) originate on the successive anchors, and end on the next anchor. </li>
+</ul>
+
+<p><img src="segments-overlapping-vs-consecutive.png" alt="overlapping-vs-consecutive" title=""></p>
+
+<hr>
+
+<h3>Circles</h3>
+
+<p>Parameters are:</p>
+
+<ul>
+<li>The use of the segments as radius or diameter (when used as a radius, the first anchor is the center)</li>
+<li>The overlapping/consecutive segments</li>
+</ul>
+
+<p>Of course, a single stroke with two points can be used to generate a simple circle.</p>
+
+<p>Some examples:</p>
+
+<ul>
+<li><p>Overlapping &amp; diameter:</p>
+
+<p><img src="segments-circles-overlapping-diameter.png" alt="overlapping-diameter" title=""></p></li>
+<li><p>Consecutive &amp; diameter:</p>
+
+<p><img src="segments-circles-consecutive-diameter.png" alt="consecutive-diameter" title=""></p></li>
+<li><p>Concentric circles obtained by overlapping segments used as radiuses. The source stroke has
+been equally divided using the <em>Stroke>Line>Divide</em> function.</p>
+
+<p><img src="segments-circles-overlapping-radius.png" alt="concentric-overlapping-radius.png" title=""></p></li>
+</ul>
+
+<hr>
+
+<h3>Polygons</h3>
+
+<p>Parameters are:</p>
+
+<ul>
+<li>The shapes: polygons are self-explanatory, spokes are just the radiuses of the same polygon.</li>
+<li>How the segment is used to position the polygon. Considering the circle that has the segment
+as a diameter (dotted blue circle), this circle can be:
+<ul>
+<li>The circle that goes through the summits (circumcircle, red)</li>
+<li>The circle that goes through the middle of the sides (incircle, in green)</li>
+<li>A slightly augmented and shifted circle, so that the polygon goes through both ends of the segment 
+(pseudo-diameter, in yellow). For even polygons this option will produce polygons that are also available with
+other options.</li>
+</ul></li>
+<li>Whether the first point of the segment is a corner or a side</li>
+<li>Whether to use overlapping or consecutive segments</li>
+</ul>
+
+<p><img src="segments-polygons-position-options-pentagon.png" alt="pentagon" title=""><img src="segments-polygons-position-options-hexagon.png" alt="hexagon" title=""></p>
+
+<hr>
+
+<h3>Rounded polygons</h3>
+
+<p>Parameters are:</p>
+
+<ul>
+<li>The shapes: polygons are self-explanatory, spokes are just the radiuses of the same polygon.</li>
+<li>How the segment is used to position the polygon. Considering the circle that has the segment
+as a diameter (dotted blue circle), this circle can be:
+<ul>
+<li>The circle that goes though the summits (circumcircle, red)</li>
+<li>The circle that goes through the middle of the sides (incircle, in green)</li>
+<li>A slightly augmented and shifted circle, so that the polygon goes through both ends of the segment 
+(pseudo-diameter, in yellow). For even polygons this option will produce polygons that are also available with
+other options.</li>
+</ul></li>
+<li>Whether the first point of the segment is a corner or a side</li>
+<li>Whether to use overlapping or consecutive segments</li>
+</ul>
+
+<p><img src="segments-rounded-polygons-position-options-pentagon.png" alt="segments-rounded-polygons-position-options-pentagon" title=""></p>
+
+<hr>
+
+<h3>Modify segments</h3>
+
+<p>This function is merely a way to move/resize the segments. The parameters are:</p>
+
+<ul>
+<li><strong>Start</strong>: the position (as a percentage) of the new first point relative to the current segment.</li>
+<li><strong>End</strong>: the position (as a percentage) of the new second point relative to the current segment.</li>
+</ul>
+
+<p>Example: result with Start=50 and End=110:</p>
+
+<p><img src="segments-modifysegments.png" alt="modifysegment" title=""></p>
+
+<h4>Hints:</h4>
+
+<ul>
+<li>Start=0, End=100 leaves the segment unchanged</li>
+<li>Start=100, End=0 reverses the direction of the segment</li>
+<li>Negative values (down to -100) are taken backwards from the first point of the source</li>
+<li>Values above 100 (up to 200) extend the result segment beyond the second point of the source segment.</li>
+<li>Start=-50, End=150 doubles the length of the seement while leaving it centered on the same point.</li>
+</ul>
+
+<hr>
+
+<h2>Various functions</h2>
+
+<p>The catch-all section for everything that doesn't fit elsewhere.</p>
+
+<h3>Tangents</h3>
+
+<p>These functions compute the tangent to circles from either another circle or from a point. 
+The circles are specified as either:</p>
+
+<ul>
+<li>Three points that define a circle (as used in <em>Shapes>On strokes>Circle>Circumcircle</em>)</li>
+<li>Two points that define a center and a radius (if a diameter is available, 
+it can be divided in two using <em>Shapes>On strokes>Lines>Divide segment</em></li>
+</ul>
+
+<p>In other words, <strong>these functions do not operate only circle paths, but also on the paths 
+that are used to construct the circles.</strong></p>
+
+<p>The result of these functions are additional paths that define the tangents. 
+All possible tangents are computed, but there is one path per category of tangent
+so unwanted tangents can be easily discarded.</p>
+
+<h4>Tangents between circles</h4>
+
+<ul>
+<li>If the selected path contains several strokes then the first stroke is the target circle 
+and other strokes are assumed to define other circles from which tangents to the target circle 
+are computed. However the order of the strokes can be difficult to determine,
+so this method is only recommended for two circles.</li>
+<li>If the selected path contains one single stroke, this stroke is the target circle and 
+the function searches for "linked" paths to use their strokes to define the other circles.</li>
+</ul>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>There are two pairs of tangents between circles, the "inner" tangents 
+(that go between the circles) and the "outer" ones.</li>
+<li>The inner tangents do not exist if the circles intersect</li>
+<li>There are no tangents if one circle is completely inside the other.</li>
+</ul>
+
+<p>In the example below, a path containing two strokes (in blue) is used to create the tangents 
+between two circles: </p>
+
+<ul>
+<li>the inner tangents (in yellow) </li>
+<li>the outer tangents (in green), </li>
+</ul>
+
+<p>It can of course also be used to construct the circles (in red).</p>
+
+<p><img src="various-tangents-circles.png" alt="tangents-circles" title=""></p>
+
+<h4>Tangents to circle from point</h4>
+
+<ul>
+<li>If the selected path contains several strokes then the first stroke is the target circle 
+and other strokes are assumed to define the origin points from which tangents to the target 
+circle are computed. The path editor allows strokes containing a single point. </li>
+<li>If the selected path contains one single stroke, this stroke is the target circle and 
+the function searches for "linked" paths to use their strokes to define the origin points of the tangents.</li>
+</ul>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li>There are no tangents if the origin point is completely inside the circle.</li>
+</ul>
+
+<p>In the example below: </p>
+
+<ul>
+<li>a path containing one stroke (in blue) defines a target circle (in red) </li>
+<li>a linked path containing a polygon (in green) defines the origins of several tangents (in yellow). </li>
+</ul>
+
+<p>The function is called on the blue path, after clicking on the link icon for the green path.</p>
+
+<p><img src="various-tangents-points.png" alt="tangents-points" title=""></p>
+
+<h4>Using tangents to make continuous paths</h4>
+
+<p>When a continuous path must be obtained using parts of the circle(s) and the tangents, 
+the trick is to use the tangent paths as guides to edit the circle path:</p>
+
+<ul>
+<li>Make the paths with required tangents visible.</li>
+<li>Create the circle path using the paths that were used to compute the tangents.</li>
+<li><p>Add anchors on the circle where the tangent ends (Ctrl-click on the circle). 
+The tangent handles for the added anchor will be aligned with the tangent path it
+the added anchor is positioned correctly.</p>
+
+<p><img src="various-tangents-join-1.png" alt="tangents-join1" title=""></p></li>
+<li><p>Remove the unnecessary segments and anchors of the circles between the contact points, 
+by Ctrl-Shift-clicking on them.</p>
+
+<p><img src="various-tangents-join-2.png" alt="tangents-join2" title=""></p></li>
+<li><p>Click on one of the contact points to select it, and Ctrl-click on the corresponding 
+contact point on the other circle (or on the tangents origin point). 
+This should create a straight line between the two.</p>
+
+<p><img src="various-tangents-join-3.png" alt="tangents-join3" title=""></p></li>
+<li><p>Done</p>
+
+<p><img src="various-tangents-join-4.png" alt="tangents-join4" title=""></p></li>
+</ul>
+
+<hr>
+
+<h2>Putting it all together: creating a clock dial</h2>
+
+<p>The clock dial will have circles to make the hours, and small ticks for the minutes.</p>
+
+<h3>Hours</h3>
+
+<p>Add guides as an aid, and create a first path with the first point on the clock center, 
+the second point on the 12 o'clock mark, then eleven more points roughly where the other 
+hour marks will be (they could actually be anywhere, only their count is important, 
+but this helps make sure their number is correct)</p>
+
+<p><img src="clock-initial.png" alt="initial" title=""></p>
+
+<p>Use <em>Shapes>On strokes>Stars>Spokes</em> to create 12 spokes evenly spaced:</p>
+
+<p><img src="clock-hours-spokes.png" alt="hours-spokes" title=""></p>
+
+<p>Getting the circles from there requires two more steps. First, using <em>Shapes>On segments>Modify segments</em> 
+(with <em>Start: 94</em> and <em>End: 106</em>) the spokes are transformed into small segments (in red) 
+centered on their end:</p>
+
+<p><img src="clock-hours-segments.png" alt="hours-segments" title=""></p>
+
+<p>Then circles (in green) are obtained from these segments using <em>Shapes>On segments>Circles</em> 
+and using <em>Segment reference: Diameter</em>.</p>
+
+<p><img src="clock-hours-circles.png" alt="hours-circles" title=""></p>
+
+<h3>Minutes</h3>
+
+<p>Creating the minutes marks could be done the same way, but clicking 61 points could be prone to errors.
+A better way is to create a path for the clock diameter (in blue) and then use 
+<em>Shapes>On segments>Polygons or spokes</em> to create 60 spokes:</p>
+
+<ul>
+<li>Shape: Spokes, </li>
+<li>Segment reference: Circumcircle,</li>
+<li>Sides/Spokes: 60, </li>
+<li>First point of segment: Summit/Spoke</li>
+</ul>
+
+<p><img src="clock-minutes-spokes.png" alt="minutes-spokes" title=""></p>
+
+<p>Then, as for hours, create segments (in green) on the tip of the spokes, making them slightly shorter
+(with <em>Start:96</em> and <em>End:104</em>):</p>
+
+<p><img src="clock-minutes-segments.png" alt="minutes-segments" title=""></p>
+
+<h3>Finally</h3>
+
+<p>Use <em>Edit>Stroke path</em> to stroke the minute marks, </p>
+
+<p><img src="clock-final-minutes.png" alt="final-minutes" title=""></p>
+
+<p>Then create a selection from the hours circles path, and bucket-fill the selection:</p>
+
+<p><img src="clock-final-hours.png" alt="final-hours" title=""></p>
+
+<hr>
+
+<p><em>Thanks to Rich2005 for his suggestions and review</em></p>
+</div><body></html>

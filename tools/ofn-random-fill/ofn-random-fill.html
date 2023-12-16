@@ -1,0 +1,199 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-random-fill</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+
+div.background {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+}
+</style>
+<body>
+<div class="background">
+<a name="ofn-2d-random-2d-fill"></a>
+<h1>ofn-random-fill</h1>
+
+<a name="Purpose"></a>
+<h2>Purpose</h2>
+
+<p>This script fills multiple areas on the target &ldquo;drawable&rdquo; (layer, mask, channel using random colors.
+The areas are designated using a path or the selection.</p>
+
+<a name="Principle-of-operation"></a>
+<h2>Principle of operation</h2>
+
+<ul>
+<li>A path is created from the selection if necessary</li>
+<li>Colors are picked from the required source</li>
+<li>Strokes from the path are assigned at random to one of the colors</li>
+<li>For each color and associated strokes:
+
+<ul>
+<li>A path is created from the strokes</li>
+<li>A selection is created from that path</li>
+<li>The selection is bucket-filled</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Remarks:</p>
+
+<ul>
+<li>The strokes are about evenly divided between the colors, which is not a true randomness</li>
+<li>The painting order is essentially random, so paths with nested strokes will not work well</li>
+<li>The script execution time is about proportional to the number of actual colors</li>
+</ul>
+
+
+<a name="Usage"></a>
+<h2>Usage</h2>
+
+<a name="Parameters"></a>
+<h3>Parameters</h3>
+
+<ul>
+<li><code>Colors from</code>: the source of the colors. It can be:
+
+<ul>
+<li><code>Gradient</code>: as many colors as indicated in the <code>Maximum colors</code> are linearly sampled on the gradient.
+If there are fewer areas to fill than colors the colors used will be picked at random among these.</li>
+<li><code>Palette</code>: colors are taken from the active palette up to <code>Maximum colors</code>.
+If there are more colors than <code>Maximum colors</code> in the palette, the colors are picked at random
+(in other words, these will not be the first <code>Maximum colors</code> ones).</li>
+<li><code>Foreground/Background</code>: the current foreground and background colors are used</li>
+</ul>
+</li>
+<li><code>Cells from</code>: the origin of the cells. It can be:
+
+<ul>
+<li><code>Path</code>: the script uses the strokes from the active path directly</li>
+<li><code>Selection</code>: the scripts creates a path from he current selection</li>
+</ul>
+</li>
+<li><code>Maximum colors</code>: the maximum number of colors to use. If there are more colors than areas, the number of areas is used.</li>
+<li><code>Bleed</code>: an amount by which the selection is &ldquo;grown&rdquo; before doing the bucket fill.
+This is usually necessary to produce a minimum of overlap with anti-aliased pixels on the edges of the selection.
+One pixel is often enough but in some cases (sharp angles) the path from the selection is not accurate enough and more pixels
+are necessary to cover the gap.</li>
+<li><code>Paint mode</code>: the bucket-fill paint mode. All available modes are provided for completeness, but the most useful ones
+are <code>Normal</code> and <code>Behind</code>.</li>
+<li><code>Paint opacity</code>: the paint opacity</li>
+</ul>
+
+
+<a name="Example-and-frequent-use-case:-filling-spaces-a-grid"></a>
+<h3>Example and frequent use case: filling spaces a grid</h3>
+
+<p><strong>Prerequisite</strong>:  Unless all the edges are perfectly vertical or horizontal the spaces have to be transparent
+because painting over existing color doesn&rsquo;t yield good results, it either leaves a faint rim of the previous color
+or it bleeds over the grid. Emptying the spaces is efficiently done with
+<a href="https://docs.gimp.org/en/gimp-filter-color-to-alpha.html">color-to-alpha</a>,
+that  replaces edge pixels by the adequate partially transparent pixels.</p>
+
+<p>Once this is done:</p>
+
+<ul>
+<li>Create a selection using the alpha: <code>Layer &gt; Transparency &gt; Alpha to selection</code></li>
+<li><code>Select &gt; Invert</code>. If you omit this, the selection is on the grid and not on the voids,
+so there is big path stroke that includes the whole grid. The results would then depend on
+where this stroke ends up during the random color assignment.</li>
+<li>Then either:
+
+<ul>
+<li>Add a layer <strong>below</strong> the grid, make it the current layer and call the script with
+painting in <code>Normal</code> mode. A one or two pixels bleed will ensure that the coloring extends
+below the partially transparent pixels on the edges where it will blend with the grid color
+to create smooth edges.</li>
+<li>Keep the grid the current layer and set the painting mode to <code>Behind</code>. A one or two pixels
+bleed will let the painting overlap the partially transparent pixels on the edges end let
+the <code>Behind</code> mode work its magic and create smooth edges.</li>
+</ul>
+</li>
+</ul>
+
+
+<a name="Results:"></a>
+<h4>Results:</h4>
+
+<p>Starting with this:</p>
+
+<p><img src="Grid-Before.png" alt="Before" /></p>
+
+<p>After setting the palette to <code>Basic</code> (in Gimp&rsquo;s Palettes list), keeping the same layer and using
+<code>Palette</code>, <code>Behind</code>, and a 1px bleed:</p>
+
+<p><img src="Grid-Palette-Behind-1px.png" alt="Palette-Behind-1px" /></p>
+
+<p>Gaps in the corners are noticeable, but are easily fixed by using a 2px bleed instead:</p>
+
+<p><img src="Grid-Palette-Behind-2px.png" alt="Palette-Behind-2px" /></p>
+
+<p>But you could also set the Gradient (in the Gimp&rsquo;s Gradients list), add a new layer below the grid,
+and use <code>Gradient</code>, <code>Normal</code>, and a 2px bleed:</p>
+
+<p><img src="Grid-Gradient-Normal-2px.png" alt="Gradient-Normal-2px" /></p>
+</div></body></html>

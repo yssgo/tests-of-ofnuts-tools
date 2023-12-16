@@ -1,0 +1,163 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-truchet-path</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+
+div.background {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+}
+</style>
+<body>
+<div class="background">
+<h1>ofn-truchet-path</h1>
+
+<h2>Purpose</h2>
+
+<p>This script creates <a href="https://en.wikipedia.org/wiki/Truchet_tiles">Truchet-like patterns</a> using the
+quarter-circles tiles invented by Smith. However, these patterns are not produced as bitmaps but as paths so:</p>
+
+<ul>
+<li>They can be stroked</li>
+<li>They can be used as selection</li>
+</ul>
+
+
+<p>Furthermore, using some of my other scripts (typically, the <code>Break path apart</code> function of <code>ofn-path-edits</code>
+and ofn-stroke-fill-paths, each contiguous curve can be individually filled or stroked.</p>
+
+<h2>Operation</h2>
+
+<p>The script works on the active layer, and produces a pattern that covers this layer. The layer is divided in square tiles,
+and the value of the pixel at the center can be use to determine the tile orientation.
+These orientations are designated by the quadrants that are enclosed by the quarter circles.</p>
+
+<p>The script is called from <code>Filters&gt;Render&gt;Paths&gt;Truchet pattern</code></p>
+
+<h3>Parameters:</h3>
+
+<ul>
+<li><code>Size</code>: the size of the square tiles, in pixels</li>
+<li><code>Tile orientation</code>: the source of the tile orientation. This can be:
+
+<ul>
+<li><code>Random</code>: orientations are an equal random draw between the two orientations.</li>
+<li><code>From layer (NE,SW on white)</code>, <code>From layer (NW,SE on white)</code>: orientations are defined by the layer value
+of the pixels at the center of the tiles.</li>
+</ul>
+</li>
+<li><code>Stroke closure</code>: if and how the strokes are closed. The options are:
+
+<ul>
+<li><code>Leave strokes open</code>: the patterns are left as open-ended strokes. This form is not suitable for a selection.</li>
+<li><code>Close strokes (closed top left)</code>,<code>Close strokes (open top left)</code>: the strokes are closed by drawing a segment in every other interval
+on the border of the pattern. The two options cover the two possible ways to handle the top-left corner (the rest of the closures
+is then determined by the oddness/evenness of the number of tiles in each direction.</li>
+</ul>
+</li>
+<li><code>Roundness</code>:  How &ldquo;round&rdquo; the pattern is:
+
+<ul>
+<li><code>0</code> produces all straight diagonal lines.</li>
+<li><code>100</code> produces the usual quarter-circle pattern.</li>
+<li><code>200</code> produces a near square horizontal/vertical pattern.</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Usage notes</h3>
+
+<h4>Tile orientation</h4>
+
+<p>When using the layer as a source, the orientation is based on the value of the single pixel at the center of the tile (the &ldquo;value&rdquo;
+is the maximum of the &ldquo;R&rdquo;, &ldquo;G&rdquo;, and &ldquo;B&rdquo; channels on that pixel). The orientation is obtained by comparing this value to 128.
+If you want the tile orientation to represent the average value of the tile, use <code>Filter&gt;Blur&gt;Pixellize</code> with the same size as the pattern.</p>
+
+<h4>Fixed randomness</h4>
+
+<p>The two <code>Close strokes</code> options produce complementary selections. It is often useful to produce both while still using a random
+pattern. Using the <code>Random</code> option twice would however produce two different patterns, but there is a simple way to produce a layer
+with random pixels that can be used several times:</p>
+
+<ul>
+<li>Create a white layer</li>
+<li>Add a layer filled with black</li>
+<li>Set the top layer to <code>Dissolve</code> mode</li>
+<li>Set the opacity to <code>50%</code>. You can also set the opacity to other value if you want to skew the randomness
+towards towards one orientation or the other.</li>
+<li>Either merge the two layers, or create a <code>New from visible</code> layer.
+You can also put the two layers in a group, and select the group before calling the script.</li>
+</ul>
+
+
+<h3>Order of strokes</h3>
+
+<p>The strokes in the produced path are sorted by length, so that the <code>Break path apart</code> mentioned above will put
+the longest strokes at the bottom, and <code>ofn-stroke-fill-paths</code> will handle these first. It is hoped that when there are nested strokes
+the outer stroke will be longer and so filled first, allowing the inner stroke to be painted over it
+(technically this isn&rsquo;t always the case, but this works well enough)</p>
+</div></body></html>

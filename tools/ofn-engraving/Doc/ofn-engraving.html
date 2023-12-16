@@ -1,0 +1,149 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-engraving</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-engraving</h1>
+
+<h2>Purpose</h2>
+
+<p>This script produces a line-stippled equivalent of an image, using either:</p>
+
+<ul>
+<li>lines of increasing width created by stroking a path.</li>
+<li>a dashed line whit a variable the dash-to-space ratio </li>
+</ul>
+
+<p>The user provides:</p>
+
+<ul>
+<li>A layer</li>
+<li>A path that does a complete coverage of the layer: stroking the path with a line thick enough should completely paint the layer.  </li>
+</ul>
+
+<p>The script creates:</p>
+
+<ul>
+<li>A layer where the lines are stroked in black on a transparent background</li>
+<li>A distinct white background</li>
+</ul>
+
+<h2>Usage</h2>
+
+<ul>
+<li>The script is called via the two entries under <code>Filters&gt;Artistic&gt;Engraving lines&gt;...</code></li>
+<li>The layer is the active layer</li>
+<li>The path is the active path (as selected in the Paths list)</li>
+</ul>
+
+<p><strong>Note:</strong> This script is for Gimp 2.10 and above.</p>
+
+<h3>Parameters:</h3>
+
+<h4>Line Thickness</h4>
+
+<ul>
+<li><code>Line width stepping</code>: the amount of width increase between each stroking of the path. For instance a stepping of 0.5 produce lines widths of .5, 1.0, 1.5, 2.0.... Of course the line widths are mostly "perceptual", a .5px wide line spans complete pixels but fills them with a very light gray.You should usually aim for 5-10 steps for a reasonably smooth rendering. </li>
+<li><code>Minimum luminance(%)</code>: how dark the darkest parts of the image will be (0% is completely black, 100% is completely white). It is rarely useful to go below 20%. The script will create patterns of decreasing luminance by stroking the path with lines of increasing widths, and stop when the resulting luminance goes below the limit, or after 50 steps. Each step generates a layer, and so increases RAM and CPU usage.</li>
+</ul>
+
+<p>Note: a compination of a wide minimum width and a tight path coverage can make the script fail (one single layer is created before reaching minimum luminance).</p>
+
+<h4>Dashes</h4>
+
+<ul>
+<li><code>Line width</code>: the width of the strokes lines (which should be close to the distance between elements of the path)</li>
+<li><code>Minimal dash ratio</code>:  the minimal dash ratio. This determines how light the white parts will look.</li>
+<li><code>Dash period</code>: the length (in pixels) of a dash-plus-space period. This should be kept rather short (no more than twice the distance between path elements)</li>
+<li><code>Dash ratio step</code>: the size of the step between dash ratio values. Smaller value improve the definition of the output but also increase rendering time.</li>
+<li><code>Fuzz method</code>: a shift pattern applied the the dashes. Without it (<code>None</code>), the spaces will create visible vertical gutters. </li>
+</ul>
+
+<h4>Common parameters</h4>
+
+<ul>
+<li><code>Gamma</code>: the gamma changes the mapping of values. A gamma greater than 1. will lighten the image but will give more variation in the darker area, while a gamma smaller than 1. will give more detail in the lighter areas.</li>
+<li><code>Blur</code>: the amount of blur to be applied to the image before using it as a mask. If the image has too much detail it can produce a choppy output. Since the engraving itself lowers the image definition, blurring by half the average distance between path lines is often good compromise.</li>
+<li><code>Merge</code>: determines if at the end the script keeps all the layers and masks or if they are merged into a single layer. Keeping the layers can be useful for debugging.</li>
+<li><code>Cap style</code>, <code>Join style</code>, <code>Miter limit</code>: the usual options to stroke paths. For the first two, <code>Current</code> use the current Gimp settings. The <code>Miter limit</code> is only taken in account if the <code>Join style</code> is explicitly set to <code>Miter</code> (in other words, <code>Join style=Current</code> will also use Gimp's miter limit setting if Gimp's current join style is <code>Miter</code>.   </li>
+</ul>
+
+<h3>Usage notes:</h3>
+
+<ul>
+<li><p>A good deal of effort is generating useful paths. Paths in my examples are usually generated with scripts <a href="http://sourceforge.net/projects/gimp-path-tools/files/scripts/">from my collection</a>:</p>
+
+<ul>
+<li>two straight lines at opposite ends of the image, made wavy with <code>path-waves</code>, with all intermediate lines interpolated with <code>path-inbetweener</code></li>
+<li>a grid generated with <code>path-shaped-grid</code>, where the segments are further transformed using <code>ofn-path-to-shape</code></li>
+</ul></li>
+<li><p>The script entails stroking several very complex paths. This will make your CPU quite busy. Try your hand on small images.</p></li>
+</ul>
+
+<h2>Example: trying to get rich quick</h2>
+
+<ul>
+<li>Let's start with a portrait of Benjamin Franklin:</li>
+</ul>
+
+<p><img src="Franklin-initial.jpg" alt="Initial][1" title=""></p>
+
+<ul>
+<li>Add a path (of course this is only a path, no need to stroke it, it is even a good idea to hide it before calling the script)</li>
+</ul>
+
+<p><img src="Franklin-path.jpg" alt="Path][1" title=""></p>
+
+<ul>
+<li>Call the script to generate the engraving</li>
+</ul>
+
+<p><img src="Franklin-engraving.jpg" alt="Engraving][1" title=""></p>
+
+<ul>
+<li><p>The engraving is always in black. A white layer is added under it for convenience, but it could be removed.
+Not bad as it is, but we can add some color back: </p>
+
+<ul>
+<li>copy the initial image to the top, </li>
+<li>blur it a bit, </li>
+<li>posterize to 10-16 colors</li>
+<li>set to <code>Color</code> mode</li>
+<li>bucket-fill the white background layer with a yellowish tint</li>
+</ul></li>
+</ul>
+
+<p><img src="Franklin-colors.jpg" alt="Colors][1" title=""></p>
+
+<p>But of course, you can do other things:</p>
+
+<p><img src="Franklin-triangles.jpg" alt="Triangles][1" title=""></p>
+</div></body></html>

@@ -1,0 +1,51 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-shred-layer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { color: #000000; background: #ffffd0; }
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-shred-layer</h1>
+
+<p>This script slices a layer in vertical or horizontal strips and creates a new image, putting a specified spacing between them.</p>
+
+<p>The <code>Unshred</code> action does the reverse, it takes strips in the source layer with a given spacing, and puts them side by side in a new image.</p>
+
+<p>When shredding, the spacing in only used between strips, there are no "outer" spaces. Un-shredding has been designed to do the exact opposite,
+so there should be no outer spaces in the layer.</p>
+
+<p>The two functions are available as the <code>Layer&gt;Shred</code> and <code>Layer&gt;Unshred</code> menus of the Image window.</p>
+
+<h2>Parameters</h2>
+
+<ul>
+<li><code>Direction</code>: the direction of the strips. </li>
+<li><code>Strip Width</code>: the with of the strips to create (shred) or the width of the strip to keep (not including the spacing)(un-shred).</li>
+<li><code>Spacing</code>: the spacing to add (shred) or to remove (un-shred).</li>
+<li>'Space filling`: how to fill the created spaces (only for shred). This uses the currently set foreground/background colors or pattern.</li>
+<li><code>Merge strip layers</code>: whether the resulting image should be flattened or not.</li>
+</ul>
+
+<p>Running the script a second time on the result of the first execution and using the alternate direction yields squares 
+with the specified spacing betwen them (shred), or removes the specifiec spacing from squares (unshred).</p>
+
+<p>The <code>Strip width</code> and <code>Spacing</code> parameters to un-shred are exactly the same as the ones used to shred. </p>
+
+<h2>Example</h2>
+
+<p>Initial image:</p>
+
+<p><img src="Initial.png" alt="Initial" title=""></p>
+
+<p>Vertical shredding, strip width=20, spacing=5:</p>
+
+<p><img src="Shredded-V-20+5.png" alt="ShreddedV" title=""></p>
+
+<p>Horizontal shredding of the above, with same width and spacing:</p>
+
+<p><img src="Shredded-V+H-20+5.png" alt="ShreddedV+H" title=""></p>
+</div><body></html>

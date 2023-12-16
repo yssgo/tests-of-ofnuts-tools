@@ -1,0 +1,69 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-jigsaw</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-jigsaw</h1>
+
+<h2>Purpose</h2>
+
+<p>This script creates jigsaw patterns as paths.</p>
+
+<h2>Operation</h2>
+
+<p>The script is started from <code>Filters&gt;Render&gt;Path&gt;Jigsaw pattern</code></p>
+
+<h3>Parameters:</h3>
+
+<ul>
+<li><code>Rows</code> and <code>Columns</code> are the number of rows and columns to create.</li>
+<li><code>Roundness</code>: controls how round the tabs are. A roundness of 0 generates triangles.</li>
+<li><code>Randomness</code>: controls how random the tabs are. A randomness of 0 generates identical tabs.</li>
+<li><code>Deepness</code>: controls how high/deep the tabs are.</li>
+<li><code>Wideness</code>: controls how wide the tabs are.</li>
+<li><code>Path</code>: determines if the output is a single path or if horizontal and vertical cuts are on separate paths.  </li>
+</ul>
+
+<p>The "*ness" parameters are not absolute values. They are just set so that keeping everything at mid-range (50) generates a decent-looking pattern. Extreme values can generate overlapping cuts.</p>
+
+<h2>Examples of use</h2>
+
+<h3>Bump-mapping a jigsaw pattern in picture:</h3>
+
+<ul>
+<li>Generate the jigsaw pattern with the script</li>
+<li>Add a layer, fill with 50 gray (R=G=B=127)</li>
+<li><em>Edit>Stroke path</em> on it, in "Line" mode, with Black. The width of the line is dependent on the size
+of your pattern, as a rule of thumb, use a width of 3 for 100x100 pieces.</li>
+<li>Blur the lines slightly</li>
+<li>Use *Filters>Map>Bump map", using your jigsaw grid layer as the "Aux input"</li>
+</ul>
+</div></body></html>

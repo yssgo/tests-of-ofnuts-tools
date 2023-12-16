@@ -1,0 +1,163 @@
+<!DOCTTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>ofn-scroll-layer</title>
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+li{
+    margin: 5px 0;
+}
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-scroll-layer</h1>
+
+<h2>Purpose</h2>
+
+<p>This script creates several copies of the active layer, offset by a constant amount
+horizontally and vertically.
+The layer contents are wrapped around so that the result can be used as a continuous
+animation.</p>
+
+<h2>Usage</h2>
+
+<p>The script is started by the <code>Layer&gt;Scroll layer</code> menu.</p>
+
+<h3>Parameters</h3>
+
+<p>The parameters are divided in two groups, one for each of the horizontal and vertical scrolls.</p>
+
+<ul>
+<li><strong>Step</strong>: 오프셋을 얼마씩 변경할 것인지 지정
+복사본의 수는 is (스텝과 스크롤범위의 최소공배수)/스텝.
+Positive numbers go from left to right and from top to bottom,
+negative numbers are right to left and bottom to top.
+At least one of of these two must be different from 0.</li>
+<li><strong>Tiles</strong>: 레이어의 내용이 타일(반복되는 내용)이 몇 번 반복 된 것인지 지정, 타일이 없으면 <code>1</code></li>
+<li><strong>Waves</strong>: The number of transverse oscillations added to the displacement.
+The higher numbers correspond to a faster wave. This applies to one period of the animation,
+which is just the tile dimension if the layer is tiled.</li>
+<li><strong>Amplitude</strong>: The maximum amplitude of the oscillations produced above. </li>
+</ul>
+
+<h3>Usage notes</h3>
+
+<h4>Creating an adequate layer</h4>
+
+<p>For a seamless animation, the layer used should itself be "seamless".</p>
+
+<p>In Gimp 2.10 this is very easy to do:</p>
+
+<ul>
+<li>Create the layer with the required dimensions</li>
+<li>Open the Symmetry Painting dialog (<code>Windows&gt;Dockable dialogs&gt;Symmetry Painting)</code> and set the symmetry to <code>Tiling</code> and the <code>Interval X</code> and <code>Interval Y</code> values to the width and height of the layer.</li>
+<li>Painting on the layer automatically makes it seamless.</li>
+<li>You can also use smaller <code>Interval</code> values (as long as they divide the layer dimensions), to generate a tiled layer
+that can significantly reduce the number of frames of the final animation.</li>
+</ul>
+
+<p>In Gimp 2.8, you can get some help from my <code>seamless-helper</code> script.</p>
+
+<h4>Generating the copies</h4>
+
+<p>The script generates as many copies as necessary to make a full cycle for both horizontal and vertical movements.</p>
+
+<ul>
+<li>For a plain layer, the scroll span is the layer dimension and an animation cycle scrolls the layer by a multiple of its height and width. </li>
+<li>For a tiled layer, the scroll span is the tile dimension and an animation cycle scrolls the layer by a multiple of the height and width of the tile (layer dimension divided by the number of tiles)</li>
+<li></li>
+<li>When the step divides the span this is just <code>span / step</code>. </li>
+<li>When it does not the number can be significantly bigger,
+for instance a step of <code>3</code> on a span of <code>200</code> is <code>LCM(200,3)/3 = 600/3 = 200</code> (while a step of <code>2</code> would yield <code>100</code> and a step of <code>4</code> would yield <code>50</code>).</li>
+<li>If the movement is both vertical and horizontal, the total number of copies is the LCM of the copies required for each direction.</li>
+</ul>
+
+<p>There are many LCM calculators online, in practice typing <code>LCM 120 300</code> in your favorite search engine will elicit a result.</p>
+
+<h4>마스크 사용하기</h4>
+
+<p>레이어에 마스크가 있으면 같이 복사되지만 위치는 변경되지 않으므로 뷰포트 역할을 함</p>
+
+<h2>Example: adding bubbles</h2>
+
+<p>This example also uses my <code>ofn-interleave-layers</code> script, avaible from the same place as <code>ofn-scroll-layer</code>.</p>
+
+<p>Starting with this image (found on the web), where I removed existing fixed bubbles and replaced them with plain color:</p>
+
+<p><img src="Champagne-Initial.jpg" alt="Initial" title=""></p>
+
+<ul>
+<li>Create a selection that encompasses the part of the glass where you want bubbles, and save it to a channel (<code>Select&gt;Save to channel</code>). Then <code>Select&gt;None</code> to remove the selection (it is saved...)</li>
+<li>Add a transparent layer that covers the glass. At that point it is best to give it dimensions that won't lead to an "LCM storm". <code>120x240</code> fits nicely, and their LCM is small since <code>120</code> divides <code>240</code>. If a taller layer were necessary, 
+<code>120x300</code> could have been decent (LCM=600).</li>
+<li>Open the Symmetry painting option and set it to <code>Tiling</code>, <code>120</code> by <code>240</code></li>
+<li>Start the Brush tool, pick a bubble brush set the size (you can use adequate brush dynamics to randomize
+size, spacing, and opacity)</li>
+<li>Make a few brush swipes across the layer.</li>
+</ul>
+
+<p><img src="Champagne-1.jpg" alt="With bubbles" title=""></p>
+
+<ul>
+<li>Add a mask to the layer: <code>Layer&gt;Mask&gt;Add layer mask</code>, and initialize the mask with the saved selection.
+The bubbles should only be visible within the glass.</li>
+</ul>
+
+<p><img src="Champagne-2.jpg" alt="With mask" title=""></p>
+
+<ul>
+<li><p>Select the layer again, by clicking on its preview in the Layers list (otherwise the next step will apply to the mask and won't work).</p></li>
+<li><p>We can now invoke <code>ofn-scroll-layer</code> on the Bubbles layer. Let's use prudent values, like a step of -4 (negative because we want the bubbles to go up) that will yield 60 copies:</p></li>
+</ul>
+
+<p><img src="Champagne-3.jpg" alt="Copies" title=""></p>
+
+<ul>
+<li>Scroll to the bottom of the Layers list. <code>ofn-scroll-layer</code> has made the initial "Bubbles" layer invisible, 
+but we also need to make the <code>Glass</code> layer invisible for the next step:</li>
+</ul>
+
+<p><img src="Champagne-4.jpg" alt="Invisible" title=""></p>
+
+<ul>
+<li><p>Now use <code>ofn-interleave-layers</code> for the animation:</p>
+
+<ul>
+<li><code>Image&gt;Interleave layers&gt;Interleave single layer under stack (sprite mode)</code></li>
+<li>Layer: pick the <code>Glass</code> layer</li>
+<li>Reduce opacity a bit: <code>65%</code> to <code>70%</code></li>
+<li>Keep mode to <code>Normal</code></li>
+<li>Merge: <code>Yes</code></li>
+</ul></li>
+<li><p>This generates a new image, which is our animation:</p></li>
+</ul>
+
+<p><img src="Champagne-final.webp" alt="Final" title=""></p>
+
+<p>If you find that 60 frames is a bit much, you can set the <code>Interval Y</code> of the Symmetry Painting to <code>80</code>, to obtain a tiled layer. Then in <code>ofn-scroll-layer</code> you set the count of <code>Tiles</code> to <code>3</code>. This will yield 20 frames.</p>
+
+<p><img src="Champagne-tiled.webp" alt="Tiled" title=""></p>
+</div></body></html>

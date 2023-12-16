@@ -1,0 +1,140 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-stroke-fill-paths</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+
+div.background {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+}
+</style>
+<body>
+<div class="background">
+<h1>ofn-stroke-fill-paths</h1>
+
+<h2>Purpose</h2>
+
+<p>This script renders all the visible paths of an image using one of three possible ways:</p>
+
+<ul>
+<li>Making a selection from the path and bucket-filling it</li>
+<li>Stroking the path:
+
+<ul>
+<li>Using the current paint tool and paint tool settings</li>
+<li>Using line mode (requires Gimp 2.10)</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Operation</h2>
+
+<p>The script is started using the three entries in the <code>Render&gt;Mass render</code> sub-menu in the Paths list menu.</p>
+
+<p>The script operates on each path in turn <strong>bottom to top</strong>. This is usually the order in which paths are created, and when used for animations, this creates the layers/frames in the same order.</p>
+
+<h2>Parameters</h2>
+
+<h3>Common parameters:</h3>
+
+<ul>
+<li><code>Color source</code>: whether all the paths are stroked/filled with the same color (which is the current foreground color)
+or the colors are sampled from the current gradient or are taken from the current palette. If there are more paths than colors in the palette, the palette is cycled as many times as necessary.</li>
+<li><code>Color order</code>: Use the natural order of colors in the gradient palette, or use the rever order, or use a random order.</li>
+<li><code>Output</code>: whether all paths are rendered on a single common layer or each path is rendered on its own layer.</li>
+<li><code>Paths</code>: the paths to process: all paths, the visible paths, or the linked paths.</li>
+<li><code>Opacity</code>: the opacity of the rendering. When using a gradient this is composed with the gradient opacity.</li>
+<li><code>Background</code>: how the layer is filled before the path is rendered</li>
+<li><code>Layer Name</code>: a pattern to name the layers (see below)</li>
+</ul>
+
+
+<h3>Line mode parameters</h3>
+
+<p>In line mode there are additional options: <code>Cap style</code>, <code>Join style</code>, <code>Miter limit</code>, and <code>Anti-aliasing</code>.
+They are the <a href="https://docs.gimp.org/en/gimp-using-paths-stroking.html">usual path stroking options</a>.</p>
+
+<h4>Layer name pattern</h4>
+
+<p>The layer name pattern specifies how the layers are named using specific path data. In the pattern,
+names in braces are replaced by the values of these data for the path. For instance, a pattern
+of <code>Frame-{number1}/{count}</code> will produce the name <code>Frame-3/50</code> for the 3rd path in a series of 50.</p>
+
+<p>The available values are:</p>
+
+<ul>
+<li><code>pathName</code>: the name of the source path</li>
+<li><code>count</code>: the total number of paths</li>
+<li><code>number0</code>, <code>number1</code>: the position of the path in the set. <code>number0</code> starts at 0 (as computers count) and
+number1 starts at 1 (as humans count).</li>
+</ul>
+
+
+<p>The name pattern is actually directly used as a Python format specification, so modifiers can be used. The most
+useful modifier for numbers is the ability to define a minimal length with zero-padding. This is done by adding <code>:0Nd</code>
+to the variable name in the braces, for instance <code>{number1:03d}</code> will insert the path number on at least three digits, with zeroes added to the left if necessary: <code>001</code>, <code>013</code>, <code>099</code>, <code>100</code>.</p>
+</div></body></html>

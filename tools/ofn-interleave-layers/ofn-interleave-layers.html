@@ -1,0 +1,125 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-interleave-layers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-interleave-layers</h1>
+
+<h2>Purpose</h2>
+
+<p>This script creates a new image by interleaving layers in the stack of
+layers of the current image.. It covers three different modes of operations:</p>
+
+<ul>
+<li>Layers from the current image are interleaved with another stack
+of layers from another image. This is typically used to combine two animations.</li>
+<li>Layers from the current image are interleaved with copies of
+single layer which is placed above them. This is typically used to add
+a fixed image part (such as a title) to all frames in an animation.</li>
+<li>Layers from the current image are interleaved with copies of a single
+layer which is placed under them. This is typically used to add a
+background to a mobile image (often called a "sprite").</li>
+</ul>
+
+<p>The top layer of each pair can be merged to the underlying layer with a
+given transparency and layer mode. The first stack of layers comes from the
+current image (the one through which the script is called).</p>
+
+<p>In multiple-layer mode, the inserted layers come from another image
+already loaded in Gimp, as specified in the script parameters dialog.</p>
+
+<p>In single layer mode, the inserted layer can come from any loaded
+image (including the one used as a source for the base layers)</p>
+
+<p>Only visible layers of both images are used, so work layers can be
+left out by making them invisible. In particular in the single layer over/under modes,
+the layer can be a layer of that same image made invisible before calling the script.</p>
+
+<p>The two images or the image and the layer should have the same size,
+and for multiple-layer both stacks should hold the same number of visible layers.</p>
+
+<h2>Usage</h2>
+
+<p>The script is started by the <code>Image&gt;Interleave layers</code> menus.</p>
+
+<h3>Parameters</h3>
+
+<ul>
+<li><strong>Layers source</strong> (multiple-layer mode): The image from which the inserted layers are obtained. 
+This is another image also opened in Gimp, not an image file from the disk.</li>
+<li><strong>Layer</strong> (single-layer mode): The layer which is interleaved with the current image layers. 
+This is a layer from the current image or from another image already opened in Gimp.</li>
+<li><strong>Opacity</strong>: An opacity to be applied to all top layers.</li>
+<li><strong>Mode</strong>: A layer mode to be applied to the top layer of each pair.</li>
+<li><strong>Merge</strong>: If true, the top layers of each pair are directly merged into the other layers,
+using the specified opacity and layer mode. The resulting layer is given the name of its component
+from the source image.</li>
+</ul>
+
+<h2>Usage hints</h2>
+
+<h3>Positioning the merged stacks in the result</h3>
+
+<p><code>ofn-interleave-layers</code> requires that both images have the same canvas size. 
+This is not a constraint, this is how you define where each layer stack ends up in the result,
+which you can do using existing Gimp functionality. Here is how you can easily achieve
+two frequent use cases:</p>
+
+<h4>Combining two animations</h4>
+
+<ul>
+<li>Compute the total size of the canvas (add the widths if side-y-side or the height id on top of each other)</li>
+<li><p>In each animation image: <code>Image&gt;Canvas size</code>, and:</p>
+
+<ul>
+<li>Set the canvas dimensions</li>
+<li>Use the position widget to indicate where the current image will be in the bigger canvas:</li>
+</ul>
+
+<p><img src="CanvasResize.webp" alt="Canvas resize][1" title=""></p>
+
+<ul>
+<li>It is often useful at that point to make sure that the layers in at least one of the stacks
+span the whole canvas of the final image, which can be done with the <code>Resize layers</code> selector of the dialog.</li>
+</ul></li>
+<li>You can then merge the two animations</li>
+</ul>
+
+<h4>Positioning an animation over a background</h4>
+
+<ul>
+<li>Open the background image</li>
+<li>Use <code>File&gt;Open as layers</code> to load all the animation layers</li>
+<li>Chain-link the added layers:  shift-click the <a href="https://docs.gimp.org/en/gimp-dialogs-structure.html#gimp-layer-attributes">link icon</a> 
+on any layer to link them all, then click on the background layer to unlink it from the rest.</li>
+<li>Move one of the layers, this will move all the chained layers.</li>
+</ul>
+</div></body></html>

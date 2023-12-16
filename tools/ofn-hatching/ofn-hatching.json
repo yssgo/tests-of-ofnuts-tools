@@ -1,0 +1,103 @@
+{
+    "_":
+        {
+        "_": "This entry has no name and will be ignored,",
+        "_": "but this is a clean way to enter global comments"
+        },
+
+    "Simple lines, absolute width": 
+        {
+            "_": "The default style, that takes all parameters from the dialog",
+            "_": "The line width is absolute",
+            "capType": "BUTT",
+            "order": 0
+        },
+    "Simple lines, relative width": 
+        {
+            "_": "The default style, that takes all parameters from the dialog",
+            "_": "The line width is relative",
+            "widthType":"RELATIVE",
+            "capType": "ROUND",
+            "order": 1
+        },
+    "Simple":
+        {
+            "_": "Simple demo style, where dash period and ratio are set globally.",
+            "_": "Note the empty dash spec that represents a dash spec that inherits all values",
+            "dashPeriod": 10,
+            "dashRatio": 60,
+            "dashes": [
+                {
+                },
+                {
+                    "dashOffset": 50
+                }
+            ]
+        },
+    "Complex":
+        {
+            "_": "Complex demo style, whith individual dash period and ratio, widthRatio makes it autoscale with spacing",
+            "angle": 45,
+            "widthType":"RELATIVE",
+            "relWidth": 20,
+            "dashes": [
+                {   
+                    "dashPeriod":20,
+                    "dashRatio":100,
+                    "dashOffset":0
+                },
+                {   
+                    "dashPeriod":4,
+                    "dashRatio":50,
+                    "dashOffset":0
+                },
+                {   
+                    "dashPeriod":null,
+                    "dashRatio":50,
+                    "dashOffset":0,
+                    "_":"Force absolute width for this pattern",
+                    "widthType":"ABSOLUTE"
+                },
+                {   
+                    "dashPeriod":4,
+                    "dashRatio":50,
+                    "dashOffset":0
+                },
+                {   
+                    "dashPeriod":20,
+                    "dashRatio":100,
+                    "dashOffset":0
+                }
+            ]
+        },
+    "4-phase pseudo random hatching, absolute":
+    {
+        "order":2,
+        "dashes":[
+            {"dashOffset": 0},
+            {"dashOffset": 25},
+            {"dashOffset": 75},
+            {"dashOffset": 50}
+            ]
+    },
+    "4-phase pseudo random hatching, relative":
+    {
+        "order":2,
+        "widthType":"RELATIVE",
+        "dashes":[
+            {"dashOffset": 0},
+            {"dashOffset": 25},
+            {"dashOffset": 75},
+            {"dashOffset": 50}
+            ]
+    },
+    "Cap styles":
+    {
+        "_": "All other settings come from parmaters dialog",
+        "dashes": [
+            {"dashOffset":0, "capType":"BUTT"},
+            {"dashOffset":33, "capType":"ROUND"},
+            {"dashOffset":66, "capType":"SQUARE"}
+        ]
+    }
+}

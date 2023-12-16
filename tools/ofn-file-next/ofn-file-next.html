@@ -1,0 +1,154 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-file-next</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+div.background {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #e0e0e0; 
+    border-radius: 8px; 
+    padding-left: 8px;
+  
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: #none;     
+    font-size:none;
+}
+
+li{
+    margin: 5px 0;
+}
+</style>
+<body>
+<div class="background">
+<h1>ofn-file-next</h1>
+
+<h2>Purpose</h2>
+
+<p>This script reduces the time it takes to manually edit a series of images by automating the sequence</p>
+
+<ul>
+<li>Save current picture,</li>
+<li>Quit current picture</li>
+<li>Open the file selector and search the next picture in  a potentially long list of files</li>
+<li>Open the next file in sequence</li>
+</ul>
+
+
+<h2>Usage</h2>
+
+<p>The script appears in the menu as two entries: <code>File🠚Open next image🠚In lexical order</code>, and <code>File🠚Open next image🠚In numerical order</code>.</p>
+
+<p>You normally open the first file using the regular <code>File🠚Open</code>, and when done with that one use the script functions to go to the next image.</p>
+
+<p>This script is best used by assigning one of the two functions to a shortcut:</p>
+
+<ul>
+<li>No need to hunt the function in menus</li>
+<li>If you assign only one order type to a keystroke, you remove the chance to switch to another sequence by mistake.</li>
+</ul>
+
+
+<p>The functions appear in the shortcut editor as <code>python-fu-ofn-file-next-lexical</code> and <code>python-fu-ofn-file-next-numerical</code> respectively.</p>
+
+<h2>Lexical v.s. Numerical</h2>
+
+<p>Given the list:</p>
+
+<pre><code>11.jpg
+20.jpg
+jkl.jpg
+Test40-01.jpg
+Test1.jpg
+def.jpg
+145.jpg
+Test4.jpg
+Test003.jpg
+Test02.jpg
+abc.jpg
+blank.png
+GHI.jpg
+</code></pre>
+
+<p>The lexical order (case-independent for the plugin) is:</p>
+
+<pre><code>11.jpg
+145.jpg
+20.jpg
+abc.jpg
+blank.png
+def.jpg
+GHI.jpg
+jkl.jpg
+Test003.jpg
+Test02.jpg
+Test1.jpg
+Test40-01.jpg
+Test4.jpg
+</code></pre>
+
+<p>So, <code>145.jpg</code> is processed before <code>20.jpg</code>, and likewise <code>Test1.jpg</code> is processed after <code>Test02.jpg</code> that itself comes after <code>Test003.jpg</code></p>
+
+<p>In numerical order, the plugins looks for digits at the end of the file name, converts that part to a number,
+and sorts using this number <strong>the files that have the same non-numerical prefix</strong>,
+so in this set of files there are two distinct sequences:</p>
+
+<ul>
+<li><p>One with an empty prefix:</p>
+
+<pre><code class="``">11.jpg
+20.jpg
+145.jpg
+</code></pre></li>
+<li><p>and one with the <code>Test</code> prefix</p>
+
+<pre><code class="``">Test1.jpg
+Test02.jpg
+Test003.jpg
+Test4.jpg
+</code></pre></li>
+</ul>
+
+</div></body></html>

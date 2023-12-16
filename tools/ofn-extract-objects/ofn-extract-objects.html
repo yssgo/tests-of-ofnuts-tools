@@ -1,0 +1,94 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-extract-objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-extract-objects</h1>
+
+<p>This script extracts non-transparent areas from the active layer and either creates 
+new layers from them or saves them to files</p>
+
+<p>The script is called using the entries in the <code>Layer&gt;Extract objects</code> sub-menu in the image window.</p>
+
+<h3>Parameters common to both modes</h3>
+
+<ul>
+<li><code>Layer size</code>: whether the saved image is a tight fit around the object or is the initial image size</li>
+<li><code>Alpha threshold</code>: how hard the script tries to find a separation between objects.<code>0</code> is normally sufficient,
+but of nothing happens try increasing this value.</li>
+</ul>
+
+<h3>Parameters when saving to files</h3>
+
+<ul>
+<li><code>Directory</code>: the directory where the object files will be saved.</li>
+<li><code>File name pattern</code>: a pattern that defines the file name of the saved objects. 
+This pattern should include an image format extension (png, gif, jpg...) since it 
+will be used by Gimp to determine how to save the object. 
+Default settings for the file type are used (JPEG quality, etc...).</li>
+</ul>
+
+<h3>Parameters when creating layers</h3>
+
+<ul>
+<li><code>Layer name pattern</code>: a pattern that defines the layer name of the extracted objects. </li>
+</ul>
+
+<h3>File and layer name pattern</h3>
+
+<p>The name pattern specifies how the object files and layers are named using specific object data. In the pattern,
+names in braces are replaced by the values of these data for the object. For instance, a pattern 
+of <code>Object@({x},{y}).png</code> will produce the name <code>Object@(112,89).png</code> for the object in the rectangle 
+located as (112,89).</p>
+
+<p>The available values are:</p>
+
+<ul>
+<li><code>imageName</code>: the base name of the image (original name, stripped of its directory and extension). If the image
+has not been saved yet the value is <code>Objects</code>.</li>
+<li><code>layerName</code>: the name of the layer from which objects are extracted</li>
+<li><code>num0</code>, <code>num1</code>: a sequence number (the <code>num0</code> sequence starts at 0, the <code>num1</code> one starts at 1). The order itself is 
+somewhat random.</li>
+<li><code>x</code>, <code>y</code>: the coordinates of the top-left corner of the rectangle that contains the object in the source layer. 
+<strong>Note:</strong>: It is possible to have objects whose enclosing rectangles have the same top-left corner, so using only these coordinates 
+in the name does not guarantee uniqueness. When saving to files, this means one object file would be overwritten by another and
+there would be a missing object.</li>
+<li><code>w</code>, <code>h</code>: the width and height of the rectangle that contains the object in the source layer</li>
+</ul>
+
+<h4>Hints</h4>
+
+<p>The name pattern is actually directly used as a Python format specification, so modifiers can be used. The most
+useful modifier for numbers is the ability to define a minimal length with zero-padding, because it makes files 
+easier to sort. This is done by adding <code>:0Nd</code>to the variable name in the braces, for instance <code>{x:03d}</code> 
+will insert the X coordinate on at least three digits, with zeros added to the left if necessary: 
+<code>001</code>, <code>013</code>, <code>099</code>, <code>100</code>.  </p>
+</div></body></html>

@@ -1,0 +1,108 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-bend-path</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #c0c0c0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-bend-path</h1>
+
+<p>This script bends a path using the strokes of another path as an envelope. 
+It can be seen as an equivalent of the "Curve Bend" tool. Unlike other scripts
+with the same purpose, this script only remaps the path control points and does not
+create new ones (it may move a few, see <code>Bendiness</code> below). </p>
+
+<p>The script is called by right-clicking the path to bend <strong>in the Paths dialog</strong>  and clicking <code>Tools&gt;Bend...</code>.</p>
+
+<h2>Typical use</h2>
+
+<ul>
+<li>Given a source path which is the path on which you start the script (active path or else) (in red)</li>
+<li>You provide an envelope path made of two strokes (in blue)</li>
+<li>The script produces the bent path (in green)</li>
+</ul>
+
+<p><img src="BendDemo.png" alt="Summary" title=""></p>
+
+<h2>How it works</h2>
+
+<p>Conceptually, in addition to the source path (green) and the envelope path (yellow), you define two horizontal reference lines (blue). 
+Space (and the source path on it) is then stretched vertically to fit these two reference lines over the envelope lines.
+The final result (red) depends on the position of these lines with regard to the source path:</p>
+
+<p><img src="Guides.png" alt="guides" title=""></p>
+
+<ul>
+<li>By design, the script only bends the path vertically (in the image above, you can observe that the vertical limits
+of the characters in the source and bent paths are aligned). </li>
+<li>The source path can be elsewhere, it only needs to overlap vertically with the envelope strokes 
+(which should both be at least as wide as the source path).</li>
+</ul>
+
+<h2>Parameters</h2>
+
+<h3><code>Envelope path</code></h3>
+
+<p>The path with the two strokes that define the envelope. Stroke order and direction is indifferent. 
+In addition to the position and size requirements mentioned, some restrictions apply:</p>
+
+<ul>
+<li>There should be only two strokes in that path.</li>
+<li>The strokes should not have loops.</li>
+<li>One of the strokes should have its extremities above the corresponding extremities 
+of the other one, so that the script can figure out which is the top and which is the bottom. 
+Hint: you can add segments outside the range of the target path to put the extremities
+in the right order.</li>
+<li>Both strokes should cover at least the same range of X coordinates as the target path.</li>
+</ul>
+
+<h3><code>Bendiness</code></h3>
+
+<p>The amount of artificial bend to apply to straight path segments. </p>
+
+<p>In Gimp paths, straight path segments are
+created by having the tangent control points exactly over the anchors. So, in the result path, these points
+are mapped to identical points, are therefore are still overlapping and the result is still a straight line, 
+which may not look good. 
+To avoid this, the script moves the tangent points somewhere between the two anchors, so that the remapping 
+naturally transforms the straight line into a curve. Note however that this curve cannot be exactly the same 
+as the one you would get by interpolating intermediate points (even if it will  be close). 
+Bendiness above 100% may generate loops and cusps, so use with caution.</p>
+
+<p><img src="Bendiness2.png" alt="Bendiness" title=""></p>
+
+<h3><code>Reference lines</code></h3>
+
+<p>The vertical coordinates of the two reference lines. </p>
+
+<p>The options are:</p>
+
+<ul>
+<li><code>Best fit</code>: the script computes the maximum and minimum Y coordinates for the source path. The net effect 
+is that the limits of your path will be very close to the envelope. However:
+<ul>
+<li>This includes both anchors and tangent handles, so the higher and lower anchors may not be on the envelope limits.</li>
+<li>In text, some round letters (<code>O</code>,<code>C</code>, <code>G</code>...) may extend slightly below the baseline so the baseline will 
+not map to the lower envelope limit.</li>
+</ul></li>
+<li><code>Guides</code>:  the script expects to find exactly two horizontal guides, whose position will be used</li>
+<li><code>Explicit values</code>: the script uses the values entered in the two fields below</li>
+</ul>
+
+<h3><code>Top coordinate</code>, <code>Bottom coordinate</code></h3>
+
+<p>The positions of the reference lines when using <code>Explicit values</code> in <code>Reference lines</code></p>
+</div></body></html>

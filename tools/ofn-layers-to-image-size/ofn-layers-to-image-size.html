@@ -1,0 +1,40 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-layers-to-image-size</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #c0c0c0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-layers-to-image-size</h1>
+
+<p>This script is the equivalent of applying <code>Layer&gt;Layer to image size</code> to all or all visible layers.</p>
+
+<p>The script is invoked using the menu <code>Image&gt;Resize layers to image size</code>.</p>
+
+<p>The options are:</p>
+
+<ul>
+<li><code>Resize layers</code>: specifies which layers are resized 
+<ul>
+<li><code>All layers</code>: the script resizes all layers.</li>
+<li><code>Visible layers</code>: the script only resizes layers that are actually visible (they are visible 
+and all their parent layers (if any) are also visible).</li>
+</ul></li>
+<li><code>Add alpha</code>: specifies if an alpha channel is added to layers without one. Without this, the resized layer
+is padded with the background color and hides all layers below it.</li>
+<li><code>Skip text</code>: specifies if text layers are explicitly ignored (resizing them makes them uneditable)</li>
+</ul>
+</div></body></html>

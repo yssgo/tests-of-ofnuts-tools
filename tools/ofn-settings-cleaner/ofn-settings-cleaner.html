@@ -1,0 +1,143 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-settings-cleaner</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-settings-cleaner</h1>
+
+<p>This utility keeps the memorized settings of various tools under control. It is not really a plug-in, even if it masquerades as such for its operation.</p>
+
+<h2>Principles of operation</h2>
+
+<p>Gimp keeps the settings of some tools in files </p>
+
+<ul>
+<li>in 2.8, a handful of files (corresponding to "Color'" tools) 
+in the subdirectory <code>tool-options</code> of the user's profile. 
+These files are named <code>gimp-{tool}-tool.settings</code>.</li>
+<li>in 2.10, about 40 files (tools and GEGL filters)
+in the subdirectory <code>filters</code> of the user's profile. 
+These files are named <code>Gimp*-config.settings</code>.</li>
+</ul>
+
+<p>In both Gimp versions these files contain: </p>
+
+<ul>
+<li>explicitly saved settings (to which a name is given) </li>
+<li>anonymous settings, that just receive a time stamp. </li>
+</ul>
+
+<p>Gimp never removes anything from these files so the settings lists in the tools dialogs can become unwieldy.</p>
+
+<p><code>ofn-settings-cleaner</code> attempts to put this under control by:</p>
+
+<ul>
+<li>dropping anonymous settings older that N days</li>
+<li>truncating the resulting list to the N most recent ones.</li>
+</ul>
+
+<p>The "named" settings are not taken in account. </p>
+
+<p>The utility runs as part of the Gimp startup, and cannot be explicitly started from a Gimp menu.</p>
+
+<p>To be run, it is put in one of the directories that Gimp searches for plug-ins. 
+When it notices an executable file that does not match a registered plug-in,
+Gimp executes it to make the plug-in run its registration code. 
+So <code>ofn-setting-cleaner</code> runs, but since it does not register, it is not added to the plug-ins,
+and on next start-up, Gimp sees it again, and runs it again...</p>
+
+<h2>Installation and configuration</h2>
+
+<p>The Python file should be installed like any other python plug-in:</p>
+
+<ul>
+<li>Moved/copied in one of the directories listed in <code>Edit&gt;Preferences&gt;Files&gt;Plug-ins</code></li>
+<li>Made executable (Linux, OSX, and other Unixen)(the unzipped file is normally already executable)</li>
+</ul>
+
+<h3>Configuration file</h3>
+
+<p>The utility will not clean any file unless explicitly told to do so via the configuration file. 
+The configuration should therefore contain one section for each settings file, named after the file, 
+within brackets, like "[gimp-curves-tool.settings]". The section can define two values:</p>
+
+<ul>
+<li><code>max_count</code>: the maximum number of anonymous settings to keep. A max_count of 0 will of course remove all anonymous settings.</li>
+<li><code>max_age</code>: the maximum age in days of anonymous settings to keep. This number can be fractional (for instance, "0.5" will clean everything older than 12 hours)</li>
+</ul>
+
+<p>A "[DEFAULT]" section can be used for values common to several sections</p>
+
+<p>For example the following configuration file:</p>
+
+<ul>
+<li>Specifies the seven files to be cleaned</li>
+<li>Sets a maximum age of <code>7</code> days for all</li>
+<li><p>Sets a maximum count of <code>10</code> for most files, but this value is overridden with <code>5</code> for the <code>gimp-threshold-tool.settings</code> file. </p>
+
+<pre>[DEFAULT]
+max_age:7
+max_count:10
+[gimp-brightness-contrast-tool.settings]
+[gimp-curves-tool.settings]
+[gimp-levels-tool.settings]
+[gimp-threshold-tool.settings]
+max_count:5
+[gimp-colorize-tool.settings]
+[gimp-hue-saturation-tool.settings]
+[gimp-color-balance-tool.settings]
+</pre></li>
+</ul>
+
+<p>The configuration file should be named after the Python file (<code>ofn-settings-cleaner.ini</code> if you do not rename the python file) and kept in the subdirectory <code>tool-options</code> (Gimp 2.8) or <code>filters</code> (Gimp 2.10) of your profile.</p>
+
+<p>Sample configuration files (<code>ofn-settings-cleaner.ini.sample-Gimp*</code>) that contains all known settings files as of Gimp 2.8.22 and Gimp 2.10.12 are provided in the ZIP.</p>
+
+<h3>Log file</h3>
+
+<p>Each run of the utility produces a log file ("ofn-settings-cleaner.log" if you do not rename the python file) in the subdirectory that contains the settings files. 
+If the plug-in misbehaves, check that file, it could contain the explanation.</p>
+
+<p>The configuration file can be used to tell how the log file is kept</p>
+
+<pre>[logging]
+log: single
+</pre>
+
+<ul>
+<li>with <code>single</code> the log file is overwritten on each run, and so remains small.</li>
+<li>with <code>cumulative</code> the log of each execution is added to the file. This lets you check the "history" but over time the file can grow quite big.</li>
+</ul>
+
+<h3>Usage notes</h3>
+
+<p>Some versions of Gimp (2.8.4 for Windows at least) do not keep complete timestamps (with hours, minutes, and seconds), so the fractional age may not work. </p>
+</div></body></html>

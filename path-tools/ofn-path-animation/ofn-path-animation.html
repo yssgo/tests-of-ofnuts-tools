@@ -1,0 +1,122 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-path-animation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-path-animation</h1>
+
+<h2>Purpose</h2>
+
+<p>This script renders all the frames necessary to generate an animation of the path being painted.</p>
+
+<p><img src="ofn-path-animation-sequential.webp" alt="Animation" title=""></p>
+
+<h2>Operation</h2>
+
+<p>The script is started using the <code>Render&gt;Path animation</code> entry after right-clicking the target path in the Paths list menu. </p>
+
+<p>The script strokes the path in <code>Line</code> mode (as in <code>Edit&gt;Stroke path</code>), using the current foreground color.</p>
+
+<h2>Usage notes:</h2>
+
+<p>The paths "strokes" are processed in the order in which they appear in the path data, and in the direction that they have in the path data.
+If you did not create the path by hand the order and direction of the strokes may not be what you expect. Shameless plug: with my 
+<code>ofn-path-edit</code> script you can:</p>
+
+<ul>
+<li>determine the order and direction of the strokes</li>
+<li>reverse the direction of strokes</li>
+<li>reorder strokes, either manually or by sorting them by position</li>
+</ul>
+
+<p>Also, most menus are disabled if there is not at least a layer or channel in the image. You can use a blank layer since the script will not generate one.</p>
+
+<p>If you don't want a blank layer, adding a dummy channel is a better work around since you won't need to remove/add it.</p>
+
+<ul>
+<li>open the Channels list, </li>
+<li>open the right-click menu and select <code>New channel...</code></li>
+<li>channel parameters are unimportant`</li>
+<li>click the eye icon to hide the channel</li>
+</ul>
+
+<p>If everything is disabled again, go to the Channels list and select the dummy channel again.</p>
+
+<h2>Parameters</h2>
+
+<ul>
+<li><p><code>Processing</code>: how the strokes are processed: </p>
+
+<ul>
+<li><code>Sequential</code>: the strokes are drawn one after the other, this is typically what is used to draw text.</li>
+</ul>
+
+<p><img src="ProcessingDemo-Sequential.webp" alt="ProcessingDemo-Sequential" title=""></p>
+
+<ul>
+<li><code>Parallel, same speed</code>: the strokes are drawn at the same time, with the same growth rate. The shorter strokes are completed before the longer ones.</li>
+</ul>
+
+<p><img src="ProcessingDemo-Parallel-Speed.webp" alt="ProcessingDemo-Parallel-Speed" title=""></p>
+
+<ul>
+<li><code>Parallel, same duration</code>: the strokes are drawn at the same time, but the growth rate is adjusted to the length of the stroke so that all strokes are
+completed at the same time.</li>
+</ul>
+
+<p><p><img src="ProcessingDemo-Parallel-Duration.webp" alt="ProcessingDemo-Parallel-Duration" title=""></p></li>
+<li><p>'Steps': the number of steps in the animation to complete all the strokes.</p></li>
+<li><code>Line width</code>: the width of the line, in pixels.</li>
+<li><code>Cap style</code>, <code>Join style</code>, <code>Miter limit</code>, and <code>Anti-aliasing</code>: the <a href="https://docs.gimp.org/en/gimp-using-paths-stroking.html">usual path stroking options</a>.
+Keep in mind that cap styles other than <code>Butt</code> extend the length of the dash by half a line width at each end.</li>
+<li><code>Opacity</code>: the opacity of the rendering.</li>
+<li><code>Background</code>: how each layer is filled before the path is rendered on it.</li>
+<li><code>Layer Name</code>: a pattern to name the layers (see below).</li>
+</ul></p>
+
+<h4>Layer name pattern</h4>
+
+<p>The layer name pattern specifies how the layers are named using specific processing data. In the pattern,
+names in braces are replaced by the values of these data for the path. For instance, a pattern 
+of <code>Frame-{step1}/{count}</code> will produce the name <code>Frame-3/50</code> for the 3rd step in a series of 50.</p>
+
+<p>The available values are:</p>
+
+<ul>
+<li><code>pathName</code>: the name of the source path</li>
+<li><code>count</code>: the total number of steps</li>
+<li><code>step</code>, <code>step</code>: the step number.</li>
+</ul>
+
+<p>The name pattern is actually directly used as a Python format specification, so modifiers can be used. The most
+useful modifier for numbers is the ability to define a minimal length with zero-padding. This is done by adding <code>:0Nd</code>
+to the variable name in the braces, for instance <code>{step:03d}</code> will insert the step number on at least three digits, with zeros added to the left if necessary: <code>001</code>, <code>013</code>, <code>099</code>, <code>100</code>.  </p>
+</div></body></html>

@@ -1,0 +1,98 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-save-next</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+
+div.background {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+}
+</style>
+<body>
+<div class="background">
+<h1>ofn-save-next</h1>
+
+<h2>Purpose</h2>
+
+<p>This script saves the current image using the next number in sequence, so you don&rsquo;t have to open the file selector and enter the sequence manually.</p>
+
+<h2>Usage</h2>
+
+<p>The script appears in the menu as: <code>File🠚Save next</code>.</p>
+
+<p>It is assumed that the file is already named using the scheme <code>{prefix}{number}{.ext}</code>.</p>
+
+<p>The script increases the <code>{number}</code> part by one to save the image. If <code>{number}</code> has leading zeros,
+the new number is padded with zeros on the left to match the length of the initial number.</p>
+
+<p>You normally open the first file using the regular <code>File🠚Open</code>, and then use the script to save the image.</p>
+
+<p>The file is saved/exported using the filetype used when opening it. Saving is done using the default options for the file type.</p>
+
+<p>The plugin is best assigned to a keystroke. It appears in the shortcut editor as <code>python-fu-ofn-save-next</code>.</p>
+
+<p><strong>Warning</strong>: the script will overwrite any exising file in case of name collision.</p>
+</div></body></html>

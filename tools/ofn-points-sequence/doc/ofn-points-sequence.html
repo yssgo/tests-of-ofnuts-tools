@@ -1,0 +1,67 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-points-sequence</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-points-sequence</h1>
+
+<h2>Purpose</h2>
+
+<p>This script adds sequential number labels to an image, using a path</p>
+
+<h2>Operation</h2>
+
+<ol>
+<li><p>Create a path using the Path tool, and click on the places where you want number labels to appear:</p>
+
+<p><img src="Path.png" alt="Path" title=""></p></li>
+<li><p>Invoke the script to create the labels (<code>Filters&gt;Render&gt;Sequence numbers on anchors</code>)  </p>
+
+<p><img src="Labels.png" alt="Labels" title=""></p></li>
+</ol>
+
+<h3>Parameters</h3>
+
+<ul>
+<li><code>Path</code>: the path to use</li>
+<li><code>Font</code>, <code>Font size</code>: the font</li>
+<li><code>Start</code>: the starting number of the sequence</li>
+<li><code>Offset X</code>, <code>Offset Y</code>: a shift of the centers of the labels from the anchors positions. 
+Positive numbers shift down and to the right. If both are 0 the label is centered on the anchor. </li>
+</ul>
+
+<h3>Notes</h3>
+
+<ul>
+<li>Labels are created as individual text layers, so that the position of some can be re-adjusted by hand.</li>
+<li>If there are several "strokes" in the path, each stroke is considered a separate sequence. If you have stray numbers, look for isolated anchors in your path.</li>
+</ul>
+</div></body></html>

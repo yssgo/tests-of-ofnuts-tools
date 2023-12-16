@@ -1,0 +1,70 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-brush-strokes-on-path</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+li{
+    margin: 5px 0;
+}
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-brush-strokes-on-path</h1>
+
+<h2>Purpose</h2>
+
+<p>The script paints evenly spaced brush strokes along a path.</p>
+
+<h2>Operation</h2>
+
+<p>The script is called from the <code>Brush strokes on path</code> item in the <code>Edit</code> menu:</p>
+
+<p><img src="Menu.webp" alt="menu" title=""></p>
+
+<p>The script paints on the designated layer using the current path and current paintbrush settings, in particular:</p>
+
+<ul>
+<li>brush</li>
+<li>size</li>
+<li>angle</li>
+<li>opacity</li>
+<li>blend mode</li>
+</ul>
+
+<h2>Parameters</h2>
+
+<ul>
+<li><code>Strokes</code>: the number of brush strokes per path element (often also called "strokes"). When this number is given
+the spacing is automatically computed.</li>
+<li><code>Spacing</code>: the approximate spacing between brush strokes. This parameter is only taken in account if <code>Strokes</code> is zero.
+The actual spacing value is the closest value that yields an integer number of strokes. For instance, on a 100px path, 
+a spacing of <code>21</code> is adjusted to <code>20</code> to yield exactly 5 intervals.</li>
+<li><code>Rotation</code>: whether or not the brush is rotated to follow the local path orientation. This is in addition to the angle 
+of the brush as specified in the paintbrush options. The "top" is on the left of the path, so that brushes are upright 
+when painted with a 0° angle on a left-to-right horizontal path.</li>
+</ul>
+</div></body></html>

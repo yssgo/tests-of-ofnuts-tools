@@ -1,0 +1,65 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-rotate-layer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { color: #000000; background: #ffffd0; }
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-rotate-layer</h1>
+
+<p>This script is used to create multiple rotated copies of a layer. 
+A typical use case is rotating animations (but it has other uses).</p>
+
+<p>This script is called via the menu entry: <code>Layer&gt;Transform&gt;Multi-rotate...</code> </p>
+
+<h2>Parameters</h2>
+
+<ul>
+<li><code>Direction</code>: determines if the rotation is clockwise or counter-clockwise. </li>
+<li><code>Angle</code>: the angle between each copy of the layer. For the mathematically inclined, negative angles
+are not accepted, and the only way to change the rotation direction is the <code>Direction</code> parameter. 
+If <code>Angle</code> is left to <code>0.</code>, then it is assumed to be <code>360/count</code>.</li>
+<li><code>Count</code>: the number of copies to produce. If left to <code>0</code>, then it is assumed to be <code>360/angle</code>.</li>
+<li><code>Auto-center</code>: if set, the layer is rotated around its own center (which may not be the image center)</li>
+<li><code>CenterX</code>, <code>CenterY</code>: the coordinates of the center of rotation if the <code>Auto-center</code> function is not used.</li>
+<li><code>Layer name</code>: a pattern to generate the layer name for the rotated copies (see below)</li>
+</ul>
+
+<h3>Layer name pattern</h3>
+
+<p>The layer name pattern specifies how the layers are named using specific layer data. In the pattern,
+names in braces are replaced by the values of these data for the layer. For instance, a pattern 
+of <code>Rotation-{AngleInt}°</code> will produce the name <code>Rotation-45°</code> for the rotated copy which is 45° from the source.</p>
+
+<p>The available values are:</p>
+
+<ul>
+<li><code>sourceName</code>: the name of the source layer</li>
+<li><code>count</code>: the total number of layers produced (typically used in "X of Y" names)</li>
+<li><code>direction</code>: "CW" or "CCW"</li>
+<li><code>num0</code>: the index number of the rotated layer (counted from 0, as comupters count)</li>
+<li><code>num1</code>: the index number of the rotated layer (counted from 1, as humans count)</li>
+<li><code>angleInt</code>: the angle of rotation for the layer, rounded to the nearest integer</li>
+<li><code>angleDec</code>: the angle of rotation for the layer, with a decimal part.</li>
+</ul>
+
+<p>The name pattern is actually directly used as a Python format specification, so modifiers can be used. </p>
+
+<ul>
+<li>The most useful modifier for numbers is the ability to define a minimal length with zero-padding. This is done by adding <code>:0Nd</code> to the variable name in the braces, for instance <code>{angleInt:03d}</code> will insert the angle on at least three digits, with zeroes added to the left if necessary: <code>045</code>, <code>090</code>, <code>115</code>.</li>
+<li>For numbers with a decimal part the number of digits after the decimal point can be specied as <code>:.Nf</code>, for instance <code>{angleDec:.2f}</code> would generate values such as <code>45.00</code>, <code>112.25</code></li>
+</ul>
+
+<h2>Usage notes</h2>
+
+<ul>
+<li>The first copy corresponds to a rotation of 0°, and is therefore identical to the source layer. 
+This is done to have all layers consistently named. </li>
+<li>Since this first copy is included in the count, you may need to specify one more copy in some cases 
+(but the typical use case of generating copies for a rotation animation doesn't require this).</li>
+</ul>
+</div><body></html>

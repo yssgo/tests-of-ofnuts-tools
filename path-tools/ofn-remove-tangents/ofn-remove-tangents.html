@@ -1,0 +1,51 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-remove-tangents</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-remove-tangents</h1>
+
+<p>This scripts removes tiny tangents handles that wreak havoc when stroking. 
+Since these tangents are very often accidental and tooo smal to have useful
+visual effect they can be removed without any negative impact.</p>
+
+<p>For some background information on paths see <a href="https://www.gimp-forum.net/Thread-Paths-Basics">here</a>.</p>
+
+<h2>Use</h2>
+
+<p>The script is called from the Paths dialog. Right-click the path you want to clean and
+invoke <code>Tools&gt;Remove small tangents</code> (towards the bottom of the menu).</p>
+
+<p>The only parameter is a size, which is the size under which a tangent is considered
+accidental and should be removed (under a pixel, usually).</p>
+
+<p>The script creates a copy of the path, named "Cleaned {source path name}"</p>
+</div></body></html>

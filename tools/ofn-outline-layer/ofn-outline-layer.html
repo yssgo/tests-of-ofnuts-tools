@@ -1,0 +1,83 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-outline-layer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-outline-layer</h1>
+
+<h2>Purpose</h2>
+
+<p>This script creates an outline around the contents of a layer.</p>
+
+<h2>Operation</h2>
+
+<p>The script is started with the entry menu <code>Layer&gt;Outline layer contents</code></p>
+
+<p>The outline color is the current background color. </p>
+
+<p>If the layer is a text layer, the outline uses the same anti-aliasing setting as the text layer.  </p>
+
+<p>The outline is merged in the target layer. 
+The resulting layer is the size of the target layer, enlarged with enough margin to hold the outline. 
+If the target layer is a text layer, it will disappear as a text layer, 
+so make a copy first if you want to keep it.</p>
+
+<h3>Parameters</h3>
+
+<ul>
+<li><code>Line width</code>: the outline width in pixels. Decimal pixels are supported.</li>
+<li><p><code>Position</code>: the position of the outline relative to the edge of the layer contents. Starting with 
+    <img src="Outline-None.png" alt="none][1" title=""></p>
+
+<ul>
+<li><p><code>Over the border</code>: the outline straddles the border:
+<img src="Outline-Over.png" alt="over][2" title=""></p></li>
+<li><p><code>Outside the border</code>: the outline starts from the border and extends outwards:
+<img src="Outline-Outside.png" alt="outside][3" title=""></p></li>
+<li><p><code>Inside the border</code>: the outline starts from the border and extends inwardss:
+<img src="Outline-Inside.png" alt="inside][4" title=""></p></li>
+</ul></li>
+<li><p><code>Join style</code>: the style of the "joins" which is how the outline behave around sharp points in the shape.</p></li>
+<li><code>Miter limit</code>: how "pointy" things cant get with "Miter" joins.</li>
+</ul>
+
+<p><code>Join style</code> and <code>Miter limit</code> are the same values as in the <a href="https://docs.gimp.org/en/gimp-path-stroke.html"><code>Edit&gt;Stroke path</code> function</a>.</p>
+
+<h2>Notes</h2>
+
+<ul>
+<li>In the presence of a selection, the outline will be drawn only within the limits of the selection.</li>
+<li>The script expects "sharp" edges for the layer contents. Results are unpredicatable if the edges are feathered.</li>
+<li>If the shape is thin and has acute recesses, you may have to reduce the miter limit to avoid protruding spikes opposite to the recesses (in orange, the generated stroke (one half is hidden by the layer), the red line marks the initial shape of the layer contents):  </li>
+</ul>
+
+<p><img src="Spikes.png" alt="spikes][5" title=""></p>
+</div></body></html>

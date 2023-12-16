@@ -1,0 +1,66 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-export-layers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #c0c0c0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-export-layers</h1>
+
+<p>This script is used to export all the image layers as seperate files. The layers are saved at their actual size and are not resized to the canvas size if they are smaller.</p>
+
+<p>This script is called via the menu entry <code>File&gt;Export&gt;Export all layers</code>. </p>
+
+<h3>Parameters</h3>
+
+<ul>
+<li><code>Directory</code>: the directory where the tile images will be saved.</li>
+<li><code>Layer name</code>: a pattern that defines the file name of the saved layer. This pattern should include an image format 
+extension (png, gif, jpg...) since it will be used by Gimp to determine how to save the layer. 
+Default settings for the file type are used (JPEG quality, etc...).</li>
+</ul>
+
+<h3>File name pattern</h3>
+
+<p>The file name pattern specifies how the layer files are named using specific layer data. In the pattern,
+names in braces are replaced by the values of these data for the layer. For instance, a pattern 
+of <code>Layer-{numDown1}.png</code> will produce the name <code>Layer-2.png</code> for the <strong>2nd</strong> layer from the top.</p>
+
+<p>The available values are:</p>
+
+<ul>
+<li><code>imageName</code>: the base name of the image (original name, stripped of its directory and extension). If the image
+has not been saved yet the value is <code>Layer</code>.</li>
+<li><code>count</code>: the number of layers in the image</li>
+<li><code>name</code>: the name of the layer, with any extension stripped</li>
+<li><code>rawName</code>: the name of the layer, without any changes</li>
+<li><code>width</code>: the width of the saved layer</li>
+<li><code>height</code>: the height of the saved layer</li>
+<li><code>numUp0</code>, <code>numUp1</code>, <code>numDown0</code>, <code>numDown1</code>: the position of the layer in the stack. 
+<ul>
+<li>Names ending with <code>0</code> start at 0 (as computers count), 
+while those ending with <code>1</code> start at <code>1</code> (as humans count).</li>
+<li>The  <code>numUp...</code> values count from the bottom (so number 0 or 1 is the "background" layer),
+whie <code>numDown...</code> values count from the top (so number 0 or 1 is the top layer).</li>
+</ul></li>
+</ul>
+
+<h3>Hints:</h3>
+
+<p>The name pattern is actually directly used as a Python format specification, so modifiers can be used. The most
+useful modifier for numbers is the ability to define a minimal length with zero-padding. This is done by adding <code>:0Nd</code>
+to the variable name in the braces, for instance <code>{numDown1:03d}</code> will insert the row number on at least three digits, with zeroes added to the left if necessary: <code>001</code>, <code>013</code>, <code>099</code>, <code>100</code>.  </p>
+</div></body></html>

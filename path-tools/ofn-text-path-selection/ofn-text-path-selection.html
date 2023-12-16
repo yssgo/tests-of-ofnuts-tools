@@ -1,0 +1,112 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-text-path-selection</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+div.background {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #e0e0e0; 
+    border-radius: 8px; 
+    padding-left: 8px;
+  
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+}
+
+</style>
+<body>
+<div class="background">
+<h1>ofn-text-path-selection</h1>
+
+<h2>Purpose</h2>
+
+<p>If you create text where there is an overlap between characters:</p>
+
+<p><img src="Example-initialText.png" alt="Initial text" /></p>
+
+<p>The strokes of these characters of course overlap:</p>
+
+<p><img src="Example-path.png" alt="Path" /></p>
+
+<p>And if you try to get a selection from that path you don&rsquo;t get the initial text:</p>
+
+<p><img src="Example-plainSelection.png" alt="Plain selection" /></p>
+
+<p>This is because Gimp uses an &ldquo;even-odd&rdquo; algorithm to determine if a pixel is selected or not:
+drawing a line from the pixel in any random direction,  the pixel is outside the selection
+if the line intersects an even number of strokes (<code>0</code> is considered even),
+and inside the selection if the line intersects an odd number of strokes.
+If the overlap areas, such a line intersects two strokes, one for each character, so
+the overlap area is unselected.</p>
+
+<p>This plugin uses a different algorithm: it identifies the strokes that belong to the same characters
+(more accurately, sets of nested strokes), and adds theses characters separately to the selection,
+so the overlap areas are the union of the selections for each characters and are selected:</p>
+
+<p><img src="Example-textSelection.png" alt="Plain selection" /></p>
+
+<h2>Usage</h2>
+
+<p>The plugin appears in the right-click menu of the Path list: <code>Text path to selection</code>.</p>
+
+<p>There are no parameters. For very complex paths (several hundred of strokes), make sure that the
+plugin has finished before you use the selection.</p>
+
+<h2>Thanks</h2>
+
+<p>Many thanks to Akovia for the incentive and the text/test cases from an unfathomable font collection.</p>
+</div></body></html>

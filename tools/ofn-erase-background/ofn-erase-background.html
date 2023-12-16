@@ -1,0 +1,63 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-erase-background</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #c0c0c0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-erase-background</h1>
+
+<p>This script removes a uniform background from an image and makes it transparent, keeping clean and smooth
+outlines around computer-generated graphics such as logos and text.</p>
+
+<p>To use:</p>
+
+<ol>
+<li>Do a fuzzy selection ("wand tool') over the background. If necessary: 
+<ul>
+<li>shift-click on isolated sections such as loop in letters to add them to the general selection. </li>
+<li>increase the selection threshold to include imperfections (such as JPEG compression artifacts)</li>
+</ul></li>
+<li>Call the script: <code>Layer&gt;Erase background</code></li>
+</ol>
+
+<h2>Options</h2>
+
+<h3><code>Delete color</code>:</h3>
+
+<ul>
+<li><code>Current background color</code>: the script erases the background paint color (that's the one shown in the toolbox indicator). 
+This is a good choice on complicated backgrounds (use the color picker to set that color before starting the script).</li>
+<li><code>Best guess from selection contents</code> : the script determines the most frequent color in the selected pixels and uses
+it as the color to remove. This works well on background that are mostly uniform.</li>
+</ul>
+
+<h3><code>Edges</code>:</h3>
+
+<p>This option tells the script how deep it should work on the edges. The <code>Clean</code> edges don't need more than one pixel, 
+the two other options will work with 2 and 3 pixels. Try the smaller values first, and increase the depth if necessary. </p>
+
+<h2>Usage notes</h2>
+
+<ul>
+<li>The result of the script depends on the accuracy of the background selection. 
+A clean logo with sharp edges on a PNG image will just require a selection with a small threshold, 
+but more difficult images (JPG with compression artifacts, for instance) may require a larger selection treshold,
+or the selection to be grown by one or to pixels before calling the script. </li>
+<li>The script works only on RGB images</li>
+<li>You can also use it to make transparent any area with a uniform color</li>
+</ul>
+</div></body></html>

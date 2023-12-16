@@ -1,0 +1,108 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-path-marquee</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-path-marquee</h1>
+
+<h2>Purpose</h2>
+
+<p>This script renders all the frames necessary to generate a moving dashed line from a path, marquee-style.</p>
+
+<p>The path can be obtained using <code>Layer&gt;Text to path</code> on a text layer</p>
+
+<p><img src="Gimp.webp" alt="Animation" title=""></p>
+
+<p>but other sources are possible. This a good way to generate "spinners" if your web site is slow:</p>
+
+<p><img src="Spinner.webp" alt="Spinner" title=""></p>
+
+<h2>Operation</h2>
+
+<p>The script is started using the <code>Render&gt;Marquee animation</code> entry after right-clicking the target path in the Paths list menu. </p>
+
+<p>The script strokes the path in <code>Line</code> mode (as in <code>Edit&gt;Stroke path</code>), shifting the dash offset for each frame. The path is stroked with
+the current foreground color.</p>
+
+<h3>Note</h3>
+
+<p>Most menus are disabled if there is not at least a layer or channel in the image. Adding a dummy layer has the downside that
+you must delete the layer before exporting the animation (or even testing it with the <code>Playback</code> filter), and then add one back to
+execute another run. Adding a dummy channel is a better work around:</p>
+
+<ul>
+<li>open the Channels list, </li>
+<li>open the right-click menu and select <code>New channel...</code></li>
+<li>channel parameters are unimportant`</li>
+<li>click the eye icon to hide the channel</li>
+</ul>
+
+<p>If everything is disabled again, go to the Channels list and select the dummy channel again.</p>
+
+<h2>Parameters</h2>
+
+<ul>
+<li><code>Reverse direction</code>: makes the animation move in the opposite direction. By default the animation moves in the order in which
+the path anchors are listed, but if the path is the output of <code>Layer&gt;Text to path</code> you may have little control over that. You can use 
+my <code>ofn-path-edits</code> script to reverse all or specific strokes.</li>
+<li><code>Period length</code>: the length of a dash+space unit. This value is subtly adjusted for each stroke to be an exact divider of the stroke length, to
+avoid unsightly things to happen on closed strokes.</li>
+<li><code>Ratio</code>: the relative length of the dash in the dash+space unit. This sets "raw" dash length, so "cap" styles may make the dash extend beyond this.</li>
+<li>'Steps': the number of steps in the animation to shift the pattern by exactly on period.</li>
+<li><code>Line width</code>: the width of the line, in pixels</li>
+<li><code>Cap style</code>, <code>Join style</code>, <code>Miter limit</code>, and <code>Anti-aliasing</code>: the <a href="https://docs.gimp.org/en/gimp-using-paths-stroking.html">usual path stroking options</a>.
+Keep in mind that cap styles other than <code>Butt</code> extend the length of the dash by half a line width at each end.</li>
+<li><code>Opacity</code>: the opacity of the rendering.</li>
+<li><code>Background</code>: how the layer is filled before the path is rendered</li>
+<li><code>Layer Name</code>: a pattern to name the layers (see below)</li>
+</ul>
+
+<h4>Layer name pattern</h4>
+
+<p>The layer name pattern specifies how the layers are named using specific processing data. In the pattern,
+names in braces are replaced by the values of these data for the path. For instance, a pattern 
+of <code>Frame-{step1}/{count}</code> will produce the name <code>Frame-3/50</code> for the 3rd step in a series of 50.</p>
+
+<p>The available values are:</p>
+
+<ul>
+<li><code>pathName</code>: the name of the source path</li>
+<li><code>count</code>: the total number of steps</li>
+<li><code>step0</code>, <code>step1</code>: the step number.. <code>step0</code> starts at 0 (as computers count) and 
+step1 starts at 1 (as humans count).</li>
+<li><code>period</code>: the length of the dash+space period, in pixels</li>
+<li><code>ratio</code>: the dash to period ratio (from 1 to 99)</li>
+</ul>
+
+<p>The name pattern is actually directly used as a Python format specification, so modifiers can be used. The most
+useful modifier for numbers is the ability to define a minimal length with zero-padding. This is done by adding <code>:0Nd</code>
+to the variable name in the braces, for instance <code>{step1:03d}</code> will insert the step number on at least three digits, with zeros added to the left if necessary: <code>001</code>, <code>013</code>, <code>099</code>, <code>100</code>.  </p>
+</div></body></html>

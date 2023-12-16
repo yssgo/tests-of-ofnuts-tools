@@ -1,0 +1,86 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-path-inbetweener</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-path-inbetweener</h1>
+
+<h2>Purpose</h2>
+
+<p>This tool interpolates more paths between the current path and end path. This can be used to generate surfaces or line-based animations.</p>
+
+<h2>Options</h2>
+
+<ul>
+<li><code>End path</code>: The end path (the start path is the current one)</li>
+<li><code>Total steps</code>: The number of steps to generate, including a copy of the begin and end paths.</li>
+<li><code>Output</code>: what output is produced: 
+<ul>
+<li><code>Single</code>: a single path is produced, that contains all the generated strokes from all the paths</li>
+<li><code>Multiple</code>: a path is generated for each iteration</li>
+<li><code>Auto</code>: when start and end path have one single stroke, this is <code>Single</code>, else this is <code>Multiple</code></li>
+</ul></li>
+<li><code>Stretch</code>: The law that governs the spacing of the paths:
+<ul>
+<li><code>Linear</code>: the intermediate paths are evenly spaced</li>
+<li><code>Accelerate</code>: the interval between paths widens from the start path to the end path. When used in an animation, 
+this is the movement of a falling object.</li>
+<li><code>Decelerate</code>: the interval between paths shrinks from the start path to the end path. When used in an animation, 
+this is the movement of a decelerating object (a bouncing ball going up, for instance).</li>
+<li><code>Swing</code>: the interval between paths widens and then shrinks. This is the movement of many oscillating systems
+(pendulum, spring...)</li>
+</ul></li>
+<li><code>Use guide</code>, <code>Guide path</code>: specify a third path that skews the interpolation. In other words, anchors on the intermediate path are no longer on a straight line between the corresponding anchors on the start and end paths. </li>
+</ul>
+
+<h2>Quirks, gotchas and caveats</h2>
+
+<ul>
+<li><p>The script interpolates the anchors of the paths, so it must match anchors in the first path with anchors in the second.</p></li>
+<li><p>The matching algorithm is simplistic: the Nth point in the stroke from path 1 is matched with the Nth point
+in the corresponding stroke in path 2, and the strokes themselves are matched by the order in which they appear in each path.</p></li>
+<li><p>Hence both paths should have the same number of strokes, and the strokes, taken in the same order, should have the same number of
+points. Working with single-stroke paths is therefore recommended.</p></li>
+<li><p>The script takes the anchors as defined in the Gimp strokes. It is recommended to check that:</p>
+
+<ul>
+<li>When working with closed strokes, the starting point of matching strokes in the two paths are the required ones </li>
+<li>In all cases, that the order of anchors (i.e., the direction) is the same in matching strokes.</li>
+</ul>
+
+<p><p>Both cases can be checked with the <code>Summary</code> function in my <code>ofn-path-edits</code> script (which can also reverse selected 
+strokes if necessary)</p></li>
+<li><p>When done, both source paths and the guide path are made invisible, while the generated paths are made visible 
+(so you are one click away from "Merge visible paths" if needed).</p></li>
+<li><p>Keep in mind that in Gimp 2.6, an even number of identical paths cancel out each other on the display. Not seeing
+anything could be normal (but who uses Gimp 2.6 in 2019?).</p></li>
+</ul></p>
+</div></body></html>

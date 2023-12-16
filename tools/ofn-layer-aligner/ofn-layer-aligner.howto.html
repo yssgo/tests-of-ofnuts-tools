@@ -1,0 +1,37 @@
+<h1>ofn-layer-aligner</h1>
+
+<p>This script realigns an image over another by scaling and rotating it so that two designated points 
+in the image comes to an exact overlap with two designated points in the reference image.</p>
+
+<p>The script uses the default interpolation method.</p>
+
+<p>To use:</p>
+
+<ul>
+<li>have the two images loaded as layers in the same Gimp image</li>
+<li>(recommended) make the top image partially transparent</li>
+<li>using the Path tool, create a path with 4 points:
+<ul>
+<li>the first two points over the reference image (the one that won't move)</li>
+<li>the next two points over the adjusted image</li>
+</ul></li>
+<li>this path can be either a single stroke with 4 points, or two strokes of two points each</li>
+<li>make sure the layer with the adjusted image is selected</li>
+<li>call the script: <em>Layer>Realign layer</em></li>
+<li>restore the full opacity of the top layer</li>
+</ul>
+
+<h2>Example</h2>
+
+<ul>
+<li>The stars are on the reference layer</li>
+<li>The circles are on the adjusted layer</li>
+</ul>
+
+<p>Before calling, the path goes through the two points of the reference layer, then through the two points of the adjusted layer: </p>
+
+<p><img src="ofn-layer-aligner-realign-before.png" alt="before" title="" /></p>
+
+<p>After execution, the adjusted layer has been moved/rotated/scaled so that the points overlap:</p>
+
+<p><img src="ofn-layer-aligner-realign-after.png" alt="after" title="" /></p>

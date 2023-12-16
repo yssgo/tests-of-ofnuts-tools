@@ -1,0 +1,202 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-tiles</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+
+div.background {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+}
+</style>
+<body>
+<div class="background">
+<h1>ofn-tiles</h1>
+
+<p>This script is used to save and load image tiles.</p>
+
+<h2>Saving</h2>
+
+<p>This script splits the image into tiles and saves them as individual files.
+In practice, it creates a new layer from the visible image (<code>Layer&gt;New from visible</code>)
+and then splits the result into the requested tiles.
+So the tiles can be either all already in a single layer, or be in distinct layers
+(as long as they are visually contiguous).</p>
+
+<p>How tiles are saved can be specified either as a number of columns and rows or as a the width and height of the tiles.</p>
+
+<p>This script is called via the menu entries:</p>
+
+<ul>
+<li><code>File&gt;Export tiles&gt;Export tiles (by width and height)</code></li>
+<li><code>File&gt;Export tiles&gt;Export tiles (by rows and columns)</code></li>
+</ul>
+
+
+<h3>Parameters</h3>
+
+<ul>
+<li><code>Directory</code>: the directory where the tile images will be saved.</li>
+<li><code>Tile name</code>: a pattern that defines the file name of the saved tiles. This pattern should include an image format
+extension (png, gif, jpg&hellip;) since it will be used by Gimp to determine how to save the tile. Default settings for the file type
+are used (JPEG quality, etc&hellip;).</li>
+<li><code>Rows</code>, <code>Columns</code>: the number of tiles to create on the height and the width of the image.
+The image size in pixels should be an integer multiple of these values (in other words, you cannot
+have partial tiles). If necessary, make a copy of the image and crop or extend it.</li>
+<li><code>Width</code>, <code>Height</code>: the width and height (in pixels)of the tiles.
+The image size in pixels should be an integer multiple of these values (in other words, you cannot
+have partial tiles). If necessary, make a copy of the image and crop or extend it.</li>
+</ul>
+
+
+<h3>Tile name pattern</h3>
+
+<p>The tile name pattern specifies how the tile files are named using specific tile data. In the pattern,
+names in braces are replaced by the values of these data for the tile. For instance, a pattern
+of <code>Tile-{row1}-{column1}.png</code> will produce the name <code>Tile-3-2.png</code> for the 2nd tile on the 3rd row.</p>
+
+<p>The names of some numeric values have two forms: one ending in <code>0</code> and one ending in <code>1</code>.
+The one ending in <code>0</code> starts at 0 (as computers count),
+while the one in <code>1</code> starts at <code>1</code> (as humans count).</p>
+
+<p>The available values are:</p>
+
+<ul>
+<li><code>imageName</code>: the base name of the image (original name, stripped of its directory and extension). If the image
+has not been saved yet the value is <code>Tile</code>.</li>
+<li><code>rows</code>: the number of rows</li>
+<li><code>columns</code>: the number of columns</li>
+<li><code>count</code>: the toal number of tiles (rows * columns)</li>
+<li><code>width</code>: the width of the tiles</li>
+<li><code>height</code>: the height of the tiles</li>
+<li><code>row0</code>,<code>row1</code>: the row number of the tile</li>
+<li><code>column0</code>,<code>column1</code>: the column number of the tile</li>
+<li><code>tileCR0</code>, <code>tileCR1</code>, <code>tileRC0</code>, <code>tileRC1</code>: the sequence number of the tile. The <code>tileRC</code>
+value increments the columns before the rows, and the <code>tileCR</code> values increments the rows before the columns.</li>
+</ul>
+
+
+<h4>Hints:</h4>
+
+<p>You can use the name pattern to define how your tiles are sorted: if you use <code>{row0}-{column0}</code> your tiles names are
+naturally sorted by row, but you can also use <code>{column0}-{row0}</code> to get names sorted on columns.
+If the sorting is important to you, you may want to additionally specify some left padding with zeroes.</p>
+
+<p>The name pattern is actually directly used as a Python format specification, so modifiers can be used.
+The most useful modifier for numbers is the ability to define a minimal length with zero-padding.
+This is done by adding <code>:0Nd</code> to the variable name in the braces, for instance <code>{row1:03d}</code>
+will insert the row number on at least three digits, with zeroes
+added to the left if necessary: <code>001</code>, <code>013</code>, <code>099</code>, <code>100</code>.</p>
+
+<h2>Loading</h2>
+
+<p>This script loads images from a sequence of files and positions them in the canvas of a new image.</p>
+
+<p>This script is called via the menu entry: <code>File&gt;Open tiles...</code></p>
+
+<h3>Parameters</h3>
+
+<ul>
+<li><code>Directory</code>: the directory from which the tile images will be loaded.</li>
+<li><code>Tile name</code>: the file name pattern of the loaded files. This typically includes wildcards (&lsquo;*&rsquo; and/ or &lsquo;?&rsquo;).</li>
+<li><code>Rows</code>, <code>Columns</code>: the number of rows and columns on which the tiles are arranged. If these two values are left to <code>0</code>
+the script tries to guess the proper numbers using clues in the tile file name (see below).</li>
+<li><code>Named by</code>: the sorting order of the files. The list of files obtained from the pattern is sorted by name
+and the files are loaded in that order. If this parameter is &lsquo;Columns then rows&rsquo;, then the files are loaded by columns,
+while of course if it is <code>Rows then columns</code> files are loaded by rows.</li>
+<li><code>Tiles</code>: whether the tiles are all merged in a single layer, or are kept as distinct layers.</li>
+</ul>
+
+
+<h4>Guessing the rows and columns</h4>
+
+<p>If the file names contain at least two identifiable groups of digits,
+then the <strong>last two</strong> groups are considered to be rows and columns numbers,
+and the numbers of rows and columns are determined by the difference between the
+smallest and biggest values. The following naming schemes are for instance valid:</p>
+
+<ul>
+<li><code>Tile-01-01.png</code></li>
+<li><code>Tile-01-01nodigits.png</code></li>
+<li><code>01-01.png</code></li>
+<li><code>Tiles(40x40)-01-01.png</code> (because what counts is that last two groups)</li>
+</ul>
+
+
+<p>Of course, the determination of which group of digits is the row and which is the column is under the control
+of the <code>Named by</code> parameter.</p>
+
+<h2>Loading and saving color-indexed images</h2>
+
+<ul>
+<li>The script always create an RGB image</li>
+<li>When saving, each tile is color-indexed on the fly by the Gimp code,
+and this likely creates  different colormap for each tile.
+This isn&rsquo;t a problem in the context of this script since the tiles are loaded in an RGB image.
+Changing the image mode to color-indexed before exporting will make sure that the colormaps
+of all tiles can be coalesced into a single 256-colors colormap.</li>
+</ul>
+
+</div></body></html>

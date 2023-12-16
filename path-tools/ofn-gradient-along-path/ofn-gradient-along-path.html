@@ -1,0 +1,56 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-gradient-along-path</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #c0c0c0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-gradient-along-path</h1>
+
+<h2>Purpose</h2>
+
+<p>ofn-gradient-along-path draws a bilinear blend transversally along path strokes, using the current gradient. 
+The gradient is drawn on the active drawable (layer, layer mask, channel....).</p>
+
+<h2>Principle</h2>
+
+<p>The gradient is rendered by stroking the path with decreasing widths, 
+setting the color by sampling the gradient at the corresponding position.</p>
+
+<h2>Usage</h2>
+
+<p>The script can be found in the right-click menu of a path in the Paths list (<code>Decorate&gt;Gradient along path...</code>).</p>
+
+<h3>Parameters</h3>
+
+<ul>
+<li><code>Width</code>: this is the total width in pixels of the stroke (<code>width/2</code> on each side of the path). </li>
+<li><code>Reverse gradient</code>: if false, the gradient is mapped inside-out, if true, it is mapped outside-in.  </li>
+<li><code>Precision</code>: the precision of the rendering. The <code>Fine</code> renderings make each stroke smaller than
+its predecessor by one pixels (.5 pixel each side). The settings are currently : .5, 1, 2, and 5 pixels.
+High precision require more stroking passes.</li>
+<li><code>Caps style</code>, <code>Join style</code> and <code>Miter limit</code>: these are the stroke line options (see the <code>Edit&gt;Stroke path</code> 
+documentation for a description). The value of <code>Current</code> means that the script will use whatever value is 
+currently set in Gimp. the <code>Miter limit</code> setting is used only if the <code>Join style</code> is explicitly set to <code>Miter</code>.</li>
+</ul>
+
+<h3>Usage notes</h3>
+
+<ul>
+<li>The principle of operation precludes the use of gradients with transparency </li>
+<li>You can render only one half of the gradient by using the path to create a selection</li>
+</ul>
+</div></body></html>

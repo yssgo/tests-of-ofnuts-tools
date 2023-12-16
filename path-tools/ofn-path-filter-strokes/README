@@ -1,0 +1,9 @@
+Installation:
+
+- Extract ofn-path-filter-strokes.py to your python plugin directory. 
+- On Linux and OSX, check that the file is marked executable
+- Plugin is available at the bottom of the Paths list right-click menu (Tools>Filter strokes on size)
+  
+See HTML doc for details
+
+Enjoy.

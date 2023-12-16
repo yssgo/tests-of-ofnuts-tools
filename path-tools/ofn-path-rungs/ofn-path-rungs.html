@@ -1,0 +1,107 @@
+<head><title>ofn-path-rungs</title></head>
+<style>
+body { font-size:120%; color: #000040; background: #f0f0f0; }
+</style>
+<h1>ofn-path-rungs</h1>
+
+<h2>Purpose</h2>
+
+<p>ofn-path-rungs creates a series of paths (the rungs/steps) between two existing paths that are used as stiles/stringers.
+The resulting path(s) can be used for complex still drawings or to create line animations. If the paths contain several strokes,
+the corresponding strokes are used.</p>
+
+<p>Blue and green being the original path, ofn-path-rungs will create the strokes of the red path:</p>
+
+<p><img src="Example1.png" alt="Example1" title="" /></p>
+
+<p>There are two diffferent mode of operations:</p>
+
+<ul>
+<li>in "by count" mode, a number of steps is given to be spread over the support paths. The steps can be spread linearly or not.</li>
+<li>in "by spacing" mode, a fixed spacing between steps is given, and the adequate number of steps is computed. </li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>The script can be found in the right-click menu of a path in the Paths list (<em>Tools>Path Rungs...</em>).
+This path is taken as the "<em>From</em>" path, and the first parameter of the dialog is the "<em>To</em>" path.</p>
+
+<h2>Specifying rungs by count</h2>
+
+<p>There are two parameters:</p>
+
+<h3>Count</h3>
+
+<p>The number of steps required</p>
+
+<h3>Stretch</h3>
+
+<p>How the steps are spread out. This option is quite useful when doing animations:</p>
+
+<ul>
+<li><p><strong>Linear</strong>: the steps are equally spaced</p>
+
+<p><img src="Demo-linear.gif" alt="linear" title="" /></p></li>
+<li><p><strong>Acceleration</strong>: the interval between the steps increases, as if subjected to a constant acceleration.</p>
+
+<p><img src="Demo-accel.gif" alt="accel" title="" /></p></li>
+<li><p><strong>Deceleration</strong>: the interval between the steps decreases, as if subjected to a constant deceleration.</p>
+
+<p><img src="Demo-decel.gif" alt="accel" title="" /></p></li>
+<li><p><strong>Swing</strong>: the interval between the steps is wider in the middle. It actually follows a sine curve, 
+like the tip of a pendulum. This is also the spread you see in perspective if you wrap the path on a cylinder.</p>
+
+<p><img src="Demo-swing.gif" alt="accel" title="" /></p></li>
+</ul>
+
+<h2>Specifying rungs by spacing</h2>
+
+<p>There are two parameters:</p>
+
+<h3>Spacing</h3>
+
+<p>The spacing in pixels between the contact points of two rungs on the "<em>From</em>" path. The spacing on the "<em>To</em>" path will depend on the ratio of the lengths of the "<em>From</em>" and "<em>To</em>" strokes. </p>
+
+<p>The spacing is adjusted to obtain a constant interval. For instance, 
+specifying a spacing of 3 pixels will yield an actual spacing of 3.03 pixels on a 100-pixels stroke.</p>
+
+<h3>Force rungs on anchors</h3>
+
+<p>Guarantees that there will be rungs between the corresponding anchors of the
+"<em>From</em>" and "<em>To</em>" strokes. This requires the strokes to have an equal number of anchors. The spacing is 
+adjusted for each interval between anchors to obtain an integer number of rungs.</p>
+
+<h2>Common options</h2>
+
+<h3>Sides</h3>
+
+<p>The sides on which the rungs attach to the stiles can be specified.</p>
+
+<ul>
+<li><strong>Sides</strong>: selects between: 
+<ul>
+<li><strong>Shortest rung</strong>: the script selects automatically the sides on both paths that will result in the shortest rung.
+this is the default</li>
+<li><strong>Explicit sides</strong>: the sides are specified using the next two selectors.</li>
+</ul></li>
+<li><strong>Side on From|To path</strong>: the sides on which the rungs will attach. This is relative to the direction
+of the stroke.</li>
+</ul>
+
+<h3>Incidence</h3>
+
+<p>The angle of the rung to the stile at the point of contact. 0 is perpendicular, positive angles are forward.</p>
+
+<h3>Bendy factor</h3>
+
+<p>The bendiness of the rung, which is the attraction of the line defined by the incidence above. 
+'0' on both sides gives a straight line.</p>
+
+<h3>Backwards</h3>
+
+<p>Swaps the ends of one of the support paths. This is useful to make all the rungs cross between
+the two paths, or to fix a support path that has been created pointing in the wrong direction.</p>
+
+<h3>Single path</h3>
+
+<p>Generates all the rungs as strokes in one single path.</p>

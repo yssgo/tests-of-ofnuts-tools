@@ -1,0 +1,67 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-dial-marks</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+li{
+    margin: 5px 0;
+}
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-dial-marks</h1>
+
+<h2>Purpose</h2>
+
+<p>This script creates dial marks (regularly spaced disk sectors) as paths.</p>
+
+<h2>Operation</h2>
+
+<p>The script is started from <code>Filters&gt;Render&gt;Paths&gt;Dial marks</code></p>
+
+<h3>Parameters:</h3>
+
+<ul>
+<li><code>Center X</code>, <code>Center Y</code>: the coordinates of the center of the dial.</li>
+<li><code>Inner radius</code>, <code>Outer radius</code>: the distance from the center of the two extremities of the marks.</li>
+<li><code>Number of marks</code>: the number of marks to generate.</li>
+<li><code>Mark width</code>: the width of the marks, in degrees.</li>
+<li><code>Start angle</code>: the angle of the center of the first mark. 0° is 0300 hours, 90° is 0600 hours, etc. Negative values (for instance, -90° for 1200 hours) are accepted.</li>
+<li><code>Mark shape</code>: <code>Polygonal</code> is made of straight lines, <code>Rounded</code> uses circle arcs for the inner and outer edges.</li>
+<li><code>Direction</code>: indicates the order in which the marks are generated: clockwise or counter-clockwise.</li>
+<li><code>Generated path(s)</code>: determines if the output is a single path or if there is one path per mark.  </li>
+</ul>
+
+<h3>Usage notes</h3>
+
+<ul>
+<li>The <code>Direction</code> and <code>Generated path(s)</code> parameters are mostly useful when using the script to generate animations (such as "spinners").</li>
+<li>The paths are generated bottom-up (the first path is the one at the bottom of the list in the Paths dialog). 
+This is coherent with other scripts (for instance, <code>ofn-stroke-fill-paths</code>) that will use paths to render frames for an animation. 
+In other words the <code>Direction</code> parameter sets the rotation direction of the final animation.</li>
+</ul>
+</div></body></html>

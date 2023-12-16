@@ -1,0 +1,33 @@
+<head>
+<title>ofn-path-filter-strokes</title>
+<style>
+pre {
+    background-color: #B0B0FF;
+}
+code {
+    font-weight: bold; 
+    color: #3030FF
+}
+
+</style>
+</head>
+<body>
+<h1>ofn-path-filter-strokes</h1>
+<h2>Purpose</h2>
+<p>This script removes strokes from a path, based on the "size" of the stroke. This size criterion can be:</p>
+<ul>
+<li>The number of anchors/segments
+<li>The length
+<li>The area (see Notes below) 
+</ul>
+<h2>Usage</h2>
+<p>Once installed, this script appears in the right-click menu of the Paths list as <code>Tools>Filter strokes on size</code>
+<p>The script doesn't delete the original path, it creates a new path which is a copy of the source path with some strokes removed.</p>
+<p>The threshold value is tested for equality (the strokes for which the measure is equal to the theshold are kept)</p>
+<h2>Notes</h2>
+<p>The computation of the stroke area is approximate, it is the area of the polygon going through the anchor points. 
+The computation is only valid for "simple" (non-self-intersecting) polygons (paths created from a selection are alays of that kind)</p>
+
+
+
+

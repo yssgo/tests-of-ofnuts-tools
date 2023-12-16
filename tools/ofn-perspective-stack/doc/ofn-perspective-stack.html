@@ -1,0 +1,104 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-perspective-stack</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-perspective-stack</h1>
+
+<h2>Purpose</h2>
+
+<p>This script makes an image that represents the layers in the initial image as a perspective 3D stack.</p>
+
+<h2>Operation</h2>
+
+<ul>
+<li>In the initial image, add a path that represents the shape of the layers once the perspective is applied:</li>
+</ul>
+
+<p><img src="InitialImage.png" alt="InitialImage.png" title=""></p>
+
+<ul>
+<li>Invoke the script (<code>Image&gt;Stack layers with perspective</code>), specifying the perspective path created above. The script creates a new image:</li>
+</ul>
+
+<p><img src="ResultImage.png" alt="ResultImage.png" title=""></p>
+
+<h3>Parameters:</h3>
+
+<ul>
+<li><p><code>Perspective Path</code>: the path used to create the perspective. 
+It must have at least one stroke, and the first stroke should have at least four anchors.
+The anchors can be in any order, the two closest to the top are assumed to apply to the top corners,
+and the other two to the bottom corners, and in each group, the one further left is assumed to apply
+to the left corner. What happens with a perfect diamond is anyone's guess.</p></li>
+<li><p><code>Spacing</code>: the vertical space between layers in the stack, expressed as a ratio 
+of the height of the transformed layers. </p></li>
+<li><p><code>Margin</code>: the size of the canvas margins around the stack, expressed as a ratio 
+of the width of the transformed layers. A margin of <code>0</code> of course means no margins.</p></li>
+<li><p><code>Merge layers</code>: merge selected layers to the layer below to stack them as one single layer.</p>
+
+<ul>
+<li><code>None</code>:  No layers are merged</li>
+<li><code>Text layers</code>: Text layers (those editable with the Text tool) are merged down. 
+This is useful to maintain layer annotations as seperate text layers. 
+All text layers are merged: if there are several text layers above a non-text layer, 
+all these layers will be merged into one.</li>
+<li><code>Linked layer</code>: Merge the mayers with the chainlink icon activated. This allows you to hand-pick the merged layers.</li>
+</ul></li>
+<li><p><code>Ghost opacity</code>: the opacity of the ghosting that fills the layer where it is transparent. 
+An opacity of <code>0</code> of course means no ghosting.</p></li>
+<li><p><code>Ghost color source</code>: the source for the color of the ghost. The choices are:</p>
+
+<ul>
+<li><code>Background color</code>: Gimp's current background color</li>
+<li><code>Specified color</code>: a color specified in the next field of the dialog</li>
+<li><code>Average layer color</code>: the average color of the layer. </li>
+<li><code>Dominant layer color</code>: the median color of the layer, which is the dominant color when there are only two colors. 
+This is often more useful than the average: in a layer with two main colors (for instance, light background and dark text), 
+the average color will be darker that the background, while the median will usually be the same as the background.</li>
+</ul></li>
+<li><p><code>Ghost color</code>: the ghost color, ignored unless also mentioned in the selector above.</p></li>
+</ul>
+
+<h3>Usage notes:</h3>
+
+<ul>
+<li>The layers in the initial image are assumed to be the size of the canvas.</li>
+<li>A path can have anchors outside of the canvas, the only constraint on size is the blur 
+induced by scaling up.</li>
+<li>A bottom white layer is added in the result image, this is mostly done to be able to evaluate the result.
+It can be hidden/deleted if not needed. </li>
+<li>If you need different types of ghosting for different layers, create several images with different
+ghosting options and then move the layers between images.</li>
+<li>The created images are "clean" from Gimp's perspective (no unsaved changes), so if you exit Gimp you will not 
+be reminded to save them.</li>
+</ul>
+</div></body></html>

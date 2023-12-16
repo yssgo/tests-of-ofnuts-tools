@@ -1,0 +1,59 @@
+<head><title>ofn-symmetries</title></head>
+<style>
+body { font-size:120%; color: #000040; background: #f0f0f0; }
+</style>
+<h1>ofn-symmetries</h1>
+
+<p>This plugin creates three symmetries of a layer. They are available in the menu <em>Layer>Symmetries</em>.</p>
+
+<p>Each symmetry has its own menu entry (instead of using a dialog to select options) so it can be 
+assigned to its own keyboard shortcut.</p>
+
+<h2>Straight symmetry</h2>
+
+<p>This symmetry folds a layer along one of its medians. The name of the symmetry is the name of
+the side which is kept and replicated. </p>
+
+<h2>Diagonal symmetry</h2>
+
+<p>This symmetry folds a square layer along one of its diagonals. The name of the symmetry is the name of
+the corner which is kept and replicated. The filter only operates on square layers. </p>
+
+<h2>Quadrilateral symmetry</h2>
+
+<p>This symmetry copies and rotates the layer by multiples of 90°, and the resulting copies are
+joined around a corner. The layer may not be square.</p>
+
+<h3>Warnings</h3>
+
+<ul>
+<li>This symmetry assumes:
+<ul>
+<li>that the layer is the only one in the image</li>
+<li>that the top left corner of the layer is in the top left corner of the image</li>
+</ul></li>
+<li>The image canvas is resized to fit the created layer. </li>
+<li>Each execution of this symmetry creates an image that contains 4 times more pixels than its source, 
+so memory usage will grow fast. Start with small images!</li>
+</ul>
+
+<h2>Typical usage</h2>
+
+<p>Take any image, and:</p>
+
+<ul>
+<li>crop a square</li>
+<li>scale it down to 200-300px</li>
+<li>apply a diagonal symmetry once</li>
+<li>apply the quadrilateral symmetry a couple of times</li>
+</ul>
+
+<h2>Example</h2>
+
+<p>The source image (the corner used (SW) is highlighted):</p>
+
+<p><img src="ofn-symmetries-source.jpg" alt="source" title="" /></p>
+
+<p>The final image after one diagonal and two quadrilateral symmetries (scaled down):</p>
+
+<p><img src="ofn-symmetries-result.jpg" alt="result" title="" /></p>

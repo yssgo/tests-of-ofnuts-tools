@@ -1,0 +1,96 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-fit-canvas-to-path</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-fit-canvas-to-path</h1>
+
+<h2>Purpose</h2>
+
+<p>This script resizes and crops the canvas around the active path, for a tight fit or with a user-specificed margin.</p>
+
+<h2>Usage</h2>
+
+<p>Once installed, this script can be launched from <code>Image&gt;Fit canvas to path&gt;Tight</code> and <code>Image&gt;Fit canvas to path&gt;With margin...</code> menu entries in the image window. The "tight" version takes no parameters, the margin version requires the margin size.</p>
+
+<p>You can use <code>Edit&gt;Keyboard shortcuts</code> to assign either to a hot key (search for <code>ofn-fit</code> to locate them).</p>
+
+<h2>Optional setup</h2>
+
+<p>Using a small configuration file, you can:</p>
+
+<ul>
+<li>Set a default value for the margin</li>
+<li>Define from which menu(s) the script can be launched</li>
+</ul>
+
+<h3>Configuration file</h3>
+
+<p>The configuration file shall be named <code>ofn-fit-canvas-to-path.ini</code> and be located in the <code>tool-options</code> subdirectory of your Gimp profile.</p>
+
+<p>The configuration file shall start with a line <code>[ofn-fit-canvas-to-path]</code>.</p>
+
+<p>Below this line, you can define any of these three values:</p>
+
+<ul>
+<li>The default margin: <code>margin: 20</code></li>
+<li>The use of a menu in an image window: <code>imageMenu: yes</code></li>
+<li>The use of a menu in an the Paths list right-click menu: <code>pathsMenu: no</code> (of course, in this case the plugin uses the specified path and not the active path) </li>
+</ul>
+
+<p>So your typical configuration file will look like:</p>
+
+<pre>[ofn-fit-canvas-to-path]
+imageMenu:no
+margin:20
+pathsMenu:yes
+</pre>
+
+<h3>Notes</h3>
+
+<h4>Renaming the plugin</h4>
+
+<p>If the script is renamed the name of the <code>.ini</code> file and the contents of its header should be changed accordingly.</p>
+
+<h4>Registration</h4>
+
+<p>Gimp updates the registration data for the plugins only when it notices a new plugin executable, or when an already registered executable changes (according to the file modification date). Changing the <code>.ini</code> file contents would require Gimp to update its registration data, but since the plugin file hasn't changed it won't notice it.</p>
+
+<p>You can force Gimp to re-acquire the registration data using any of the methods below:</p>
+
+<ul>
+<li>Editing the <code>pluginrc</code> file in the Gimp profile, locating the line starting with <code>(plug-in-def</code> that bears the plugin file name, and delete the file contents from that line up to and not including the next <code>(plug-in-def</code>.</li>
+<li>Deleting the pluginrc file, but this makes Gimp re-run all the plugins for registration the next time it starts.</li>
+<li>Renaming the plugin file. Gimp will delete the registration data obtained under its previous name, and make that new plugin register itself.</li>
+<li>Move the plugin in another directory, start Gimp, exit Gimp, move the plugin back, and start Gimp</li>
+<li>Use the touch utility (if you have it...) to bump the date of the plugin file </li>
+</ul>
+</div></body></html>

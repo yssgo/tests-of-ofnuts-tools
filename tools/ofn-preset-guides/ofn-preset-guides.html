@@ -1,0 +1,179 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-preset-guides</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+li{
+    margin: 5px 0;
+}
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-preset-guides</h1>
+
+<h2>Purpose</h2>
+
+<p>This plugin creates a <code>Image&gt;Guides&gt;Presets</code> submenu with sets of guides that you use often. 
+If necessary these presets can beinvoked using hotkeys (see <code>Edit&gt;Keyboard shortcuts</code>).</p>
+
+<p>Guides can be created relative to the image or relative to the current active layer.</p>
+
+<p><img src="Menu.png" alt="Menu" title=""></p>
+
+<h2>Set-up</h2>
+
+<p>The plugin works using a small configuration file. This file:</p>
+
+<ul>
+<li>Should have the same name as the plugin Python file, with extension <code>.py</code> replaced by extension <code>.ini</code></li>
+<li>Should be placed in the same directory as the plugin Python file.</li>
+<li><strong>The plugin cannot work if the configuration file is not available</strong></li>
+</ul>
+
+<p>Updating the file can be tricky, see the important "Registration" section below.</p>
+
+<h3>Configuration file contents</h3>
+
+<p>The file contains a set of lines, that are either comments, empty, or a preset. Comment lines start with a '#'.</p>
+
+<h4>Preset lines</h4>
+
+<p>A preset line must contain, separated by colons (<code>:</code>):</p>
+
+<ul>
+<li>The description/menu entry (free text, except of course <code>:</code>)</li>
+<li>The plugin identifier part (made only of letter and numbers). It must be unique within layer or image definitions, duplicate definitions are ignored.</li>
+<li>The list of horizontal guide positions (that can be empty)</li>
+<li>The list of vertical guide positions (that can be empty)</li>
+<li>The target of the guide: image (<code>I</code>) or layer (<code>L</code>) (<code>I</code> assumed if omitted)</li>
+</ul>
+
+<h4>Positions</h4>
+
+<p>Positions are either:</p>
+
+<ul>
+<li>Floating point numbers in the range <code>[-1., +1.]</code>. They indicate a relative position in the canvas.</li>
+<li>Integers. They indicate an absolute position in pixels </li>
+</ul>
+
+<p>A floating point number always contains a dot: <code>.3</code> or <code>0.3</code>. An integer number has no dot: <code>33</code>.</p>
+
+<p>Positive numbers are relative to the left/top sides, negative numbers to the right/bottom ones</p>
+
+<p>Positions that fall outside the canvas are silently ignored</p>
+
+<h4>Position lists</h4>
+
+<p>A position list is a set of numbers separated by commas. Spaces can be added for clarity, and the list can be enclosed in square brackets (<code>[</code>,<code>]</code>)</p>
+
+<p>For the snake charmers (they will recognize themselves), a position list is any expression that yields an iterable (the position list specification is passed to <code>eval()</code>). You can test your expressions in the snake training area.</p>
+
+<p>Examples</p>
+
+<ul>
+<li><p>A comment line:</p>
+
+<pre>\# This is a comment line:
+</pre></li>
+<li><p>A preset with both lists, each containing a single floating point position:</p>
+
+<pre>Centered:centered:[.5]:[.5]:I
+</pre></li>
+<li><p>The same preset, centered on the active layer:</p>
+
+<pre>Centered:centered:[.5]:[.5]:L
+</pre></li>
+<li><p>A preset with negative numbers:</p>
+
+<pre>Margins @20px:margins20:20,-20:20,-20:I
+</pre></li>
+<li><p>A preset mixing floating point and integer positions:</p>
+
+<pre>Full Monty:fullmonty:[20,50,.5,-50,-20]:[20,50,.5,-50,-20]:I
+</pre></li>
+<li><p>A preset with no vertical guides (note the empty column <code>::</code>):</p>
+
+<pre>No vguides:novert:[33]::I
+</pre></li>
+<li><p>A preset with no horizontal guides (note the empty column <code>::</code>):</p>
+
+<pre>No hguides:nohorz::42:I
+</pre></li>
+<li><p>A preset with Python expressions:</p>
+
+<pre>Python expression:python:range(50,251,5):[((x+1)/10.)**2 for x in range(10)]
+</pre></li>
+</ul>
+
+<h2>Notes</h2>
+
+<h3>Guides from layers</h3>
+
+<p>Guides created from layers are created relative to the current active layer. Like all Gimp guides,
+they are relative to the image, so they will not move with the layer.</p>
+
+<h3>Registration</h3>
+
+<p>Gimp updates the registration data for the plugins only when it notices a new plugin executable, or when an already registered executable changes (according to the file modification date). Changing the .ini file contents would requires Gimp to update its registration data, but since the plugin file hasn't changed it won't notice it.</p>
+
+<p>You can force Gimp to re-acquire the registration data using any of the methods below:</p>
+
+<ul>
+<li>Editing the <code>pluginrc</code> file in the Gimp profile, locating the line starting with <code>(plug-in-def</code> that bears the plugin file name, and delete the file contents from that line up to and not including the next <code>(plug-in-def</code>.</li>
+<li>Deleting the <code>pluginrc</code> file, but this makes Gimp re-run all the plugins for registration the next time it starts.</li>
+<li>Renaming the plugin file. Gimp will delete the registration data obtained under its previous name, and make that new plugin register itself.</li>
+<li>Move the plugin in another directory, start Gimp, exit Gimp, move the plugin back, and start Gimp</li>
+<li>Use the <code>touch</code> utility (if you have it...) to bump the date of the plugin file </li>
+</ul>
+
+<h3>Checking for errors</h3>
+
+<p>The plugins outputs some debugging information when the registration code is run. For instance:</p>
+
+<pre>Reading configuration file /home/me/.gimp-2.8/plug-ins/ofn-preset-guides.ini
+Preset "Centered": registering
+Preset "Margins @20px": registering
+Preset "Margins @50px": registering
+Preset "Full Monty": registering
+Preset "No vguides": registering
+Preset "No hguides": registering
+Preset "Python expression": registering
+Preset "Neg floats": registering
+Line 33 does not contain at least 4 elements
+Preset "Bad list": Incorrect syntax: 20a,35+
+Preset "Bad element": invalid number: '23'
+Configuration file /home/me/.gimp-2.8/plug-ins/ofn-preset-guides.ini read successfully
+</pre>
+
+<p>To obtain this information:</p>
+
+<ul>
+<li>On Linux, start Gimp from a terminal, these messages will show up in the terminal while Gimp starts</li>
+<li>On all other platforms, the plugin creates a log file (<code>${plugin_name}.log</code>) in the same directory as the plugin and configuration files. If there are no messages in the terminal, or if the log file is not created or updated, see the "Registration" section above.</li>
+</ul>
+</div></body></html>

@@ -1,0 +1,230 @@
+<!DOCTTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>ofn-text-along-path</title>
+
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-text-along-path</h1>
+
+<p>경로 목록 창의 한 경로 위에서 우클릭하여  다음 두 메뉴 중 하나 선택.
+<ul>
+<li>Ofnuts/Tools/Text (multi) along path</li>
+<li>Ofnuts/Tools/Text along path</li>
+</ul>
+<p>이 플러그인의 대화창에서 선택한 글꼴 및 글꼴 크기로 텍스트 경로를 만든 다음, 
+생성된 텍스트 경로의 각 문자를 현재 경로를 따라 배치. 이때, 다른 옵션에 맞추어 각 문자의 회전 및 이동하는 방식이 달라집니다.
+</p>
+
+<p>이 도구는 김프 텍스트 도구의 <code>Text along path</code>를 개선한 버전입니다.</p>
+
+<ul>
+<li>문자 형태를 왜곡하지 않습니다. 각 문자를 회전 및 이동합니다.</li>
+<li>경로 상에서 텍스트를 왼쪽,오른쪽,중간,양쪽 맞춤 또는 반복 가능.</li>
+<li>유도선 경로 기준으로 수직 위치 지정 가능</li>
+</ul>
+
+<p>두 개의 서로 다른 기능함수가 있음:</p>
+
+<ul>
+<li>한 줄로 된 텍스트가 경로의 모든 부경로마다 사용되는 기능함수. 표준 모드.</li>
+<li>경로의 각 부경로에 텍스트의 한 줄씩 사용되는 기능함수. multi(다중) 모드</li>
+</ul>
+
+<p><strong>경로 목록 창</strong>에서 유도선 경로로 사용될 경로에서 우클릭해서 호출. <code>Tools(도구)</code> 하위 메뉴에 있음. </p>
+
+<h2>선택 사항</h2>
+
+<h3>Text(글)</h3>
+
+<p>글</p>
+
+<ul>
+<li>표준 모드: 한 줄 텍스트. 텍스트 경로의 너비가, 유도선 경로의 최단 부경로의 폭보다 넓어지면 안 됨.</li>
+<li>다중 ("multi") 모드: 경로로 변환된, 텍스트의 각 줄의 너비가, 대응하는 부경로보다 짧아야 함. 
+텍스트의 줄 수와 유도선 경로 안의 부경로의 개수가 똑같아야 함.</li>
+</ul>
+
+<h3>Spacer(사이 띄움 문자열)</h3>
+
+<p> <code>Repeated(반복됨)</code> 레이아웃을 사용할 때, 반복되는 텍스트의 사이에 넣을 문자열. 
+열린 부경로에서 텍스트의 사본 '사이'에만 넣어짐.
+닫힌 경로에서, 각 텍스트의 끝에 더해짐.</p>
+
+<h3>Font name(글꼴 이름)</h3>
+
+<p>비워 두면, 현재 글꼴(텍스트 도구에서 선택한 글꼴)을 사용.</p>
+
+<h3>Font size(글꼴 크기)</h3>
+
+<p>픽셀 단위의 크기</p>
+
+<h3>Layout(배치)</h3>
+
+<ul>
+<li><code>Left-aligned(왼쪽 맞춤)</code>: 텍스트의 원래 너비는 변경하지 않고, 부경로의 시작부분에 왼쪽을 맞춤.</li>
+<li><code>Right-aligned(오른쪽 맞춤)</code>:  텍스트 경로의 원래 너비는 변경하지 않고, 부경로의 끝부분에 오른쪽을 맞춤</li>
+<li><code>Centered(중심 맞춤)</code>:  텍스트의 원래 너비는 변경하지 않고, 부경로의 중간부분에 가운데를 맞춤</li>
+<li><code>Justified(양쪽 맞춤)</code>: 텍스트가 유도선 안 부경로의 전체 길이를 채우도록 문자 사이에 여분의 공간을 삽입.</li>
+<li><code>Repeated(반복됨)</code>: 부경로를 채우도록 텍스트를 반복한 후, 모자라면 너비를 늘임. 
+<code>spacer(사이 띄움 문자열)</code> 텍스트가 있으면 각 텍스트 사이에 놓음.</li>
+</ul>
+
+<p><img src="Layouts.png" alt="Layouts][1" title=""></p>
+
+<h3>Use kerning(커닝 사용)</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Kerning">커닝</a>을 사용하여 더 규칙적으로 글자 사이를 띄우려고 시도.
+커닝은 간접적으로 얻으며 모든 글꼴에서 잘 작동하지는 않음. 특히, 이탤릭 글꼴에서는 커닝 입력란은 비워두는 것이 최선임.</p>
+
+<p><img src="Kerning.png" alt="Kerning][1" title=""></p>
+
+<h3>Extra spacing(여분의 간격 두기)</h3>
+
+<p>모든 글자 사이에 여분의 공간을 삽입해서 텍스트를 넓힘. 1 픽셀이 안 되는 값(소수점이 있는 수) 사용 가능. 
+경로의 부경로에 타이트한 곡선이 있거나, <code>tilt wiggle</code> 옵션을 사용할 때, 문자 사이에 약간 더 여유 공간을 주어서 문자가 겹치지 않게 할 때 유용함. 
+<code>Justified(맞춤)</code> 레이아웃에서는 이 값을 무시. <code>Repeated(반복)</code> 레이아웃에서는 최소값으로 사용(실제 문자 간격은 넓어질 수 있음).</p>
+
+<h3>Height reference(높이 기준)</h3>
+
+<p>유도선 기준의 수직 위치. <code>box(상자)</code>는 텍스트 도구였으면 텍스트 레이어의 바운더리였을 부분.</p>
+
+<p><img src="HeightReference.png" alt="HeightReference][1" title=""></p>
+
+<p><code>Top of Uppercase(대문자 상단)</code>, <code>Middle of Uppercase(대문자 중간)</code>, <code>Top of Lowercase(소문자 상단)</code>, <code>Middle of Lowercase(소문자 중간)</code>의 실제 높이는 
+<code>X</code>의 대문자, 소문자를 그려 낸 것을 검사해서 계산됨. "예술적" 글꼴에는 잘 맞지 않음.</p>
+
+<h3>Vertical adjust(수직 조정)</h3>
+
+<p>높이 조정. <code>높이 기준</code> 옵션에 더해짐. 1픽셀이 안 되는 값도 허용됨.</p>
+
+<h3>Keep upright(똑바로 있게 하기)</h3>
+
+<p>'예'이면, 글자를 기울이지 않음.</p>
+
+<p><img src="KeepUpright.png" alt="KeepUpright][1" title=""></p>
+
+<h3>Lateral wiggle(옆쪽 꿈틀)</h3>
+
+<p>무작위로 좌우로 위치를 바꿀 최댓값. 평균 문자 너비에 대한 퍼센트로 표시.</p>
+
+<h3>Vertical wiggle(수직 꿈틀)</h3>
+
+<p>무작위로 상하로 위치를 바꿀 최댓값. <code>character box(문자 상자)</code>의 높이에 대한 퍼센트로 표시.
+</p>
+
+<h3>Tilt wiggle(기울이기 꿈틀)</h3>
+
+<p>각 문자를 무작위로 더 기울일 최댓값. 각도 단위로 표시.</p>
+
+<p><img src="Wiggles.png" alt="Wiggles][1" title=""></p>
+
+<h3>Reverse stroke direction(부경로 방향 뒤집기)</h3>
+
+<p>"예"로 하면 부경로의 방향과 반대로 문자를 배치함. 또한 문자가 부경로의 반대 편에 문자가 놓이게 됨.</p>
+
+<p><img src="Reversed.png" alt="Reverse][1" title=""></p>
+
+<h3>상자를 경로로 생성 및 표시</h3>
+
+<p><code>상자를 경로로 표시</code>는 최초에는 디버깅용이었음. 문자 상자에 사각형 경로를 생성해서, 
+문자 경로의 위치가 정해진 방법과 이유를 더 확실하게 보여줌. 예술적 용도로 사용하도록 남겨 놓았음.
+실제 출력은 <code>Generate(생성하기)</code> 선택에 따라 달라짐.</p>
+
+<p><code>Generate(생성하기)</code>가 주 옵션임:</p>
+
+<ul>
+<li><code>One single path(단일 경로 하나)</code>:  경로 하나를 만들어서 모든 문자 출력을 담음. '상자'가 요청되면, 그 문자들에 대해 추가 경로가 하나가 만들어짐.</li>
+<li><code>One path per stroke(부경로마다 경로 하나)</code>: 유도선 경로 안에서, 문자들이 배치된 부경로마다 경로 하나가 만들어짐. 움직그림에 특히 유용.
+'상자'가 요청되면, 각 부경로마다 추가로 경로 하나가 만들어짐.</li>
+<li><code>Separate text and spacer paths(텍스트와 스페이서 경로를 분리)</code>: 경로 두 개 생성. 하나는 <code>Text(텍스트)</code> 입력란의 모든 문자용이고, 다른 하나는 <code>Spacer(사이 띄움 문자열)</code> 입력란의 모든 문자용임. 이 두 문자 부류의 처리(색 등등)를 나중에 다르게 할 때 유용.
+'상자'가 요청되면, 경로 두 개가 더 생성됨. 하나는 텍스트 상자용이고 하나는 스페이서용임</li>
+<li><code>One path per character(문자당 경로 하나)</code>: 문자마다 경로 하나 생성. '상자'가 요청되면, 같은 경로에 상자가 추가됨. 즉, 각 경로가 문자와 그 문자의 상자를 담음.</li>
+</ul>
+
+<p><img src="RansomNote.png" alt="Boxes][1" title=""></p>
+
+<h2>사용법 노트</h2>
+
+<h3>문자들</h3>
+
+<p>대화창에 입력할 수 있고 글꼴 안에 있는 문자는 모두 사용 가능.
+이것은 이모지 등등 가능한 유니코드 심볼 전체를 사용할 수 있음을 의미함.
+일반 키보드로 입력할 수 없는 문자는 문자표(또는 웹 페이지)에서 복사해서 붙여 넣을 수 있음.</p>
+
+<h3>경로</h3>
+
+<p>이 플러그인은 경로 안의 모든 부경로를 사용함. 각 부경로는 독립된 단위로 간주함.
+이 플러그인이 제대로 작동하지 않으면, 간과된 부경로를 찾아 볼 것(특히, 단일-포인트 부경로들).<br />
+(역주: 경로 목록 창에서 우클릭하고 '경로 편집'하면 앵커 하나뿐인 부경로가 있을 때, 편집할 수 있음.)</p>
+
+<h3>Stroke origin and direction(부경로 원점과 방향)</h3>
+
+<p>텍스트는 부경로의 시작점부터 끝점까지 사용하여 배치됩니다.
+대부분의 겨우, 열린 부경로는 왼쪽에서 오른쪽으로 진행하고, 닫힌 경로는 시계방향으로 진행합니다.
+부경로가 하나뿐인 경로는, <code>Reverse(뒤집기)</code> 옵션으로 진행 방향을 바꿀 수 있습니다.
+부경로가 여러 개이면, 이 옵션은 부경로가 모두 잘못된 방향일 때만 유용합니다.</p>
+
+<p>원처럼 닫힌 부경로의 원점은 결정하기 어려움.
+<a href="https://www.gimp-forum.net/Thread-Paths-Basics">이 짧은 write-up(보충 논평)</a>이 닫힌 경로의 부경로 원점을 변경하는 기교에 대해 상세 설명합니다.<br />
+(역주: 보충 논평 중에서 이 페이지와 관련된 요점은, 닫힌 부경로의 선분 하나를 Ctrl+Space+클릭으로 지웠다가 끝노드를 클릭, 다른 끝 노드를 Ctrl+클릭 해서 다시 이으면 그 위치가 첫 앵커와 마지막 앵커로 바뀐다는 것)
+</p>
+
+<h3>다른 원 둘레에 텍스트 놓기</h3>
+
+<p>텍스트 하나는 위에 하나는 아래에 놓기.
+텍스트가 상단 및 하단에서 가운데 맞춤이 되도록 하는 두 가지 방법:</p>
+
+<ol>
+<li><p>완전한 원 유지하기:</p>
+
+<ul>
+<li>6시 눈금에서 원이 시작하는지 확인.
+<br />(역주: 왼쪽 눈금자에서부터 끌어서 수직 안내선 생성, 경로 도구 선택, 원의 반지름과 원주의 6시 눈금이 될 곳을 안내선에 맞추어 클릭해서 경로 생성, 생성된 도구를 우클릭하고 Shapes/On Segments/Circle에서 'radius'와 'consecutive'를 선택하고 확인을 누르면 정확히 6시 눈금에서 시작.)</li>
+<li>경로 위에서 우클릭하고 Tools/text along path 를 실행하여 상단 텍스트를 배치(<code>Centered(가운데 맞춤)</code> 배치를 사용)</li>
+<li>원형 경로를 복제, 뒤집기 도구로 수직으로 뒤집기(도구 옵션에서 <code>경로 뒤집기</code> 옵션을 선택한 상태여야 함)</li>
+<li>같은 방법으로 하단 텍스트를 배치. 원을 뒤집으면 방향도 뒤집히므로 <code>Reverse path direction(경로 방향 뒤집기)</code> 옵션 사용 불필요.</li>
+</ul></li>
+<li><p>원을 반쪽으로 나누기(이 방법을 사용하려면 상단과 하단 텍스트가 각각 반원보다 짧아야 함):</p>
+
+<ul>
+<li>수평 지름 상에 앵커가 없으면 추가.</li>
+<li>원을 복제</li>
+<li>하나는 아래 반을 도려 내고, 다른 하나는 위의 반쪽을 도려 냄<br />
+(역주: 경로 도구로, 도려낼 부분에서 지름과 가까운 선분 두 개를 Ctrl+Shift+클릭해서 제거. 선택 도구로 도려낼 부경로의 일부를 선택. 경로를 우클릭. Edit/Delete Strokes(편집/부경로 삭제))</li>
+<li>상단 반원 경로를 선택하고 Tools/Text along path로 상단 텍스트를 배치. 이때 <code>Centered(가운데 맞춤)</code> 배치 사용.</li>
+<li>하단 반원 경로로 선택하고 마찬가지로 하단 텍스트 배치. 이때 보통은 <code>Reverse path direction(경로 방향 뒤집기)</code> 옵션을 사용해야 함.</li>
+</ul></li>
+</ol>
+
+<p>뒤집힌 경로를 사용한 예. 유니코드 "Anchor(닻)" 기호(&#x2693;) (<code>U+2693</code>)와  "Roboto Bold" 글꼴 사용:</p>
+
+<p><img src="CircleAndSymbols.png" alt="Circle and Symbols][1" title=""></p>
+

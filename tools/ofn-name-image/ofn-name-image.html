@@ -1,0 +1,49 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-name-image</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-name-image</h1>
+
+<p>This script is used to give a meaningful name to an image (as displayed in the title bar)
+without saving the image to disk.</p>
+
+<p>This script is called via the menu entry: <code>Image&gt;Name image</code> </p>
+
+<p>The only parameter is the new image name. As safety measures:</p>
+
+<ul>
+<li>The new name is accepted only if the current name is between brackets: <code>[Untitled]</code>. 
+If you expect to rename the image several times, give it a name that starts and ends with brackets: <code>[New Name]</code>.</li>
+<li>The corresponding pseudo-filename (which will be used by Gimp if you attempt to save) corresponds 
+to the "natural" user images directory for your platform (as obtained with <code>gimp.user_directory(4)</code>)</li>
+</ul>
+</div></body></html>

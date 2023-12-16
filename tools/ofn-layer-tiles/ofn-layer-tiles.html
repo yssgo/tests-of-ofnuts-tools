@@ -1,0 +1,172 @@
+<!docttype HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>ofn-layer-tiles</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+code { 
+    color: #000000; 
+    background: #f8f8f8; 
+    border-style: solid; 
+    border-width: thin; 
+    border-color: #e0e0e0; 
+    border-radius: 3px; 
+    padding-left: 3px;
+    padding-right: 3px;    
+}
+pre { 
+    color: #000000; 
+    background: #ffffff; 
+    border-style: solid; 
+    border-width: medium; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;    
+}
+
+</style>
+<body>
+<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<h1>ofn-layer-tiles</h1>
+
+<p>This script is used to split a layer into individual tile layers (rectangles all of same height and width), or to position/join
+layers of same width and height to form a single continuous image.</p>
+
+<h2>Splitting</h2>
+
+<p>Splitting can be specified either as a number of columns and rows or as a the width and height of the individual tiles. </p>
+
+<p>The script is called via the menu entries: </p>
+
+<ul>
+<li><code>Layer&gt;Tiles&gt;Split tiles (by width and height)</code></li>
+<li><code>Layer&gt;Tiles&gt;Split tiles (by rows and columns)</code></li>
+</ul>
+
+<h3>Parameters</h3>
+
+<ul>
+<li><code>Rows</code>, <code>Columns</code>: the number of tiles to create on the height and the width of the layer.
+The layer size in pixels should be an integer multiple of these values (in other words, you cannot
+have partial tiles). If necessary, resize the layer first.</li>
+<li><code>Width</code>, <code>Height</code>: the width and height (in pixels) of the tiles.
+The layer size in pixels should be an integer multiple of these values (in other words, you cannot
+have partial tiles). If necessary, resize the layer first.</li>
+<li><code>Name</code>: a pattern that defines the name of the saved tiles (see below)7</li>
+<li><p><code>Rows/Columns order</code>: how the layers are generated. </p>
+
+<ul>
+<li><p><code>Rows first</code>: the first consecutive items in the generated layers stack
+come from the same row:</p>
+
+<pre>1 2 3
+4 5 6
+</pre></li>
+<li><p><code>Columns first</code>: the first consecutive items in the generated layers stack
+come from the same column:</p>
+
+<pre>1 3 5
+2 4 6
+</pre></li>
+</ul></li>
+<li><p><code>Position</code>: </p>
+
+<ul>
+<li><code>Keep In place</code>: the tile layers are kept above their source position in the initial layer. </li>
+<li><code>Superimpose</code>: the tile layers are all given an offset of 0,0 (this moves them all to the top-left corner). This is useful if all the tiles should become an animation. </li>
+</ul></li>
+<li><code>Resize</code>: the image is resized to fit the tiles. This only works in conjunction with the <code>Superimpose</code> option above.</li>
+</ul>
+
+<h3>Tile name pattern</h3>
+
+<p>The tile name pattern specifies how the tile layers are named using specific tile data. In the pattern,
+names in braces are replaced by the values of these data for the tile. For instance, a pattern 
+of <code>Tile-{column1}-{row1}.png</code> will produce the name <code>Tile-2-3.png</code> for the 2nd tile on the 3rd row.</p>
+
+<p>The names of some numeric values have two forms: one ending in <code>0</code> and one ending in <code>1</code>. 
+The one ending in <code>0</code> starts at <code>0</code> (as computers count), 
+while the one in <code>1</code> starts at <code>1</code> (as humans count).</p>
+
+<p>The available values are:</p>
+
+<ul>
+<li><code>layerName</code>: the name of the source layer</li>
+<li><code>rows</code>: the number of rows</li>
+<li><code>columns</code>: the number of columns</li>
+<li><code>count</code>: the total number of tiles (rows * columns)</li>
+<li><code>width</code>: the width of the tiles</li>
+<li><code>height</code>: the height of the tiles</li>
+<li><code>row0</code>,<code>row1</code>: the row number of the tile</li>
+<li><code>column0</code>,<code>column1</code>: the column number of the tile</li>
+<li><code>tileCR0</code>, <code>tileCR1</code>, <code>tileRC0</code>, <code>tileRC1</code>: the sequence number of the tile. The <code>tileRC</code>
+value increments the columns before the rows, and the <code>tileCR</code> values increments the rows before the columns.</li>
+</ul>
+
+<h4>Hints:</h4>
+
+<p>The name pattern is actually directly used as a Python format specification, so modifiers can be used. The most
+useful modifier for numbers is the ability to define a minimal length with zero-padding. This is done by adding <code>:0Nd</code>
+to the variable name in the braces, for instance <code>{row1:03d}</code> will insert the row number on at least three digits, with zeroes 
+added to the left if necessary: <code>001</code>, <code>013</code>, <code>099</code>, <code>100</code>.  </p>
+
+<h2>Joining</h2>
+
+<p>This script is called via the menu entry: <code>Layer&gt;Tiles&gt;Join tiles</code></p>
+
+<h3>Parameters</h3>
+
+<ul>
+<li><p><code>Row/Columns</code>: how the number of rows and columns is determined:</p>
+
+<ul>
+<li><code>Rows given, compute columns</code> and <code>Columns given, compute rows</code>: the script use the number in the next
+field as a count of rows and columns, and deduces the other count by dividing the total number of layers. </li>
+<li><code>Parse tile names</code>: the script looks for two groups of digits in the names of the tile layers (see a more 
+complete explanation below)</li>
+</ul>
+
+<p><p>Your total number of layers should be an integer multiple of the specified number of columns or rows. 
+If necessary, complement the existing layers with other layers (transparent, filled, or copies of other 
+layers, as you see fit).</p></li>
+<li><p><code>Rows or columns</code> the number of rows or columns, depending on what is specified in the previous field</p></li>
+<li><code>Rows/Columns order</code>: this field has two different (and somewhat unrelated) meanings:</p>
+
+<ul>
+<li>When not using <code>Parse tile names</code>, this describes the order of the tiles in the input stack. 
+<code>Rows first</code> then means that the first layers will belong to the same row.</li>
+<li>When using <code>Parse tile names</code>, this indicates if the first group of digits refers to rows or to columns.</li>
+</ul></li>
+<li><code>Stack order</code>:  this indicates if the first tile is at the bottom or at the top of the layer stack. In animations, the first frame is at the bottom.</li>
+<li><code>Final image</code>: the tiles are kept as-is, or flattened to a single layer.</li>
+<li><code>Resize</code>: the image is resized to fit the tiles.</li>
+</ul>
+
+<h4>Guessing the rows and columns</h4>
+
+<p>If the files are named so that they contain at least two identifiable groups of digits, then the <strong>last two</strong> groups are
+considered to be rows and columns numbers, and the numbers of rows and columns are determined by the difference between the 
+smallest and biggest values. The following naming schemes are for instance valid:</p>
+
+<ul>
+<li><code>Tile-01-01.png</code></li>
+<li><code>Tile-01-01nodigits.png</code></li>
+<li><code>01-01.png</code></li>
+<li><code>Tiles(40x40)-01-01.png</code> (because what counts is that last two groups)</li>
+</ul>
+
+<p>Of course, the determination of which group of digits is the row and which is the column is under the control
+of the <code>Rows/Columns order</code> parameter.</p>
+
+<h3>Notes</h3>
+
+<ul>
+<li>The source tiles must all be plain layers. Layer groups are ignored. </li>
+<li>If the script flattens the image, layers that were invisible will not be part of the final image.</li>
+<li>Of course, visible layers that are in a group are not used as tiles but ill be in the final flattened image.</li>
+</ul>
+</div></body></html>
