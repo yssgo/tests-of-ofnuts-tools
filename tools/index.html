@@ -4,8 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Ofnuts의 김프 도구 테스트 하기(testing of gimp-tools-by-Ofnuts)</title>
-    <link id="default_style" rel="stylesheet" href="style.css" type="text/css" disabled="disabled" />
-    <link id="dark_style" rel="stylesheet" href="dark.css" type="text/css" />
+    <link id="default_style" rel="stylesheet" href="./styles/style.css" type="text/css" disabled="disabled" />
+    <link id="dark_style" rel="stylesheet" href="./styles/dark.css" type="text/css" />
+    <script src="./scripts/script.js" defer></script>
   </head>
   <body>
     <div style="position:fixed; overflow:auto; left:90%; top:3%; width:8%; height:10%;z-index:10;background: rgba(225, 225, 225, .8);text-align:center;">
@@ -264,35 +265,15 @@ Tiles from luminosity 경고
       </section>
 
       <section class="plug-in" data-menu="File/Ofnuts">
-        <h2>Coalesce images(이미지 합체)</h2>
+        <h2>Coalesce images(이미지 모으기)</h2>
         <h3>ofn-coalesce-images/ofn-coalesce-images.py</h3>
-        <p><em class="caption">메뉴</em>: 파일/Ofnuts/Coalesce images</p>
-        <p>루트 폴더에 있는 이미지마다 하위 폴더에서 이름이 같은 파일들을 찾아 xcf 파일에 모아서 저장 </p>
-        <button onclick="part_toggle('#ofn-coalesce-images-plug-in-error')">ofn-coalesce-images.py의 에러</button>
-        <div id="ofn-coalesce-images-plug-in-error" style="display:none" class="code-error">
-          <p>들여쓰기가 잘못됨</p>
-          <code><pre>
-    for layerImage in layerImages:
-        layer=pdb.gimp_file_load_layer(image,layerImage)
-        image.add_layer(layer,0)
-        layer.name=layerImage[len(root)+1:]
-    pdb.gimp_xcf_save(0,image,None,outputImage,outputImage)
-          </pre></code>
-          <p>&nbsp;</p>
-          <p>들여쓰기를 고치면</p>
-          <code><pre>
-    for layerImage in layerImages:
-        layer=pdb.gimp_file_load_layer(image,layerImage)
-        image.add_layer(layer,0)
-        layer.name=layerImage[len(root)+1:]
-        pdb.gimp_xcf_save(0,image,None,outputImage,outputImage)
-          </pre></code>
-        </div>
+        <p><em class="caption">메뉴</em>: 파일/Ofnuts/Coalesce images</p>        
+        <p>이미지 루트 폴더와 자손 폴더에서 이미지마다, 출력 폴더에 XCF 파일로 저장합니다.</p>
+        <p>이름이 같은 이미지가 여러 개이면 같은 이름의 XCF 파일 하나에 모아서 저장합니다.</p>
         <p>소스 폴더와 하위 폴더에는 이미지 파일만 있어야 함.</p>
         <h3>옵션</h3>
-        <p>Root of image directories: 소스 폴더. 이 이미지에 있는 이미지마다 이름이 같은 이미지를 하위 폴더에서 찾음. </p>
-        <p>Output directory: xcf 파일을 저장할 폴더.</p>
-        <p><img src="images/coalesce.png" /></p>
+        <p>Root of image directories: 소스 폴더. 이 폴더와 자손 폴더에서 이미지를 찾음. </p>
+        <p>Output directory: xcf 파일들을 저장할 폴더.</p>        
       </section>
 
       <section class="plug-in" data-menu="Color/Ofnuts">
@@ -976,6 +957,5 @@ Frame:frame:0.,1.:0.,1.:L
         <p>설명서: 없음</p>
       </section>
     </article>
-    <script src="script.js"></script>
   </body>
 </html>
