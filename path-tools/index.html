@@ -4,34 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Ofnuts의 김프 경로 도구 테스트 하기(testing of gimp-path-tools-by-Ofnuts)</title>
-    <link id="default_style" rel="stylesheet" href="style.css" type="text/css"  disabled="disabled" />
-    <link id="dark_style" rel="stylesheet" href="dark.css" type="text/css"/> 
+    <link id="default_style" rel="stylesheet" href="./styles/style.css" type="text/css"  disabled="disabled" />
+    <link id="dark_style" rel="stylesheet" href="./styles/dark.css" type="text/css"/> 
+    <script src="./scripts/script.js" defer></script> 
+    <link id="buttons_style" rel="stylesheet" href="./styles/buttons.css" type="text/css" />    
+    </style>
   </head>
   <body>
-    <div id='theme-buttons' style="
-    position:fixed;
-    overflow:auto;
-    left:90%;
-    top:3%;
-    width:8%;
-    height:10%;
-    z-index:10;
-    background: rgba(225, 225, 225, .8);
-    text-align:center;
-    ">
+    <div id='theme-buttons' class='theme-buttons-div'>
     <p><button onclick="brightcss()">기본</button><br />
    <button onclick="darkcss()">어둡게</button></p>
     </div>
-    <div id='toc-buttons' style="
-    position:fixed;
-    overflow:auto;
-    left:90%;
-    top:65%;
-    width:8%;
-    height:30%;
-    z-index:10;
-    background: rgba(225, 225, 225, .8);
-    text-align:center;">
+    <div id='toc-buttons' class='toc-buttons-div'>
     <p><button onclick="document.body.scrollTop=0;document.documentElement.scrollTop=0;">맨 위로</button></p>
     <p><button onclick="createToc('ByMenu')">메뉴순 목차 정렬</button><br />
       <button onclick="createToc('ByAlphabet')">알파벳순 목차 정렬</button><br />
@@ -46,7 +30,7 @@
       <h2>기본 편집 기능</h2>
       <h3>ofn-path-edits/ofn-path-edits.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Edit</p>
-      <p>설명서: <a href="ofn-path-edits/ofn-path-edits.html">ofn-path-edits/ofn-path-edits.html</a></p>
+      <p>설명서(영문): <a href="ofn-path-edits/ofn-path-edits.html">ofn-path-edits/ofn-path-edits.html</a></p>
 
       <dt>Delete anchors(앵커 삭제):</dt>
       <dd>    앵커(경로에서 고정되는 점; 노드) 삭제</dd>
@@ -151,7 +135,7 @@
       <h2>Bend(구부리기)</h2>
       <h3>ofn-bend-path/ofn-bend-path.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Tools/Bend...</em></p>
-      <p><em class="caption">설명서:</em> <a href="ofn-bend-path/Doc/ofn-bend-path.html">ofn-bend-path/ofn-bend-path.html</a></p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-bend-path/Doc/ofn-bend-path.html">ofn-bend-path/ofn-bend-path.html</a></p>
       <p>부 경로가 정확히 2개(위쪽과 아래쪽)인 봉투 경로(envolope path)대로 경로의 상하 폭을 조정</p>
       <ul>
         <li><dt>Envelope path(봉투 경로)</dt>
@@ -193,7 +177,7 @@
       <h2>Dial marks(다이얼 눈금)</h2>
       <h3>ofn-dial-marks/ofn-dial-marks.py"</h3>
       <p><em class="caption">메뉴</em>: 필터/Ofnuts/Render/Paths/Dial marks</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-dial-marks/ofn-dial-marks.html">ofn-dial-marks/ofn-dial-marks.html</a></p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-dial-marks/ofn-dial-marks.html">ofn-dial-marks/ofn-dial-marks.html</a></p>
       <p>다이얼 마크(간격이 규칙적인 원반 섹터;시계판 눈금 같은 것) 모양의 경로를 만듦</p>
       <p><img src="images/dial-marks.png" /></p>
     </section>
@@ -204,10 +188,10 @@
       <p><em class="caption">메뉴</em>: Image/Ofnuts/Fit canvas to path/</p>
       <p class="tab">Tight</p>
       <p class="tab">With margin...</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-fit-canvas-to-path/ofn-fit-canvas-to-path.html">ofn-fit-canvas-to-path/ofn-fit-canvas-to-path.html</a></p>    
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-fit-canvas-to-path/ofn-fit-canvas-to-path.html">ofn-fit-canvas-to-path/ofn-fit-canvas-to-path.html</a></p>    
       <p>경로 크기에 맞게 캔버스를 키우거나 줄임</p>
       <button onclick="part_toggle('#fit_canvas_bug')">ofn-fit-canvas-to-path.py의 버그</button>
-      <div class="code-error" id="fit_canvas_bug" style="display:none">
+      <div class="code-error" id="fit_canvas_bug" style="display:: 없음">
         <p class="note">선택 영역을 만들 수 없는 경로(예를 들어, 직선인 경로)는 'With margin...' 메뉴를 사용하면 에러가 나와서</p>
 
         <pre class="codepara">    image.crop(2*margin+maxX-minX,2*margin+maxY-minY,minX-margin,minY-margin)</pre>
@@ -220,7 +204,7 @@
     <section class="plug-in" data-menu="[Paths]/Ofnuts/Decorate">
       <h2>Gradient along path(경로를 따라 그레이디언트)</h2>
       <h3>ofn-gradient-along-path/ofn-gradient-along-path.py</h3>
-      <p><em class="caption">설명서:</em> <a href="ofn-gradient-along-path/ofn-gradient-along-path.html">ofn-gradient-along-path/ofn-gradient-along-path.html</a></p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-gradient-along-path/ofn-gradient-along-path.html">ofn-gradient-along-path/ofn-gradient-along-path.html</a></p>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Decorate/Gradient along path...</p>
       <p>경로에 걸쳐 직교 방향으로 이중선형 그레이디언트를 그림. (Gimp 2.10 필요함)</p>
       <p>그레이디언트의 투명도는 무시하고 완전히 불투명하게 그림.</p>
@@ -235,7 +219,7 @@
       <h2>Jigsaw pattern(직소 무늬)</h2>
       <h3>ofn-jigsaw/ofn-jigsaw.py</h3>
       <p><em class="caption">메뉴</em>: 필터/렌더/Paths/Jigsaw pattern</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-jigsaw/ofn-jigsaw.html">ofn-jigsaw/ofn-jigsaw.html</a></p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-jigsaw/ofn-jigsaw.html">ofn-jigsaw/ofn-jigsaw.html</a></p>
       <p>직소 퍼즐 패턴 모양의 경로를 만듦</p>
 	  <p><img src="images/jigsaw-pattern.png" /></p>
     </section>
@@ -244,7 +228,7 @@
       <h2>Path animation(경로 움직그림)</h2>
       <h3>ofn-path-animation/ofn-path-animation.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Render/Path animation</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-path-animation/ofn-path-animation.html">ofn-path-animation/ofn-path-animation.html</a></p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-path-animation/ofn-path-animation.html">ofn-path-animation/ofn-path-animation.html</a></p>
       <p>경로를 따라 칠하기 움직그림을 만듦.</p>
       <p><em class="caption">옵션</em></p>
       <ul>
@@ -283,8 +267,8 @@
       <h2>Filter strokes on size(크기에 따라 부경로 거르기)</h2>
       <h3>ofn-path-filter-strokes/ofn-path-filter-strokes.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Tools/Filter strokes on size</p>
-      <p><em class="caption">짧은 설명</em>: 크기 준거(앵커 수, 둘레 길이, 면적)을 사용하여 경로 안의 부경로 유지/제거</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-path-filter-strokes/doc/ofn-path-filter-strokes.html">ofn-path-filter-strokes/doc/ofn-path-filter-strokes.html</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: 크기 준거(앵커 수, 둘레 길이, 면적)을 사용하여 경로 안의 부경로 유지/제거</p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-path-filter-strokes/doc/ofn-path-filter-strokes.html">ofn-path-filter-strokes/doc/ofn-path-filter-strokes.html</a></p>
       <p>Threshold 옵션에 지정한 크기와 같은 부경로만 남긴 경로를 만듦</p>
     </section>
     
@@ -292,7 +276,7 @@
       <h2>Marquee animation(광고등 움직그림)</h2>
       <h3>ofn-path-marquee/ofn-path-marquee.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Render/Marquee animation</p>    
-      <p><em class="caption">설명서:</em> <a href="ofn-path-marquee/ofn-path-marquee.html">ofn-path-marquee/ofn-path-marquee.html</a></p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-path-marquee/ofn-path-marquee.html">ofn-path-marquee/ofn-path-marquee.html</a></p>
       <p>경로를 따라 무비 마키(영화관 입구 위 광고등) 스타일의 움직그림을 만듦</p>
       <ul>
         <li>Period length: 대시+공간 단위의 길이. (닫은 부경로에서 약간 변경될 수 있음)</li>
@@ -321,7 +305,7 @@
       <h3>ofn-path-rungs/ofn-path-rungs.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Tools/Path rungs/By spacing</p>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Tools/Path rungs/By count</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-path-rungs/ofn-path-rungs.html">ofn-path-rungs/ofn-path-rungs.html</a></p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-path-rungs/ofn-path-rungs.html">ofn-path-rungs/ofn-path-rungs.html</a></p>
       <p>두 경로 사이에 지정한 개수 또는 간격으로 선을 만듦</p>
       <p>경로 가로장 Sides 옵션<br /><img src="images/path-rung-sides.png" /></p>
     </section>
@@ -330,7 +314,7 @@
       <h2>Generate envelope of two paths(두 경로를 감싸는 선택 영역 만들기)</h2>
       <h3>ofn-paths-envelope/ofn-paths-envelope.py</h3>    
       <p><em class="caption">경로 창 문맥 메뉴</em>: Tools/Generate envelope of two paths</p>
-      <p><em class="caption">짧은 설명</em>: 두 경로와 그 사이의 모든 것을 포함하는 선택 영역을 만듦</p>
+      <p><em class="caption">짧은 설명(영문)</em>: 두 경로와 그 사이의 모든 것을 포함하는 선택 영역을 만듦</p>
       <p>html 문서: 없음</p>
       <p>두 경로를 지나가는 guide path를 지정하면 그 경로를 따라가면서 선택 영역을 늘려 나감(느림)</p>
     </section>
@@ -339,8 +323,8 @@
       <h2>Selection from visible paths(모든 보이는 경로로 선택)</h2>
       <h3>ofn-paths-to-selection/ofn-paths-to-selection.py</h3>
       <p><em class="caption">메뉴</em>: Select/Ofnuts/Selection from visible paths</p>
-      <p><em class="caption">짧은 설명</em>: 모든 보이는 경로를 선택한 것의 합집합인 선택 영역을 만듭니다.</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-paths-to-selection/ofn-paths-to-selection.html">ofn-paths-to-selection/ofn-paths-to-selection.html</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: 모든 보이는 경로를 선택한 것의 합집합인 선택 영역을 만듭니다.</p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-paths-to-selection/ofn-paths-to-selection.html">ofn-paths-to-selection/ofn-paths-to-selection.html</a></p>
     </section>
     
     <section class="plug-in" data-menu="[Paths]/Ofnuts/Sahpes">
@@ -362,9 +346,9 @@
       
       <p>Circle, Star, Polygon, Rounded Polygon, Rectangle, Line</p>
       
-      <p><em class="caption">짧은 설명</em>: 기존 경로 안의 부경로를 이용하여 기하학적 도형(원, 별, 다각형 등등)을 만듦
+      <p><em class="caption">짧은 설명(영문)</em>: 기존 경로 안의 부경로를 이용하여 기하학적 도형(원, 별, 다각형 등등)을 만듦
       
-      <p><em class="caption">설명서:</em> <a href="ofn-path-to-shape/doc/ofn-path-to-shape.html">ofn-path-to-shape/doc/ofn-path-to-shape.html</a></p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-path-to-shape/doc/ofn-path-to-shape.html">ofn-path-to-shape/doc/ofn-path-to-shape.html</a></p>
       
       <p><img src="images/On-stroke-polygon.png" /></p>
       
@@ -413,8 +397,8 @@
       <h2>Remove small tangents(작은 접선 제거)</h2>
       <h3>ofn-remove-tangents/ofn-remove-tangents.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Tools/Remove small tangents</p>
-      <p><em class="caption">짧은 설명</em>:  경로 안의 작은 접선(노드 핸들)을 제거</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-remove-tangents/ofn-remove-tangents.html">ofn-remove-tangents/ofn-remove-tangents.html</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>:  경로 안의 작은 접선(노드 핸들)을 제거</p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-remove-tangents/ofn-remove-tangents.html">ofn-remove-tangents/ofn-remove-tangents.html</a></p>
     </section>
 
     <section class="plug-in" data-menu="[Paths]/Ofnuts/Render">
@@ -423,8 +407,8 @@
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Render/Mass render 메뉴 아래</p>
       <p class="tab">            Fill paths(경로 안 채우기)</p>
       <p class="tab">            Paint along paths(경로 따라 긋기)    </p>
-      <p><em class="caption">짧은 설명</em>: 선긋기/채우기로 모든 보이는 경로를 그려 냅니다.</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-stroke-fill-paths/ofn-stroke-fill-paths.html">ofn-stroke-fill-paths/ofn-stroke-fill-paths.html</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: 선긋기/채우기로 모든 보이는 경로를 그려 냅니다.</p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-stroke-fill-paths/ofn-stroke-fill-paths.html">ofn-stroke-fill-paths/ofn-stroke-fill-paths.html</a></p>
     </section>
 
     <section class="plug-in" data-menu="[Paths]/Ofnuts/Tools">
@@ -433,8 +417,8 @@
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Tools</p>
       <p class="tab">             Text along path...</p>
       <p class="tab">             Text (multi) along path...</p>
-      <p><em class="caption">짧은 설명</em>: 경로를 따라 텍스트를 구부립니다</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-text-along-path/Doc/ofn-text-along-path.html">ofn-text-along-path/Doc/ofn-text-along-path.html</a>(<a href="ofn-text-along-path/Doc/ofn-text-along-path.ko.html">번역</a>)</p>
+      <p><em class="caption">짧은 설명(영문)</em>: 경로를 따라 텍스트를 구부립니다</p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-text-along-path/Doc/ofn-text-along-path.html">ofn-text-along-path/Doc/ofn-text-along-path.html</a>(<a href="ofn-text-along-path/Doc/ofn-text-along-path.ko.html">번역</a>)</p>
       <p>레이어 메뉴의 '경로 따라 텍스트'는 텍스트 레이어가 대상.</p>
       <p>이 플러그인은 플러그인 대화창에서 직접 텍스트를 입력하고, 글꼴도 그 창 안에서 지정함.</p>
       <p>김프의 자체 '경로 따라 텍스트'보다 더 많은 옵션 제공.</p>
@@ -444,8 +428,8 @@
       <h2>Text path to selection(텍스트 경로를 선택 영역으로)</h2>
       <h3>ofn-text-path-selection/ofn-text-path-selection.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Text path to selection</p>
-      <p><em class="caption">짧은 설명</em>: creates a selection from a text path, where overlap areas are selected</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-text-path-selection/ofn-text-path-selection.html">ofn-text-path-selection/ofn-text-path-selection.html</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: creates a selection from a text path, where overlap areas are selected</p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-text-path-selection/ofn-text-path-selection.html">ofn-text-path-selection/ofn-text-path-selection.html</a></p>
       <p>텍스트 경로에서 선택 영역을 만듭니다. 이때 글자가 겹치는 부분도 선택에서 제외되지 않게 합니다</p>      
     </section>
 
@@ -453,15 +437,17 @@
       <h2>Truchet pattern(트뤼셰 패턴)</h2>
       <h3>ofn-truchet-path/ofn-truchet-path.py</h3>
       <p><em class="caption">메뉴</em>: Filters/Ofnuts/Render/Paths/Truchet pattern</p>
-      <p><em class="caption">짧은 설명</em>: creates a Truchet pattern</p>
-      <p><em class="caption">설명서:</em> <a href="ofn-truchet-path/ofn-truchet-path.html">ofn-truchet-path/ofn-truchet-path.html</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: creates a Truchet pattern</p>
+      <p><em class="caption">설명서(영문):</em> <a href="ofn-truchet-path/ofn-truchet-path.html">ofn-truchet-path/ofn-truchet-path.html</a></p>
       <p><img src="images/truchet-patterns.png" /></p>
     </section>
 
     <section class="plug-in" data-menu="Select/Ofnuts">
       <h2>Golden Spiral on selection(선택 상에 황금비 나선)</h2>
-      <h3>golen-spiral-0.0.py</h3>
+      <h3>golden-spiral-0.0.py</h3>
       <p><em class="caption">메뉴</em>: 선택/Ofnuts/Golden spiral on selection</p>
+      <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
+      <p><em class="caption">설명서(영문):</em> : <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#golden-spiral">http://gimp-path-tools.sourceforge.net/tools.shtml#golden-spiral</a>(<a href="golden-spiral-ko.html">번역</a>)</p>
       <p><img src="images/golden-spiral.png" /></p>
     </section>
 
@@ -481,8 +467,8 @@
       <h2>Arrow heads(화살촉)</h2>
       <h3>path-arrow-heads-0.0.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Decorate/Arrow heads...</p>
-      <p><em class="caption">짧은 설명</em>: None</p>
-      <p><em class="caption">설명서:</em> None</p>
+      <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
+      <p><em class="caption">설명서(영문):</em> : 없음</p>
     </section>
 
     <section class="plug-in" data-menu="[Paths]/Ofnuts/Tools">
@@ -491,15 +477,16 @@
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Tools/CSV 메뉴 아래</p>
       <p class="tab">            Import CSV</p>
       <p class="tab">            Export CSV</p>
-      <p><em class="caption">짧은 설명</em>: None</p>
-      <p><em class="caption">설명서:</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#path-csv">http://gimp-path-tools.sourceforge.net/tools.shtml#path-csv</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
+      <p><em class="caption">설명서(영문):</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#path-csv">http://gimp-path-tools.sourceforge.net/tools.shtml#path-csv</a></p>
+      <p>한글 번역 : <a href="path-csv-0.1.ko.html">path-csv-0.1.ko.html</a></p>
     </section>
 
     <section class="plug-in" data-menu="[Paths]/Ofnuts/Tools">  
       <h2>Dump</h2>
       <h3>path-dump-0.1.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Tools/Dump</p>
-      <p><em class="caption">설명서:</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#path-dump">http://gimp-path-tools.sourceforge.net/tools.shtml#path-dump</a></p>
+      <p><em class="caption">설명서(영문):</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#path-dump">http://gimp-path-tools.sourceforge.net/tools.shtml#path-dump</a></p>
       <p>콘솔(터미널)에 경로 내용을 출력</p>
       <p>리눅스: 김프를 터미널에서 시작해야함.</p>
       <p><del>윈도스: 김프를 gimp-console로 시작해야 함.</del> <ins>윈도스에서는 사용 불가능.</ins></p>
@@ -516,8 +503,8 @@
       <p><em class="caption">메뉴</em>: Filters/Ofnuts/Render/Pattern/</p>
       <p class="tab">            Rectangular grid path in selection...</p>
       <p class="tab">            Rectangular grid path...</p>
-      <p><em class="caption">짧은 설명</em>: None</p>
-      <p><em class="caption">설명서:</em> None</p>
+      <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
+      <p><em class="caption">설명서(영문):</em> : 없음</p>
       <p>수직, 수평선 부경로로 이루어진 격자 경로 생성. </p>
       <p>메뉴 이름의 'selection(선택)'과 상관 없이, 선택 영역이 있으면 선택 영역(사각형 경계)안에,
       없으면 이미지 영역 안에 생성.</p>
@@ -533,8 +520,8 @@
       <h2>Shape grid(도형 격자)</h2>
       <h3>path-shaped-grid-0.0.py</h3>
       <p><em class="caption">메뉴</em>: Filters/Ofnuts/Render/Paths/Shape grid...</p>
-      <p><em class="caption">짧은 설명</em>: 다양한 도형으로  다각형 격자 경로를 생성. 생성된  격자 경로에서 모든 선분이 개별 부경로에 해당함.</p>
-      <p><em class="caption">설명서:</em> <a href="http://gimp-path-tools.sourceforge.net/decorations.shtml#path-shaped-grid">http://gimp-path-tools.sourceforge.net/decorations.shtml#path-shaped-grid</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: 다양한 도형으로  다각형 격자 경로를 생성. 생성된  격자 경로에서 모든 선분이 개별 부경로에 해당함.</p>
+      <p><em class="caption">설명서(영문):</em> <a href="http://gimp-path-tools.sourceforge.net/decorations.shtml#path-shaped-grid">http://gimp-path-tools.sourceforge.net/decorations.shtml#path-shaped-grid</a></p>
       <p>격자를 구성하는 도형의 개수는 바꿀 수 없음.</p>
       옵션:
       <ul>
@@ -552,8 +539,8 @@
       <h2>Shift path(경로 이동)</h2>
       <h3>path-shift-0.1.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Tools/Shift path</p>
-      <p><em class="caption">짧은 설명</em>: None</p>
-      <p><em class="caption">설명서:</em> ><a href="http://gimp-path-tools.sourceforge.net/tools.shtml#path-shift">http://gimp-path-tools.sourceforge.net/tools.shtml#path-shift</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
+      <p><em class="caption">설명서(영문):</em> ><a href="http://gimp-path-tools.sourceforge.net/tools.shtml#path-shift">http://gimp-path-tools.sourceforge.net/tools.shtml#path-shift</a></p>
       <p>지정한 X(가로), Y(세로) 픽셀 수 만큼 경로를 이동</p>
     </section>
 
@@ -561,8 +548,8 @@
       <h2>Spread pixels over path(경로 위로 픽셀 퍼뜨리기)</h2>
       <h3>path-spread-0.2.py</h3>
       <p><em class="caption">메뉴</em>: Filters/Ofnuts/Noise/Spread pixels over path...</p>
-      <p><em class="caption">짧은 설명</em>: None</p>
-      <p><em class="caption">설명서:</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#path-spread">http://gimp-path-tools.sourceforge.net/tools.shtml#path-spread</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
+      <p><em class="caption">설명서(영문):</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#path-spread">http://gimp-path-tools.sourceforge.net/tools.shtml#path-spread</a></p>
       <p>경로를 따라 현재 레이어의 픽셀(색)을 퍼뜨린 새 레이어를 만듦</p>
     </section>
 
@@ -572,8 +559,8 @@
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Decorate/Periodic wave/</p>
       <p class="tab">            Sine(사인), Ellipse(타원), Circle(원)</p>
       <p class="tab">            Square(정사각), Triangle(삼각)</p>
-      <p><em class="caption">짧은 설명</em>: None</p>
-      <p><em class="caption">설명서:</em> None</p>
+      <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
+      <p><em class="caption">설명서(영문):</em> : 없음</p>
       <p><img src="images/periodic-wave.png" /></p>
     </section>
 
@@ -581,8 +568,8 @@
       <h2>Ribbon using path</h2>
       <h3>ribbon-path-0.1.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Tools/Ribbon using path..</p>
-      <p><em class="caption">짧은 설명</em>: None</p>
-      <p><em class="caption">설명서:</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#ribbon-path">http://gimp-path-tools.sourceforge.net/tools.shtml#ribbon-path</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
+      <p><em class="caption">설명서(영문):</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#ribbon-path">http://gimp-path-tools.sourceforge.net/tools.shtml#ribbon-path</a></p>
       <p>설명서와 다름(버그가 있는 것으로 보임). 상당히 느림. 노드(앵커)가 아주 많이 추가됨.</p>      
     </section>
 
@@ -590,8 +577,8 @@
       <h2>Coil along path</h2>
       <h3>slinky-0.3.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Decorate/Sine/Coil along path...</p>
-      <p><em class="caption">짧은 설명</em>: None</p>
-      <p><em class="caption">설명서:</em> None</p>
+      <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
+      <p><em class="caption">설명서(영문):</em> : 없음</p>
       <p>상당히 느림. 노드(앵커)가 많이 추가됨.</p>
       <p>Decorate/Periodic Wave/Sine이 더 나음</p>
     </section>
@@ -600,12 +587,12 @@
       <h2>Unclose(열린 경로)</h2>
       <h3>unclose-path-0.1.py</h3>
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Tools/Unclose</p>
-      <p><em class="caption">짧은 설명</em>: None</p>
-      <p><em class="caption">설명서:</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#unclose-path">http://gimp-path-tools.sourceforge.net/tools.shtml#unclose-path</a></p>
+      <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
+      <p><em class="caption">설명서(영문):</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#unclose-path">http://gimp-path-tools.sourceforge.net/tools.shtml#unclose-path</a></p>
       <p>스트로크트 폰트 목록은 <a href="http://www.imajeenyus.com/computer/20150110_single_line_fonts/index.shtml#mecsoft">Single-line fonts</a> 참조</p>
       
       <button onclick="part_toggle('#unclose_path_bug')">unclose-path-0.1.py의 버그</button>
-      <div class="code-error" id="unclose_path_bug" style="display:none">
+      <div class="code-error" id="unclose_path_bug" style="display:: 없음">
 <p>'except Exception as e:'가 있는 줄만 스페이스를 들여쓰기에 사용. 나머지는 탭을 사용.<br />
 cooy-ofn-path-tools-UBUNTU-WIN10.py는 탭을 스페이스 4개씩으로 바꾸어 복사함.</p>
 <p>'except Exception as e:'가 있는 줄은 들여쓰기 단계도 잘못 됨.</p>
@@ -636,7 +623,6 @@ cooy-ofn-path-tools-UBUNTU-WIN10.py는 탭을 스페이스 4개씩으로 바꾸�
       
     </section>
     
-  </article>
-  <script src="script.js"></script> 
+  </article>  
   </body>
 </html>
