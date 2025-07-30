@@ -123,7 +123,7 @@ function createToc(SortType){
         }
         dv.appendChild(p);
     }
-    document.body.insertBefore(dv,document.body.firstChild)
+    document.getElementById("go-to-home").after(dv)
 }
 window.onload=function(){
     // brightcss()
