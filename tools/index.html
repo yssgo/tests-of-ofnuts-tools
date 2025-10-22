@@ -29,6 +29,33 @@
         <h2>Setting Cleaner(설정 정리기)</h2>
         <h3>ofn-settings-cleaner/ofn-settings-cleaner.py</h3>
         <p><em class="caption">메뉴</em>: 없음(None). 김프 시작시 자동 실행(automatically starts with GIMP)</p>
+        <button onclick="part_toggle('#settings-cleaner-plug-in-error')">ofn-settings-cleaner.py의 에러</button>
+        <div id="settings-cleaner-plug-in-error" style="display:none" class="code-error">          
+          <p>This plugin terminates unexpectedly if `print` function is used in Windows.</p>
+          <p>The part that caused the error in GIMP 2.10.38.</p>
+          <code><pre>
+def log(s):
+    print(s)
+    logFile.write(s+'\n')
+    logFile.flush()
+          </pre></code>
+          <p> Corrected code: </p>
+          <code><pre>
+def log(s):
+    import traceback
+    try:
+        print(s)
+    except Exception as e:
+        if type(e) == IOError and e.errno == 9 and e.strerror == 'Bad file descriptor':
+            pass
+        else:
+            logFile.write(traceback.format_exc())
+            logFile.write('e={0}, type(e)={1}'.format(e, type(e)))
+            raise e
+    logFile.write(s+'\n')
+    logFile.flush()
+          </pre></code>
+        </div>
         <p>설명서: <a href="ofn-settings-cleaner/ofn-settings-cleaner.html">ofn-settings-cleaner/ofn-settings-cleaner.html</a>(<a href="ofn-settings-cleaner/ofn-settings-cleaner.ko.html">번역</a>)</p>
         <p>각 도구의 설정 파일에서 이름 없는 미리설정을 최근 10일치, 최대 5개만 남기고 삭제.</p>
         <p>ofn-settings-cleaner/ofn-settings-cleaner.py는 사용자 plug-ins 폴더 중 하나에 저장하고</p>
@@ -43,7 +70,7 @@
 		  (MS Windows에서는  %USERPROFILE%\.gimp-2.8\tool-options ) <br />
 		  (Linux에서는 ~/.gimp-2.8/tool-options ) <br />
         <p>ini 파일의 구성은 설명서 참조</p>
-        <p class="note">copy-ofn-tools-UBUNTU-WIN10.py을 실행하고  김프 버전을 선택하면 ini 파일도 알아서 복사함.</p>
+        <p class="note"><del>copy-ofn-tools-UBUNTU-WIN10.py을 실행하고  김프 버전을 선택하면 ini 파일도 알아서 복사함.</del></p>
       </section>
 
       <section class="plug-in" data-menu="">
