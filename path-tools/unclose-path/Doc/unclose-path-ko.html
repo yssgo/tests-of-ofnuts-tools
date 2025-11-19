@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+            <html>
+                <head>                    
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+                    <title>unclose-path-ko.md</title>
+                    <style type="text/css">
+                    /*div.background */ body {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+}
+
+p:has(> img) {text-align: center; }
+p:has(img[src="external_link_icon.svg"]) {text-align: left; }
+h5 {
+	margin: 10px 0px;
+	padding: 5px 0px 2px;
+}
+
+#content p {
+	margin: 5px 0;
+	padding: 0px 0;
+}
+
+h5 + p {
+	padding: 0 30px;
+	margin-top: -5px;
+}
+
+                    </style>
+                </head>
+                <body style="">
+                <h1 id="0">unclose-path</h1>
+<p id="2">이 스크립트는 Gimp에서 잘못된 동작 방식을 수정합니다.
+<strong>&quot;stroke&quot;</strong> 글꼴(예: <img src="external_link_icon.svg" alt="외부 링크" /><a href="http://featurecam.com/general/support/engrave_fonts.asp">여기에서 얻을 수  있음</a>)을 사용할 때</p>
+<p id="5">Gimp는 모든 획을 &quot;닫아서&quot;(아마도 문자를 &quot;채울&quot; 수 있도록) 추가 선분을 생성합니다.</p>
+<p id="7">안타깝게도 &quot;<code>텍스트를 경로로(Path from text)</code>&quot;에서도 획은 닫힌 상태로 유지됩니다.</p>
+<p id="9"><img src="images/ClosedStrokes.png" alt="ClosedStrokes.png" /></p>
+<p id="11">이 스크립트는 획을 &quot;닫힘 제거(unclose)&quot; 해서 유용한 경로로 복원합니다.</p>
+<p id="13"><img src="images/UnclosedStrokes.png" alt="UnclosedStrokes.png" /></p>
+<p id="15">이 스크립트는 과격하게 모든 획을 다시 엽니다. 지금까지는
+이것으로 인해 문제가
+발생하지 않는 것으로 보입니다.
+여태까지의 사용한 모든 글꼴에서, 닫힌 상태로 유지되어야 하는 획(예: &quot;O&quot;)조차도
+마지막 선분을 그릴 때 닫힘 상태에 의존하지 않았기 때문입니다.
+반례를 발견하시면, 기꺼이 스크립트를 수정하겠습니다.</p>
+
+                </body>
+            </html>
+            
