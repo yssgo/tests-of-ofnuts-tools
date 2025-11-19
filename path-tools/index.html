@@ -598,13 +598,16 @@
       <div class="code-error" id="unclose_path_bug" style="display:: 없음">
 <p>'except Exception as e:'가 있는 줄만 스페이스를 들여쓰기에 사용. 나머지는 탭을 사용.<br />
 cooy-ofn-path-tools-UBUNTU-WIN10.py는 탭을 스페이스 4개씩으로 바꾸어 복사함.</p>
-<p>'except Exception as e:'가 있는 줄은 들여쓰기 단계도 잘못 됨.</p>
-<pre>
-        except Exception as e: #이 줄을
-</pre>
-<pre>
-    except Exception as e:" #이렇게 바꾸어야 함.
-</pre>
+<div>
+	<p><del>'except Exception as e:'가 있는 줄은 들여쓰기 단계도 잘못 됨.</del></p>
+	<pre>
+	        <del>except Exception as e: #이 줄을</del>
+	</pre>
+	<pre>
+	    <del>except Exception as e:" #이렇게 바꾸어야 함.</del>
+	</pre>
+</del></div>
+<p><ins>들여쓰기 문제가 발생한 원인: 원문의 탭 크기는 8, 편집기의 탭 크기는 4인 상태에서 untabify를 했기 때문.</ins></p>
 <p>콘솔 또는 터미널에서 GIMP를 시작하지 않았거나 해서, print를 사용할 수 없는 환경에서 print를 사용.<br />
 예를 들어 Windows에서 GIMP 아이콘을 눌러서 GIMP가 실행되었을 때 print를 사용하면 플러그인의 실행이 중단됨</p>  
 <p>print 문이 디버그용으로 사용된 것만 있으므로, cooy-ofn-path-tools-UBUNTU-WIN10.py는 'print'를 모두 'pass #print'로 바꾸어서 복사함.</p>
