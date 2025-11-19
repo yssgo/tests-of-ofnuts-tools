@@ -194,7 +194,7 @@
       <p><em class="caption">설명서(영문):</em> <a href="ofn-fit-canvas-to-path/ofn-fit-canvas-to-path.html">ofn-fit-canvas-to-path/ofn-fit-canvas-to-path.html</a></p>    
       <p>경로 크기에 맞게 캔버스를 키우거나 줄임</p>
       <button onclick="part_toggle('#fit_canvas_bug')">ofn-fit-canvas-to-path.py의 버그</button>
-      <div class="code-error" id="fit_canvas_bug" style="display:: 없음">
+      <div class="code-error" id="fit_canvas_bug" style="display:none">
         <p class="note">선택 영역을 만들 수 없는 경로(예를 들어, 직선인 경로)는 'With margin...' 메뉴를 사용하면 에러가 나와서</p>
 
         <pre class="codepara">    image.crop(2*margin+maxX-minX,2*margin+maxY-minY,minX-margin,minY-margin)</pre>
@@ -592,10 +592,11 @@
       <p><em class="caption">경로 창 문맥 메뉴</em>: Ofnuts/Tools/Unclose</p>
       <p><em class="caption">짧은 설명(영문)</em>: : 없음</p>
       <p><em class="caption">설명서(영문):</em> <a href="http://gimp-path-tools.sourceforge.net/tools.shtml#unclose-path">http://gimp-path-tools.sourceforge.net/tools.shtml#unclose-path</a></p>
+      <p><em class="caption">설명서 번역:</em> <a href="./unclose-path/Doc/unclose-path-ko.html">unclose-path-ko.html</a></p>
       <p>스트로크트 폰트 목록은 <a href="http://www.imajeenyus.com/computer/20150110_single_line_fonts/index.shtml#mecsoft">Single-line fonts</a> 참조</p>
       
       <button onclick="part_toggle('#unclose_path_bug')">unclose-path-0.1.py의 버그</button>
-      <div class="code-error" id="unclose_path_bug" style="display:: 없음">
+      <div class="code-error" id="unclose_path_bug" style="display::none">
 <p>'except Exception as e:'가 있는 줄만 스페이스를 들여쓰기에 사용. 나머지는 탭을 사용.<br />
 cooy-ofn-path-tools-UBUNTU-WIN10.py는 탭을 스페이스 4개씩으로 바꾸어 복사함.</p>
 <div>
