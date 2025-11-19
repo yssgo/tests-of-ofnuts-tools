@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+            <html>
+                <head>                    
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+                    <title>unclose-path.md</title>
+                    <style type="text/css">
+                    /*div.background */ body {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+}
+
+p:has(> img) {text-align: center; }
+p:has(img[src="external_link_icon.svg"]) {text-align: left; }
+h5 {
+	margin: 10px 0px;
+	padding: 5px 0px 2px;
+}
+
+#content p {
+	margin: 5px 0;
+	padding: 0px 0;
+}
+
+h5 + p {
+	padding: 0 30px;
+	margin-top: -5px;
+}
+
+                    </style>
+                </head>
+                <body style="">
+                <h1 id="0">unclose-path</h1>
+<p id="2">This script fixes a incorrect behavior in
+Gimp. When using <strong>&quot;stroke&quot;</strong>
+fonts (such as those <img src="external_link_icon.svg" alt="external link" /><a href="http://featurecam.com/general/support/engrave_fonts.asp">available
+here</a>)</p>
+<p id="7">Gimp &quot;closes&quot; all the strokes (perhaps to be able to &quot;fill&quot;
+the characters), producing extra line segments.</p>
+<p id="10">Unfortunately the strokes remain closed even in a &quot;<code>Path from text</code>&quot;:</p>
+<p id="12"><img src="images/ClosedStrokes.png" alt="ClosedStrokes.png" /></p>
+<p id="14">This script &quot;uncloses&quot; the strokes to restore a usable path:</p>
+<p id="16"><img src="images/UnclosedStrokes.png" alt="UnclosedStrokes.png" /></p>
+<p id="18">This script bluntly re-opens all strokes. So far this does not
+appear to have any ill effects
+since in all the fonts encountered, even the strokes that should remain
+closed (&quot;O&quot;, for instance) do not
+rely on the closure to draw the last segment. If you come across a
+counter-example, I will be glad to fix the script.</p>
+
+                </body>
+            </html>
+            
