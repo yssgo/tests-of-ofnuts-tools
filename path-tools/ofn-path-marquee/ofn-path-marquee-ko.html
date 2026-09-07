@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+            <html>
+                <head>                    
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8"></meta>
+                    <title>ofn-path-marquee-ko.md</title>
+                    <style type="text/css">
+                    /* style.css */
+body {
+    padding: 20px; 
+    width: 800px;
+    margin: 0 auto; 
+    font-size:1.2em; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+body {font-family: Sans-serif}
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family: D2Coding, NanumGothicCoding, 나눔고딕코딩, "Cascadia Code", Consolas, "SF Mono", "Melono",
+ "Liberation Mono", Monospace, "DejaVu Sans Mono", monospace;
+    font-size:1.1em;                
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8;
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+    overflow-x: scroll;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;  
+    font-size:none;
+    line-height: 120%;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    max-width:100%;
+    height:auto;
+}            
+h5 {
+    margin: 10px 0px;
+    padding: 5px 0px 2px;
+    font-size:1.0em;
+    font-style: oblique;
+}
+
+#content p {
+    margin: 5px 0;
+    padding: 0px 0;
+}
+
+/* + := Next-sibling combinator */
+h5 + p {
+    padding: 0 30px;
+    margin-top: -5px;
+}
+blockquote {
+  margin: 15px 0;
+}
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777;
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  /*margin-bottom: 0;*/
+}
+.powershellAttribute {
+    color: #B0E0E6;
+}
+
+.powershellOperator {
+    color: #808080;
+}
+
+.powershellType {
+    color: #008080;
+}
+
+.powershellVariable {
+    color: #FF4500;
+}
+/* THE FOLLIOWING IS FROM style.css and/or style-dark.css from NppMarkdownPanel */
+
+/* Styles for github alerts */
+
+:root {
+    --color-note: #0969da;
+    --color-tip: #1a7f37;
+    --color-warning: #9a6700;
+    --color-severe: #bc4c00;
+    --color-caution: #d1242f;
+    --color-important: #8250df;
+}
+
+.markdown-alert {
+    padding: 0.5rem 1rem;
+    margin-bottom: 16px;
+    color: inherit;
+    border-left: .25em solid #888;
+}
+
+    .markdown-alert > :first-child {
+        margin-top: 0
+    }
+
+    .markdown-alert > :last-child {
+        margin-bottom: 0
+    }
+
+    .markdown-alert .markdown-alert-title {
+        display: flex;
+        font-weight: 500;
+        align-items: center;
+        line-height: 1
+    }
+
+        .markdown-alert .markdown-alert-title svg {
+            margin-right: 0.5rem;
+            display: inline-block;
+            overflow: visible !important;
+            vertical-align: text-bottom;
+            fill: currentColor;
+        }
+
+    .markdown-alert.markdown-alert-note {
+        border-left-color: var(--color-note);
+    }
+
+        .markdown-alert.markdown-alert-note .markdown-alert-title {
+            color: var(--color-note);
+        }
+
+    .markdown-alert.markdown-alert-important {
+        border-left-color: var(--color-important);
+    }
+
+        .markdown-alert.markdown-alert-important .markdown-alert-title {
+            color: var(--color-important);
+        }
+
+    .markdown-alert.markdown-alert-warning {
+        border-left-color: var(--color-warning);
+    }
+
+        .markdown-alert.markdown-alert-warning .markdown-alert-title {
+            color: var(--color-warning);
+        }
+
+    .markdown-alert.markdown-alert-tip {
+        border-left-color: var(--color-tip);
+    }
+
+        .markdown-alert.markdown-alert-tip .markdown-alert-title {
+            color: var(--color-tip);
+        }
+
+    .markdown-alert.markdown-alert-caution {
+        border-left-color: var(--color-caution);
+    }
+
+        .markdown-alert.markdown-alert-caution .markdown-alert-title {
+            color: var(--color-caution);
+        }
+    dl {margin: 15px 0;}
+    dl {
+        padding: 0;
+    }
+
+        dl dt {
+            font-weight: bold;
+            font-style: italic;
+            padding: 0;
+            margin: 15px 0 5px;
+        }
+
+            dl dt:first-child {
+                padding: 0;
+            }
+
+            dl dt > :first-child {
+                margin-top: 0;
+            }
+
+            dl dt > :last-child {
+                margin-bottom: 0;
+            }
+
+        dl dd {
+            margin: 0 0 15px;
+            padding: 0 15px;
+        }
+
+            dl dd > :first-child {
+                margin-top: 0;
+            }
+
+            dl dd > :last-child {
+                margin-bottom: 0;
+            }
+
+/* Custom CSS styles */
+.menupath {display:inline-block; border: 1px solid silver; padding-left: 5px; padding-right: 5px; border-radius: 5px; }
+.link-with-icon {display:inline-block;white-space:nowrap; margin-left: 0.3em;margin-right: 0.4em; }
+
+                    </style>
+                    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" onerror="this.remove();"></script>
+                    <script>
+                    if(typeof mermaid!=='undefined'){mermaid.initialize({ startOnLoad: false });}
+                    </script>
+                </head>
+                <body class="markdown-body" style="">
+                <p data-line="0"><a href="ofn-path-marquee-en.html">English</a></p>
+<h1 id="ofn-path-marquee" data-line="3">ofn-path-marquee</h1>
+<h2 id="section" data-line="5">목적</h2>
+<p data-line="7">이 스크립트는 경로 하나로부터 마키(marquee) 스타일로 움직이는 점선을 생성하는 데
+필요한 모든 프레임을 렌더링합니다.</p>
+<p data-line="10">이 경로는 텍스트 레이어에서 <span class="menupath">레이어 → 텍스트를 경로로</span>를 사용하여 얻을 수도 있습니다.</p>
+<p data-line="12"><img src="./images/Gimp.webp" alt="애니메이션"></p>
+<p data-line="14">다른 소스를 사용할 수도 있습니다. 웹 사이트 속도가 느릴 경우 "스피너"를 생성하는 좋은 방법입니다.</p>
+<p data-line="16"><img src="./images/Spinner.webp" alt="스피너"></p>
+<h2 id="section-1" data-line="19">작동 방식</h2>
+<p data-line="21">이 스크립트는 경로 목록 메뉴에서 대상 경로를 우클릭 한 후
+<span class="menupath">렌더링 → 마키 애니메이션</span> 항목을 선택하여 시작합니다.</p>
+<p data-line="24">이 스크립트는 <span class="menupath">편집 → 경로대로 획 긋기</span>와 같은 <code>선</code> 모드로 경로를 따라 획을 긋고,
+각 프레임마다 점선 오프셋<a id="fnref:1" href="#fn:1" class="footnote-ref"><sup>1</sup></a>을 조정합니다. 경로에 현재 전경색으로 획이 그어집니다.</p>
+<h3 id="section-2" data-line="29">주의 사항</h3>
+<p data-line="31">이미지에 레이어나 채널이 적어도 하나가 없으면 대부분의 메뉴가 비활성화됩니다.
+더미 ""레이어""를 추가하면 애니메이션을 내보내기 전에(또는 '재생' 필터로 테스트하기 전에조차)
+해당 레이어를 삭제해야 하고, 이 스크립트를 또 한 번 실행하려면 더미 레이어를
+다시 추가해야 한다는 단점이 있습니다. 더미 ""채널""을 추가하는 것이 더 나은 해결 방법입니다.</p>
+<ul data-line="36">
+<li data-line="36">채널 목록을 엽니다.</li>
+<li data-line="37">우클릭 메뉴를 열고 '새 채널...'을 선택합니다.</li>
+<li data-line="38">채널 매개변수는 중요하지 않습니다.</li>
+<li data-line="39">눈 모양 아이콘을 클릭하여 채널을 숨깁니다.</li>
+</ul>
+<p data-line="41">모든 메뉴가 다시 비활성화되면, 채널 목록으로 이동하여 더미 채널을 다시 선택합니다.</p>
+<h2 id="section-3" data-line="43">매개변수</h2>
+<ul data-line="45">
+<li data-line="45"><p data-line="45"><code>방향 반전</code>: 애니메이션을 반대 방향으로 움직입니다.
+기본적으로 애니메이션은 경로 앵커가 나열된 순서대로 움직이지만,
+경로가 <span class="menupath">레이어  →  텍스트를 경로로</span>의 출력인 경우 이 동작을 제어하기 어려울 수 있습니다.
+모든 획  또는 특정 획을 반전시키려면 제 스크립트 'ofn-path-edits'를 사용할 수 있습니다.</p>
+</li>
+<li data-line="50"><p data-line="50"><code>주기 길이</code>: 대시+공백 단위의 길이입니다. 이 값은 각 획의 길이를 정확히 나누도록
+미묘하게 조정되어, 닫힌 획에서 보기 흉한 현상이 발생하는 것을 방지합니다.</p>
+</li>
+<li data-line="53"><p data-line="53"><code>비율</code>: 대시+공백 단위에서 대시의 상대적인 길이입니다.
+이 값은 "기본(raw)" 대시 길이를 설정하므로 "마개(cap)" 스타일을 사용하면
+대시가 이 값을 초과하여 연장될 수 있습니다.</p>
+</li>
+<li data-line="57"><p data-line="57">'단계 수': 패턴을 정확히 한 주기만큼 이동시키는 애니메이션 총 단계 수입니다.</p>
+</li>
+<li data-line="59"><p data-line="59"><code>선 폭</code>: 선의 두께(픽셀 단위)</p>
+</li>
+<li data-line="60"><p data-line="60"><code>마개(cap) 스타일</code>, <code>이음(join) 스타일</code>, <code>뾰족뿔(miter) 제한</code>, <code>계단 현상 제거(antialiasing)</code>:
+<span class="link-with-icon"><img src="external_link_icon.svg" alt="web">
+<a href="https://docs.gimp.org/en/gimp-using-paths-stroking.html">일반적인 경로 획 긋기 옵션</a></span>.
+<code>뭉툭하게(Butt)</code> 스타일을 제외한 마개 스타일은
+대시의 양쪽 끝을 선 폭의 절반만큼 확장한다는 점에 유의하세요.</p>
+</li>
+<li data-line="65"><p data-line="65"><code>불투명도</code>: 렌더링(그려 내기)의 불투명도</p>
+</li>
+<li data-line="67"><p data-line="67"><code>배경</code>: 경로가 렌더링되기 전에 레이어를 색으로 채우는 방식</p>
+</li>
+<li data-line="68"><p data-line="68"><code>레이어 이름</code>: 레이어 이름을 지정하는 패턴(아래 참조)</p>
+</li>
+</ul>
+<h4 id="section-4" data-line="70">레이어 이름 패턴</h4>
+<p data-line="72">레이어 이름 패턴은 특정 처리 데이터를 사용하여 레이어 이름을 지정하는 방법을 지정합니다.
+패턴에서, 중괄호 안의 이름은 해당 경로에 대한 데이터의 값으로 교체됩니다.
+예를 들어, 패턴 <code>Frame-{step1}/{count}</code>는 50단계 중 세 번째 단계에 대해
+<code>Frame-3/50</code>이라는 이름을 생성합니다.</p>
+<p data-line="77">사용 가능한 값은 다음과 같습니다.</p>
+<ul data-line="79">
+<li data-line="79"><p data-line="79"><code>pathName</code>: 원본 경로 이름</p>
+</li>
+<li data-line="80"><p data-line="80"><code>count</code>: 총 단계 수</p>
+</li>
+<li data-line="81"><p data-line="81"><code>step0</code>, <code>step1</code>: 단계 번호.</p>
+<p data-line="83"><code>step0</code>은 0부터 시작하고(컴퓨터가 세는 방식),
+<code>step1</code>은 1부터 시작합니다(사람이 세는 방식).</p>
+</li>
+<li data-line="86"><p data-line="86"><code>period</code>: 하이픈+공백 주기의 길이(픽셀 단위)</p>
+</li>
+<li data-line="87"><p data-line="87"><code>ratio</code>: 주기에 대한 대시의 비율(1~99)</p>
+</li>
+</ul>
+<p data-line="89">이름 패턴은 실제로 파이썬 형식 지정자(specification)로 직접 사용되므로 수정자를 사용할 수 있습니다.
+숫자에 가장 유용한 수정자는 0으로 채워진 최소 길이를 정의하는 기능입니다.
+이는 중괄호 안의 변수 이름에 <code>:0Nd</code>를 추가하여 수행합니다.
+예를 들어, <code>{step1:03d}</code>는 단계 번호를 최소 세 자리 숫자로 삽입하고 필요한 경우 왼쪽에 0을 추가합니다.
+예: <code>001</code>, <code>013</code>, <code>099</code>, <code>100</code>.</p>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p data-line="27">dash offset(역주: 점선 시작 위치)<a href="#fnref:1" class="footnote-back-ref">↩</a></p>
+</li>
+</ol>
+</div>
+
+                <script>
+                if(typeof mermaid!=='undefined'){mermaid.run();}
+                </script>
+                </body>
+            </html>
+            

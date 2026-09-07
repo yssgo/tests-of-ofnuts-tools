@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+            <html>
+                <head>                    
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8"></meta>
+                    <title>ofn-path-marquee-en.md</title>
+                    <style type="text/css">
+                    /* style.css */
+body {
+    padding: 20px; 
+    width: 800px;
+    margin: 0 auto; 
+    font-size:1.2em; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+body {font-family: Sans-serif}
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family: D2Coding, NanumGothicCoding, 나눔고딕코딩, "Cascadia Code", Consolas, "SF Mono", "Melono",
+ "Liberation Mono", Monospace, "DejaVu Sans Mono", monospace;
+    font-size:1.1em;                
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8;
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+    overflow-x: scroll;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;  
+    font-size:none;
+    line-height: 120%;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    max-width:100%;
+    height:auto;
+}            
+h5 {
+    margin: 10px 0px;
+    padding: 5px 0px 2px;
+    font-size:1.0em;
+    font-style: oblique;
+}
+
+#content p {
+    margin: 5px 0;
+    padding: 0px 0;
+}
+
+/* + := Next-sibling combinator */
+h5 + p {
+    padding: 0 30px;
+    margin-top: -5px;
+}
+blockquote {
+  margin: 15px 0;
+}
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777;
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  /*margin-bottom: 0;*/
+}
+.powershellAttribute {
+    color: #B0E0E6;
+}
+
+.powershellOperator {
+    color: #808080;
+}
+
+.powershellType {
+    color: #008080;
+}
+
+.powershellVariable {
+    color: #FF4500;
+}
+/* THE FOLLIOWING IS FROM style.css and/or style-dark.css from NppMarkdownPanel */
+
+/* Styles for github alerts */
+
+:root {
+    --color-note: #0969da;
+    --color-tip: #1a7f37;
+    --color-warning: #9a6700;
+    --color-severe: #bc4c00;
+    --color-caution: #d1242f;
+    --color-important: #8250df;
+}
+
+.markdown-alert {
+    padding: 0.5rem 1rem;
+    margin-bottom: 16px;
+    color: inherit;
+    border-left: .25em solid #888;
+}
+
+    .markdown-alert > :first-child {
+        margin-top: 0
+    }
+
+    .markdown-alert > :last-child {
+        margin-bottom: 0
+    }
+
+    .markdown-alert .markdown-alert-title {
+        display: flex;
+        font-weight: 500;
+        align-items: center;
+        line-height: 1
+    }
+
+        .markdown-alert .markdown-alert-title svg {
+            margin-right: 0.5rem;
+            display: inline-block;
+            overflow: visible !important;
+            vertical-align: text-bottom;
+            fill: currentColor;
+        }
+
+    .markdown-alert.markdown-alert-note {
+        border-left-color: var(--color-note);
+    }
+
+        .markdown-alert.markdown-alert-note .markdown-alert-title {
+            color: var(--color-note);
+        }
+
+    .markdown-alert.markdown-alert-important {
+        border-left-color: var(--color-important);
+    }
+
+        .markdown-alert.markdown-alert-important .markdown-alert-title {
+            color: var(--color-important);
+        }
+
+    .markdown-alert.markdown-alert-warning {
+        border-left-color: var(--color-warning);
+    }
+
+        .markdown-alert.markdown-alert-warning .markdown-alert-title {
+            color: var(--color-warning);
+        }
+
+    .markdown-alert.markdown-alert-tip {
+        border-left-color: var(--color-tip);
+    }
+
+        .markdown-alert.markdown-alert-tip .markdown-alert-title {
+            color: var(--color-tip);
+        }
+
+    .markdown-alert.markdown-alert-caution {
+        border-left-color: var(--color-caution);
+    }
+
+        .markdown-alert.markdown-alert-caution .markdown-alert-title {
+            color: var(--color-caution);
+        }
+    dl {margin: 15px 0;}
+    dl {
+        padding: 0;
+    }
+
+        dl dt {
+            font-weight: bold;
+            font-style: italic;
+            padding: 0;
+            margin: 15px 0 5px;
+        }
+
+            dl dt:first-child {
+                padding: 0;
+            }
+
+            dl dt > :first-child {
+                margin-top: 0;
+            }
+
+            dl dt > :last-child {
+                margin-bottom: 0;
+            }
+
+        dl dd {
+            margin: 0 0 15px;
+            padding: 0 15px;
+        }
+
+            dl dd > :first-child {
+                margin-top: 0;
+            }
+
+            dl dd > :last-child {
+                margin-bottom: 0;
+            }
+
+/* Custom CSS styles */
+.menupath {display:inline-block; border: 1px solid silver; padding-left: 5px; padding-right: 5px; border-radius: 5px; }
+.link-with-icon {display:inline-block;white-space:nowrap; margin-left: 0.3em;margin-right: 0.4em; }
+
+                    </style>
+                    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" onerror="this.remove();"></script>
+                    <script>
+                    if(typeof mermaid!=='undefined'){mermaid.initialize({ startOnLoad: false });}
+                    </script>
+                </head>
+                <body class="markdown-body" style="">
+                <h1 id="ofn-path-marquee" data-line="1">ofn-path-marquee</h1>
+<h2 id="purpose" data-line="3">Purpose</h2>
+<p data-line="5">This script renders all the frames necessary to generate a moving dashed line from a path, marquee-style.</p>
+<p data-line="7">The path can be obtained using <span class="menupath">Layer → Text to path</span> on a text layer</p>
+<p data-line="9"><img src="./images/Gimp.webp" alt="Animation"></p>
+<p data-line="11">but other sources are possible. This a good way to generate "spinners" if your web site is slow:</p>
+<p data-line="13"><img src="./images/Spinner.webp" alt="Spinner"></p>
+<h2 id="operation" data-line="15">Operation</h2>
+<p data-line="17">The script is started using the <span class="menupath">Render → Marquee animation</span> entry
+after right-clicking the target path in the Paths list menu.</p>
+<p data-line="20">The script strokes the path in <code>Line</code> mode (as in <span class="menupath">Edit → Stroke path</span>),
+shifting the dash offset for each frame. The path is stroked with the current foreground color.</p>
+<h3 id="note" data-line="23">Note</h3>
+<p data-line="25">Most menus are disabled if there is not at least a layer or channel in the image.
+Adding a dummy layer has the downside that you must delete the layer before exporting the animation
+(or even testing it with the <code>Playback</code> filter), and then add one back to execute another run.
+Adding a dummy channel is a better work around:</p>
+<ul data-line="30">
+<li data-line="30">open the Channels list,</li>
+<li data-line="31">open the right-click menu and select <code>New channel...</code></li>
+<li data-line="32">channel parameters are unimportant</li>
+<li data-line="33">click the eye icon to hide the channel</li>
+</ul>
+<p data-line="35">If everything is disabled again, go to the Channels list and select the dummy channel again.</p>
+<h2 id="parameters" data-line="37">Parameters</h2>
+<ul data-line="39">
+<li data-line="39"><p data-line="39"><code>Reverse direction</code>: makes the animation move in the opposite direction.
+By default the animation moves in the order in which the path anchors are listed,
+but if the path is the output of <span class="menupath">Layer → Text to path</span> you may have little control
+over that. You can use my <code>ofn-path-edits</code> script to reverse all or specific strokes.</p>
+</li>
+<li data-line="43"><p data-line="43"><code>Period length</code>: the length of a dash+space unit. This value is subtly adjusted for each stroke
+to be an exact divider of the stroke length, to avoid unsightly things
+to happen on closed strokes.</p>
+</li>
+<li data-line="46"><p data-line="46"><code>Ratio</code>: the relative length of the dash in the dash+space unit. This sets "raw" dash length,
+so "cap" styles may make the dash
+extend beyond this.</p>
+</li>
+<li data-line="49"><p data-line="49">'Steps': the number of steps in the animation to shift the pattern by exactly one period.</p>
+</li>
+<li data-line="50"><p data-line="50"><code>Line width</code>: the width of the line, in pixels</p>
+</li>
+<li data-line="51"><p data-line="51"><code>Cap style</code>, <code>Join style</code>, <code>Miter limit</code>, and <code>Anti-aliasing</code>: the <img src="external_link_icon.svg" alt="external link"><a href="https://docs.gimp.org/en/gimp-using-paths-stroking.html">usual path stroking options</a>.</p>
+<p data-line="53">Keep in mind that cap styles other than <code>Butt</code> extend the length of the dash by half a line width at
+each end.</p>
+</li>
+<li data-line="56"><p data-line="56"><code>Opacity</code>: the opacity of the rendering.</p>
+</li>
+<li data-line="57"><p data-line="57"><code>Background</code>: how the layer is filled before the path is rendered</p>
+</li>
+<li data-line="58"><p data-line="58"><code>Layer Name</code>: a pattern to name the layers (see below)</p>
+</li>
+</ul>
+<h4 id="layer-name-pattern" data-line="60">Layer name pattern</h4>
+<p data-line="62">The layer name pattern specifies how the layers are named using specific processing data. In the pattern, names in braces are replaced by the values of these data for the path. For instance, a pattern of <code>Frame-{step1}/{count}</code> will produce the name <code>Frame-3/50</code> for the 3rd step in a series of 50.</p>
+<p data-line="64">The available values are:</p>
+<ul data-line="66">
+<li data-line="66"><p data-line="66"><code>pathName</code>: the name of the source path</p>
+</li>
+<li data-line="67"><p data-line="67"><code>count</code>: the total number of steps</p>
+</li>
+<li data-line="68"><p data-line="68"><code>step0</code>, <code>step1</code>: the step number..</p>
+<p data-line="70"><code>step0</code> starts at 0 (as computers count) and
+<code>step1</code> starts at 1 (as humans count).</p>
+</li>
+<li data-line="73"><p data-line="73"><code>period</code>: the length of the dash+space period, in pixels</p>
+</li>
+<li data-line="74"><p data-line="74"><code>ratio</code>: the dash to period ratio (from 1 to 99)</p>
+</li>
+</ul>
+<p data-line="76">The name pattern is actually directly used as a Python format specification, so modifiers can be used. The
+most useful modifier for numbers is the ability to define a minimal length with zero-padding. This is done by
+adding <code>:0Nd</code> to the variable name in the braces, for instance <code>{step1:03d}</code> will insert the step number on
+at least three digits, with zeros added to the left if necessary: <code>001</code>, <code>013</code>, <code>099</code>, <code>100</code>.</p>
+
+                <script>
+                if(typeof mermaid!=='undefined'){mermaid.run();}
+                </script>
+                </body>
+            </html>
+            
