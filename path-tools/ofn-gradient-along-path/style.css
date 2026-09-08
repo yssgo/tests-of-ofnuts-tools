@@ -1,0 +1,239 @@
+/* style.css */
+body {
+    padding: 20px; 
+    width: 800px;
+    margin: 0 auto; 
+    font-size:1.2em; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+body {font-family: Sans-serif}
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family: D2Coding, NanumGothicCoding, 나눔고딕코딩, "Cascadia Code", Consolas, "SF Mono", "Melono",
+ "Liberation Mono", Monospace, "DejaVu Sans Mono", monospace;
+    font-size:1.1em;                
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8;
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+    overflow-x: scroll;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;  
+    font-size:none;
+    line-height: 120%;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    max-width:100%;
+    height:auto;
+}            
+h5 {
+    margin: 10px 0px;
+    padding: 5px 0px 2px;
+    font-size:1.0em;
+    font-style: oblique;
+}
+
+#content p {
+    margin: 5px 0;
+    padding: 0px 0;
+}
+
+/* + := Next-sibling combinator */
+h5 + p {
+    padding: 0 30px;
+    margin-top: -5px;
+}
+blockquote {
+  margin: 15px 0;
+}
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777;
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  /*margin-bottom: 0;*/
+}
+.powershellAttribute {
+    color: #B0E0E6;
+}
+
+.powershellOperator {
+    color: #808080;
+}
+
+.powershellType {
+    color: #008080;
+}
+
+.powershellVariable {
+    color: #FF4500;
+}
+/* THE FOLLIOWING IS FROM style.css and/or style-dark.css from NppMarkdownPanel */
+
+/* Styles for github alerts */
+
+:root {
+    --color-note: #0969da;
+    --color-tip: #1a7f37;
+    --color-warning: #9a6700;
+    --color-severe: #bc4c00;
+    --color-caution: #d1242f;
+    --color-important: #8250df;
+}
+
+.markdown-alert {
+    padding: 0.5rem 1rem;
+    margin-bottom: 16px;
+    color: inherit;
+    border-left: .25em solid #888;
+}
+
+    .markdown-alert > :first-child {
+        margin-top: 0
+    }
+
+    .markdown-alert > :last-child {
+        margin-bottom: 0
+    }
+
+    .markdown-alert .markdown-alert-title {
+        display: flex;
+        font-weight: 500;
+        align-items: center;
+        line-height: 1
+    }
+
+        .markdown-alert .markdown-alert-title svg {
+            margin-right: 0.5rem;
+            display: inline-block;
+            overflow: visible !important;
+            vertical-align: text-bottom;
+            fill: currentColor;
+        }
+
+    .markdown-alert.markdown-alert-note {
+        border-left-color: var(--color-note);
+    }
+
+        .markdown-alert.markdown-alert-note .markdown-alert-title {
+            color: var(--color-note);
+        }
+
+    .markdown-alert.markdown-alert-important {
+        border-left-color: var(--color-important);
+    }
+
+        .markdown-alert.markdown-alert-important .markdown-alert-title {
+            color: var(--color-important);
+        }
+
+    .markdown-alert.markdown-alert-warning {
+        border-left-color: var(--color-warning);
+    }
+
+        .markdown-alert.markdown-alert-warning .markdown-alert-title {
+            color: var(--color-warning);
+        }
+
+    .markdown-alert.markdown-alert-tip {
+        border-left-color: var(--color-tip);
+    }
+
+        .markdown-alert.markdown-alert-tip .markdown-alert-title {
+            color: var(--color-tip);
+        }
+
+    .markdown-alert.markdown-alert-caution {
+        border-left-color: var(--color-caution);
+    }
+
+        .markdown-alert.markdown-alert-caution .markdown-alert-title {
+            color: var(--color-caution);
+        }
+    dl {margin: 15px 0;}
+    dl {
+        padding: 0;
+    }
+
+        dl dt {
+            font-weight: bold;
+            font-style: italic;
+            padding: 0;
+            margin: 15px 0 5px;
+        }
+
+            dl dt:first-child {
+                padding: 0;
+            }
+
+            dl dt > :first-child {
+                margin-top: 0;
+            }
+
+            dl dt > :last-child {
+                margin-bottom: 0;
+            }
+
+        dl dd {
+            margin: 0 0 15px;
+            padding: 0 15px;
+        }
+
+            dl dd > :first-child {
+                margin-top: 0;
+            }
+
+            dl dd > :last-child {
+                margin-bottom: 0;
+            }
+
+/* Custom CSS styles */
+.menupath {display:inline-block; border: 1px solid silver; padding-left: 5px; padding-right: 5px; border-radius: 5px; }
+.link-with-icon {display:inline-block;white-space:nowrap; margin-left: 0.3em;margin-right: 0.4em; }
+.table-of-contents {line-height:110%; font-size:smaller}
