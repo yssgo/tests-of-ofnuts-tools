@@ -5,52 +5,128 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <style>
+
+div.background {
+    padding: 20px; 
+    width: 800px; 
+    font-size:120%; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+
 code { 
     color: #000000; 
-    background: #ffffff; 
+    background: #fefefe; 
     border-style: solid; 
-    border-width: thin; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8; 
+    border-style: solid; 
+    border-width: 1px; 
     border-color: #c0c0c0; 
-    border-radius: 3px; 
-    padding-left: 3px;
-    padding-right: 3px;    
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;     
+    font-size:none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
 }
 </style>
 <body>
-<div style="padding: 20px; width: 800px; font-size:120%; color: #000040; background: #f0f0f0; ">
+<div class="background">
+<a name="ofn-2d-gradient-2d-along-2d-path"></a>
 <h1>ofn-gradient-along-path</h1>
 
+<a name="Purpose"></a>
 <h2>Purpose</h2>
 
-<p>ofn-gradient-along-path draws a bilinear blend transversally along path strokes, using the current gradient. 
-The gradient is drawn on the active drawable (layer, layer mask, channel....).</p>
+<p><code>ofn-gradient-along-path</code> draws a bilinear blend transversally along path strokes, using the current gradient.</p>
 
+<a name="Principle"></a>
 <h2>Principle</h2>
 
-<p>The gradient is rendered by stroking the path with decreasing widths, 
+<p>The gradient is rendered by stroking the path with decreasing widths,
 setting the color by sampling the gradient at the corresponding position.</p>
 
+<p>On layers, when the gradient is not fully opaque, a mask is added to the layer and the opacity part of gradient
+is stroked in a similar way on the mask. The mask is then applied to the layer.</p>
+
+<a name="Usage"></a>
 <h2>Usage</h2>
 
-<p>The script can be found in the right-click menu of a path in the Paths list (<code>Decorate&gt;Gradient along path...</code>).</p>
+<p>The script can be found in the right-click menu of a path in the Paths list (<code>Decorate➤Gradient along path...</code>).
+The gradient is drawn on the active drawable (layer, layer mask, channel, quickmask&hellip;).</p>
 
+<a name="Parameters"></a>
 <h3>Parameters</h3>
 
 <ul>
-<li><code>Width</code>: this is the total width in pixels of the stroke (<code>width/2</code> on each side of the path). </li>
-<li><code>Reverse gradient</code>: if false, the gradient is mapped inside-out, if true, it is mapped outside-in.  </li>
+<li><code>Width</code>: this is the total width in pixels of the stroke (<code>width÷2</code> on each side of the path).</li>
+<li><code>Reverse gradient</code>: if false, the gradient is mapped inside-out, if true, it is mapped outside-in.</li>
 <li><code>Precision</code>: the precision of the rendering. The <code>Fine</code> renderings make each stroke smaller than
-its predecessor by one pixels (.5 pixel each side). The settings are currently : .5, 1, 2, and 5 pixels.
+its predecessor by one pixels (.5 pixel each side). The settings are currently : .5, 1, 2, 5, and 10 pixels.
 High precision require more stroking passes.</li>
-<li><code>Caps style</code>, <code>Join style</code> and <code>Miter limit</code>: these are the stroke line options (see the <code>Edit&gt;Stroke path</code> 
-documentation for a description). The value of <code>Current</code> means that the script will use whatever value is 
+<li><code>Caps style</code>, <code>Join style</code> and <code>Miter limit</code>: these are the stroke line options (see the <code>Edit➤Stroke path</code>
+documentation for a description). The value of <code>Current</code> means that the script will use whatever value is
 currently set in Gimp. the <code>Miter limit</code> setting is used only if the <code>Join style</code> is explicitly set to <code>Miter</code>.</li>
 </ul>
 
+
+<a name="Usage-notes"></a>
 <h3>Usage notes</h3>
 
 <ul>
-<li>The principle of operation precludes the use of gradients with transparency </li>
-<li>You can render only one half of the gradient by using the path to create a selection</li>
+<li><p>The principle of operation requires the use of a mask to implement transparency, and as a consequence,
+gradients with transparency cannot be used on:</p>
+
+<ul>
+<li>channels (this includes the quickmask)</li>
+<li>layer masks</li>
+<li>layers that already have a mask</li>
 </ul>
+</li>
+<li><p>The opacity of the gradient sets the opacity of the layer, the gradient isn&rsquo;t drawn over the existing pixels,
+it completely replaces them.</p></li>
+<li><p>You can render only one half of the gradient by using the path to create a selection.</p></li>
+</ul>
+
 </div></body></html>

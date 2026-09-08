@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+            <html>
+                <head>                    
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8"></meta>
+                    <title>ofn-gradient-along-path-en.md</title>
+                    <style type="text/css">
+                    /* style.css */
+body {
+    padding: 20px; 
+    width: 800px;
+    margin: 0 auto; 
+    font-size:1.2em; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+body {font-family: Sans-serif}
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family: D2Coding, NanumGothicCoding, 나눔고딕코딩, "Cascadia Code", Consolas, "SF Mono", "Melono",
+ "Liberation Mono", Monospace, "DejaVu Sans Mono", monospace;
+    font-size:1.1em;                
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8;
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+    overflow-x: scroll;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;  
+    font-size:none;
+    line-height: 120%;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    max-width:100%;
+    height:auto;
+}            
+h5 {
+    margin: 10px 0px;
+    padding: 5px 0px 2px;
+    font-size:1.0em;
+    font-style: oblique;
+}
+
+#content p {
+    margin: 5px 0;
+    padding: 0px 0;
+}
+
+/* + := Next-sibling combinator */
+h5 + p {
+    padding: 0 30px;
+    margin-top: -5px;
+}
+blockquote {
+  margin: 15px 0;
+}
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777;
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  /*margin-bottom: 0;*/
+}
+.powershellAttribute {
+    color: #B0E0E6;
+}
+
+.powershellOperator {
+    color: #808080;
+}
+
+.powershellType {
+    color: #008080;
+}
+
+.powershellVariable {
+    color: #FF4500;
+}
+/* THE FOLLIOWING IS FROM style.css and/or style-dark.css from NppMarkdownPanel */
+
+/* Styles for github alerts */
+
+:root {
+    --color-note: #0969da;
+    --color-tip: #1a7f37;
+    --color-warning: #9a6700;
+    --color-severe: #bc4c00;
+    --color-caution: #d1242f;
+    --color-important: #8250df;
+}
+
+.markdown-alert {
+    padding: 0.5rem 1rem;
+    margin-bottom: 16px;
+    color: inherit;
+    border-left: .25em solid #888;
+}
+
+    .markdown-alert > :first-child {
+        margin-top: 0
+    }
+
+    .markdown-alert > :last-child {
+        margin-bottom: 0
+    }
+
+    .markdown-alert .markdown-alert-title {
+        display: flex;
+        font-weight: 500;
+        align-items: center;
+        line-height: 1
+    }
+
+        .markdown-alert .markdown-alert-title svg {
+            margin-right: 0.5rem;
+            display: inline-block;
+            overflow: visible !important;
+            vertical-align: text-bottom;
+            fill: currentColor;
+        }
+
+    .markdown-alert.markdown-alert-note {
+        border-left-color: var(--color-note);
+    }
+
+        .markdown-alert.markdown-alert-note .markdown-alert-title {
+            color: var(--color-note);
+        }
+
+    .markdown-alert.markdown-alert-important {
+        border-left-color: var(--color-important);
+    }
+
+        .markdown-alert.markdown-alert-important .markdown-alert-title {
+            color: var(--color-important);
+        }
+
+    .markdown-alert.markdown-alert-warning {
+        border-left-color: var(--color-warning);
+    }
+
+        .markdown-alert.markdown-alert-warning .markdown-alert-title {
+            color: var(--color-warning);
+        }
+
+    .markdown-alert.markdown-alert-tip {
+        border-left-color: var(--color-tip);
+    }
+
+        .markdown-alert.markdown-alert-tip .markdown-alert-title {
+            color: var(--color-tip);
+        }
+
+    .markdown-alert.markdown-alert-caution {
+        border-left-color: var(--color-caution);
+    }
+
+        .markdown-alert.markdown-alert-caution .markdown-alert-title {
+            color: var(--color-caution);
+        }
+    dl {margin: 15px 0;}
+    dl {
+        padding: 0;
+    }
+
+        dl dt {
+            font-weight: bold;
+            font-style: italic;
+            padding: 0;
+            margin: 15px 0 5px;
+        }
+
+            dl dt:first-child {
+                padding: 0;
+            }
+
+            dl dt > :first-child {
+                margin-top: 0;
+            }
+
+            dl dt > :last-child {
+                margin-bottom: 0;
+            }
+
+        dl dd {
+            margin: 0 0 15px;
+            padding: 0 15px;
+        }
+
+            dl dd > :first-child {
+                margin-top: 0;
+            }
+
+            dl dd > :last-child {
+                margin-bottom: 0;
+            }
+
+/* Custom CSS styles */
+.menupath {display:inline-block; border: 1px solid silver; padding-left: 5px; padding-right: 5px; border-radius: 5px; }
+.link-with-icon {display:inline-block;white-space:nowrap; margin-left: 0.3em;margin-right: 0.4em; }
+.table-of-contents {line-height:110%; font-size:smaller}
+
+                    </style>
+                    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" onerror="this.remove();"></script>
+                    <script>
+                    if(typeof mermaid!=='undefined'){mermaid.initialize({ startOnLoad: false });}
+                    </script>
+                </head>
+                <body class="markdown-body" style="">
+                <h1 id="ofn-gradient-along-path" data-line="1">ofn-gradient-along-path</h1>
+<h2 id="purpose" data-line="4">Purpose</h2>
+<p data-line="6"><code>ofn-gradient-along-path</code> draws a bilinear blend transversally along path strokes, using the current gradient.</p>
+<h2 id="principle" data-line="9">Principle</h2>
+<p data-line="11">The gradient is rendered by stroking the path with decreasing widths,
+setting the color by sampling the gradient at the corresponding position.</p>
+<p data-line="14">On layers, when the gradient is not fully opaque, a mask is added to the layer and the opacity part of gradient
+is stroked in a similar way on the mask. The mask is then applied to the layer.</p>
+<h2 id="usage" data-line="18">Usage</h2>
+<p data-line="20">The script can be found in the right-click menu of a path in the Paths list
+(<span class="menupath">Ofnuts → Decorate → Gradient along path...</span>).
+The gradient is drawn on the active drawable (layer, layer mask, channel, quickmask…).</p>
+<h3 id="parameters" data-line="24">Parameters</h3>
+<ul data-line="26">
+<li data-line="26"><code>Width</code>: this is the total width in pixels of the stroke (<code>width÷2</code> on each side of the path).</li>
+<li data-line="27"><code>Reverse gradient</code>: if false, the gradient is mapped inside-out, if true, it is mapped outside-in.</li>
+<li data-line="28"><code>Precision</code>: the precision of the rendering. The <code>Fine</code> renderings make each stroke smaller than
+its predecessor by one pixels (.5 pixel each side). The settings are currently : .5, 1, 2, 5, and 10 pixels.
+High precision require more stroking passes.</li>
+<li data-line="31"><code>Caps style</code>, <code>Join style</code> and <code>Miter limit</code>: these are the stroke line options
+(see the <span class="menupath">Ofnuts → Edit → Stroke path</span>documentation for a description). The value of <code>Current</code> means that the script will use whatever value is
+currently set in Gimp. the <code>Miter limit</code> setting is used only if the <code>Join style</code> is explicitly set to <code>Miter</code>.</li>
+</ul>
+<h3 id="usage-notes" data-line="37">Usage notes</h3>
+<ul data-line="39">
+<li data-line="39"><p data-line="39">The principle of operation requires the use of a mask to implement transparency, and as a consequence,
+gradients with transparency cannot be used on:</p>
+<ul data-line="42">
+<li data-line="42">channels (this includes the quickmask)</li>
+<li data-line="43">layer masks</li>
+<li data-line="44">layers that already have a mask</li>
+</ul>
+</li>
+<li data-line="46"><p data-line="46">The opacity of the gradient sets the opacity of the layer, the gradient isn’t drawn over the existing pixels,
+it completely replaces them.</p>
+</li>
+<li data-line="48"><p data-line="48">You can render only one half of the gradient by using the path to create a selection.</p>
+</li>
+</ul>
+
+                <script>
+                if(typeof mermaid!=='undefined'){mermaid.run();}
+                </script>
+                </body>
+            </html>
+            

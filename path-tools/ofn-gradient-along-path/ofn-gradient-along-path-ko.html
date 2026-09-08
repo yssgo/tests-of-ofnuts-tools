@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+            <html>
+                <head>                    
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8"></meta>
+                    <title>ofn-gradient-along-path-ko.md</title>
+                    <style type="text/css">
+                    /* style.css */
+body {
+    padding: 20px; 
+    width: 800px;
+    margin: 0 auto; 
+    font-size:1.2em; 
+    color: #000040; 
+    background: #fcfcfc;
+}
+body {font-family: Sans-serif}
+h1, h2, h3, h4{
+    color: #2020A0;
+}
+h1 {
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 3px; 
+    border-color: #303080; 
+    border-radius: 8px; 
+    padding-left: 8px;
+}
+code { 
+    color: #000000; 
+    background: #fefefe; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    border-radius: 2px; 
+    padding-left: 2px;
+    padding-right: 2px;
+    font-family: D2Coding, NanumGothicCoding, 나눔고딕코딩, "Cascadia Code", Consolas, "SF Mono", "Melono",
+ "Liberation Mono", Monospace, "DejaVu Sans Mono", monospace;
+    font-size:1.1em;                
+}
+
+pre { 
+    color: #000000; 
+    background: #fffff8;
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #c0c0c0; 
+    border-radius: 5px; 
+    padding-top: 8px;
+    padding-bottom: 5px;    
+    padding-left: 8px;
+    padding-right: 8px;
+    font-family:monospace;
+    font-size:90%;
+    overflow-x: scroll;
+}
+
+pre > code {
+    border-style: none; 
+    background: none;  
+    font-size:none;
+    line-height: 120%;
+}
+
+li {
+    margin: 5px 0;
+}
+
+img {
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: #e0e0e0; 
+    max-width:100%;
+    height:auto;
+}            
+h5 {
+    margin: 10px 0px;
+    padding: 5px 0px 2px;
+    font-size:1.0em;
+    font-style: oblique;
+}
+
+#content p {
+    margin: 5px 0;
+    padding: 0px 0;
+}
+
+/* + := Next-sibling combinator */
+h5 + p {
+    padding: 0 30px;
+    margin-top: -5px;
+}
+blockquote {
+  margin: 15px 0;
+}
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777;
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  /*margin-bottom: 0;*/
+}
+.powershellAttribute {
+    color: #B0E0E6;
+}
+
+.powershellOperator {
+    color: #808080;
+}
+
+.powershellType {
+    color: #008080;
+}
+
+.powershellVariable {
+    color: #FF4500;
+}
+/* THE FOLLIOWING IS FROM style.css and/or style-dark.css from NppMarkdownPanel */
+
+/* Styles for github alerts */
+
+:root {
+    --color-note: #0969da;
+    --color-tip: #1a7f37;
+    --color-warning: #9a6700;
+    --color-severe: #bc4c00;
+    --color-caution: #d1242f;
+    --color-important: #8250df;
+}
+
+.markdown-alert {
+    padding: 0.5rem 1rem;
+    margin-bottom: 16px;
+    color: inherit;
+    border-left: .25em solid #888;
+}
+
+    .markdown-alert > :first-child {
+        margin-top: 0
+    }
+
+    .markdown-alert > :last-child {
+        margin-bottom: 0
+    }
+
+    .markdown-alert .markdown-alert-title {
+        display: flex;
+        font-weight: 500;
+        align-items: center;
+        line-height: 1
+    }
+
+        .markdown-alert .markdown-alert-title svg {
+            margin-right: 0.5rem;
+            display: inline-block;
+            overflow: visible !important;
+            vertical-align: text-bottom;
+            fill: currentColor;
+        }
+
+    .markdown-alert.markdown-alert-note {
+        border-left-color: var(--color-note);
+    }
+
+        .markdown-alert.markdown-alert-note .markdown-alert-title {
+            color: var(--color-note);
+        }
+
+    .markdown-alert.markdown-alert-important {
+        border-left-color: var(--color-important);
+    }
+
+        .markdown-alert.markdown-alert-important .markdown-alert-title {
+            color: var(--color-important);
+        }
+
+    .markdown-alert.markdown-alert-warning {
+        border-left-color: var(--color-warning);
+    }
+
+        .markdown-alert.markdown-alert-warning .markdown-alert-title {
+            color: var(--color-warning);
+        }
+
+    .markdown-alert.markdown-alert-tip {
+        border-left-color: var(--color-tip);
+    }
+
+        .markdown-alert.markdown-alert-tip .markdown-alert-title {
+            color: var(--color-tip);
+        }
+
+    .markdown-alert.markdown-alert-caution {
+        border-left-color: var(--color-caution);
+    }
+
+        .markdown-alert.markdown-alert-caution .markdown-alert-title {
+            color: var(--color-caution);
+        }
+    dl {margin: 15px 0;}
+    dl {
+        padding: 0;
+    }
+
+        dl dt {
+            font-weight: bold;
+            font-style: italic;
+            padding: 0;
+            margin: 15px 0 5px;
+        }
+
+            dl dt:first-child {
+                padding: 0;
+            }
+
+            dl dt > :first-child {
+                margin-top: 0;
+            }
+
+            dl dt > :last-child {
+                margin-bottom: 0;
+            }
+
+        dl dd {
+            margin: 0 0 15px;
+            padding: 0 15px;
+        }
+
+            dl dd > :first-child {
+                margin-top: 0;
+            }
+
+            dl dd > :last-child {
+                margin-bottom: 0;
+            }
+
+/* Custom CSS styles */
+.menupath {display:inline-block; border: 1px solid silver; padding-left: 5px; padding-right: 5px; border-radius: 5px; }
+.link-with-icon {display:inline-block;white-space:nowrap; margin-left: 0.3em;margin-right: 0.4em; }
+.table-of-contents {line-height:110%; font-size:smaller}
+
+                    </style>
+                    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" onerror="this.remove();"></script>
+                    <script>
+                    if(typeof mermaid!=='undefined'){mermaid.initialize({ startOnLoad: false });}
+                    </script>
+                </head>
+                <body class="markdown-body" style="">
+                <p style="text-align: right" data-line="0"><a href="./ofn-gradient-along-path-en.html">English</a> </p>
+<h1 id="ofn-gradient-along-path" data-line="3">ofn-gradient-along-path</h1>
+<h2 id="section" data-line="6">목적</h2>
+<p data-line="8"><code>ofn-gradient-along-path</code>는, 현재 그라디언트를 사용하여, 경로 획들을 따라 가로로 이중 선형 혼합을 그립니다.</p>
+<h2 id="section-1" data-line="11">원리</h2>
+<p data-line="13">그라디언트는 너비를 줄이면서 경로대로 획을 그어서 렌더링되고,
+대응하는 위치에서 그라디언트를 샘플링(표본 추출)하여 색상을 설정합니다.</p>
+<p data-line="16">레이어에서, 그라디언트가 완전히 불투명하지 않으면, 레이어에 마스크가 추가되고 그라디언트의 불투명도 부분에
+비슷한 방식으로 획을 긋습니다. 그런 다음 마스크가 레이어에 적용됩니다.</p>
+<h2 id="section-2" data-line="20">사용법</h2>
+<p data-line="22">이 스크립트는 경로 목록에서
+경로의 우클릭 메뉴(<span class="menupath">Ofnuts → 장식 → 경로를 따라 그라디언트...</span>)에서 찾을 수 있습니다.
+그라디언트는 활성 드로어블(레이어, 레이어 마스크, 채널, 퀵마스크 등)에 그려집니다.</p>
+<h3 id="section-3" data-line="26">매개변수</h3>
+<ul data-line="28">
+<li data-line="28"><code>폭</code>: 획의 전체 너비(픽셀 단위)입니다(경로 양쪽은 각각 <code>폭÷2</code>).</li>
+<li data-line="29"><code>뒤집힌 그라디언트</code>: '아니요'이면 그라디언트가 안쪽에서 바깥쪽으로 매핑되고, '예'이면 바깥쪽에서 안쪽으로 매핑됩니다.</li>
+<li data-line="30"><code>정밀도</code>: 렌더링의 정밀도입니다. <cite><code>세밀한</code> 렌더링들</cite><a id="fnref:1" href="#fn:1" class="footnote-ref"><sup>1</sup></a> 은 각 획을 이전 획보다
+1픽셀씩 작게 만듭니다(양 쪽에 0.5픽셀씩). 현재 설정은 0.5, 1, 2, 5, 10픽셀입니다.
+높은 정밀도는 획 긋기 과정이 더 많이 필요합니다.</li>
+<li data-line="33"><code>마개 모양새</code>, <code>이음 모양새</code> 및  <code>뾰족뿔 제한</code> : 획 선 옵션입니다
+(자세한 내용은 <span class="menupath">Ofnuts → 편집 → 경로에 획 긋기</span>문서를 참조하십시오). 값이 <code>현재</code> 이면 스크립트가 Gimp에 현재 설정된 값을 사용함을 의미합니다.
+<code>뾰족뿔 제한</code> 설정은 <code>이음 모양새</code>가 명시적으로 <code>뾰족뿔</code>로 설정된 경우에만 사용됩니다.</li>
+</ul>
+<h3 id="section-4" data-line="40">사용상 주의 사항</h3>
+<ul data-line="42">
+<li data-line="42"><p data-line="42">작동 원리상 투명도를 구현하려면 마스크를 사용해야 하므로,
+투명도가 있는 그라디언트는 다음에 대해서는 사용할 수 없습니다.</p>
+<ul data-line="45">
+<li data-line="45">채널(퀵 마스크 포함)</li>
+<li data-line="46">레이어 마스크</li>
+<li data-line="47">이미 마스크가 있는 레이어</li>
+</ul>
+</li>
+<li data-line="49"><p data-line="49">그라디언트의 불투명도는 레이어의 불투명도를 설정합니다. 그라디언트는 기존 픽셀 위에 덧그리는 것이 아닙니다.
+그다디언트가 해당 픽셀을 완전히 바꿉니다.</p>
+</li>
+<li data-line="51"><p data-line="51">경로를 사용하여 선택 영역을 만들면 그라디언트의 절반만 렌더링할 수 있습니다.</p>
+</li>
+</ul>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p data-line="38">(역주:<code>매우 세밀함</code> 정밀도와 <code>세밀함</code> 정밀도)<a href="#fnref:1" class="footnote-back-ref">↩</a></p>
+</li>
+</ol>
+</div>
+
+                <script>
+                if(typeof mermaid!=='undefined'){mermaid.run();}
+                </script>
+                </body>
+            </html>
+            
