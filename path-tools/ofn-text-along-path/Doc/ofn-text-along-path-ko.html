@@ -318,176 +318,177 @@ blockquote > :last-child {
 <li data-line="60">경로의 각 부경로에 텍스트의 한 줄씩 사용되는 기능함수. multi(다중) 모드</li>
 </ul>
 <p data-line="62"><strong>경로 목록 창</strong>에서 유도선 경로로 사용될 경로에서 우클릭해서 호출. <code>도구</code> 하위 메뉴에 있음.</p>
-<h2 id="section-1" data-line="64">선택 사항</h2>
-<h3 id="text" data-line="66">Text(글)</h3>
-<p data-line="68">글</p>
-<ul data-line="70">
-<li data-line="70">표준 모드: 한 줄 텍스트. 텍스트 경로의 너비가, 유도선 경로의 최단 부경로의 폭보다 넓어지면 안 됨.</li>
-<li data-line="71">다중 모드: 경로로 변환된, 텍스트의 각 줄의 너비가, 대응하는 부경로보다 짧아야 함.
+<p data-line="64"><img src="./images/Menu.png" alt="Menu"></p>
+<h2 id="section-1" data-line="66">선택 사항</h2>
+<h3 id="text" data-line="68">Text(글)</h3>
+<p data-line="70">글</p>
+<ul data-line="72">
+<li data-line="72">표준 모드: 한 줄 텍스트. 텍스트 경로의 너비가, 유도선 경로의 최단 부경로의 폭보다 넓어지면 안 됨.</li>
+<li data-line="73">다중 모드: 경로로 변환된, 텍스트의 각 줄의 너비가, 대응하는 부경로보다 짧아야 함.
 텍스트의 줄 수와 유도선 경로 안의 부경로의 개수가 똑같아야 함.</li>
 </ul>
-<h3 id="spacer" data-line="74">Spacer(사이 띄움 문자열)</h3>
-<p data-line="76"><code>반복됨</code> 레이아웃을 사용할 때, 반복되는 텍스트의 사이에 넣을 문자열.
+<h3 id="spacer" data-line="76">Spacer(사이 띄움 문자열)</h3>
+<p data-line="78"><code>반복됨</code> 레이아웃을 사용할 때, 반복되는 텍스트의 사이에 넣을 문자열.
 열린 부경로에서 텍스트의 사본 '사이'에만 넣어짐.
 닫힌 경로에서, 각 텍스트의 끝에 더해짐.</p>
-<h3 id="font-name" data-line="80">Font name(글꼴 이름)</h3>
-<p data-line="82">비워 두면, 현재 글꼴(텍스트 도구에서 선택한 글꼴)을 사용.</p>
-<h3 id="font-size" data-line="84">Font size(글꼴 크기)</h3>
-<p data-line="86">픽셀 단위의 크기</p>
-<h3 id="layout" data-line="88">Layout(배치)</h3>
-<ul data-line="90">
-<li data-line="90"><code>왼쪽 맞춤</code>: 텍스트의 원래 너비는 변경하지 않고, 부경로의 시작부분에 왼쪽을 맞춤.</li>
-<li data-line="91"><code>오른쪽 맞춤</code>:  텍스트 경로의 원래 너비는 변경하지 않고, 부경로의 끝부분에
+<h3 id="font-name" data-line="82">Font name(글꼴 이름)</h3>
+<p data-line="84">비워 두면, 현재 글꼴(텍스트 도구에서 선택한 글꼴)을 사용.</p>
+<h3 id="font-size" data-line="86">Font size(글꼴 크기)</h3>
+<p data-line="88">픽셀 단위의 크기</p>
+<h3 id="layout" data-line="90">Layout(배치)</h3>
+<ul data-line="92">
+<li data-line="92"><code>왼쪽 맞춤</code>: 텍스트의 원래 너비는 변경하지 않고, 부경로의 시작부분에 왼쪽을 맞춤.</li>
+<li data-line="93"><code>오른쪽 맞춤</code>:  텍스트 경로의 원래 너비는 변경하지 않고, 부경로의 끝부분에
 오른쪽을 맞춤</li>
-<li data-line="93"><code>중심 맞춤</code>:  텍스트의 원래 너비는 변경하지 않고, 부경로의 중간부분에 가운데를 맞춤</li>
-<li data-line="94"><code>양쪽 맞춤</code>: 텍스트가 유도선 안 부경로의 전체 길이를 채우도록 문자 사이에 여분의
+<li data-line="95"><code>중심 맞춤</code>:  텍스트의 원래 너비는 변경하지 않고, 부경로의 중간부분에 가운데를 맞춤</li>
+<li data-line="96"><code>양쪽 맞춤</code>: 텍스트가 유도선 안 부경로의 전체 길이를 채우도록 문자 사이에 여분의
 공간을 삽입.</li>
-<li data-line="96"><code>반복됨</code>: 부경로를 채우도록 텍스트를 반복한 후, 모자라면 너비를 늘임.
+<li data-line="98"><code>반복됨</code>: 부경로를 채우도록 텍스트를 반복한 후, 모자라면 너비를 늘임.
 <code>스페이서</code> 텍스트가 있으면 각 텍스트 사이에 놓음.</li>
 </ul>
-<p data-line="99"><img src="./images/Layouts.png" alt="Layouts"></p>
-<h3 id="use-kerning" data-line="101">Use kerning(커닝 사용)</h3>
-<p data-line="103"><img src="./icons/external_link_icon.svg" alt="external link"><a href="https://en.wikipedia.org/wiki/Kerning">커닝</a>을
+<p data-line="101"><img src="./images/Layouts.png" alt="Layouts"></p>
+<h3 id="use-kerning" data-line="103">Use kerning(커닝 사용)</h3>
+<p data-line="105"><img src="./icons/external_link_icon.svg" alt="external link"><a href="https://en.wikipedia.org/wiki/Kerning">커닝</a>을
 사용하여 더 규칙적으로 글자 사이를 띄우려고 시도.
 커닝은 간접적으로 얻으며 모든 글꼴에서 잘 작동하지는 않음. 특히, 이탤릭 글꼴에서는 커닝 입력란은
 비워두는 것이 최선임.</p>
-<p data-line="108"><img src="./images/Kerning.png" alt="Kerning"></p>
-<h3 id="extra-spacing" data-line="110">Extra spacing(여분의 간격 두기)</h3>
-<p data-line="112">모든 글자 사이에 여분의 공간을 삽입해서 텍스트를 넓힘. 1 픽셀이 안 되는 값(소수점이 있는 수) 사용
+<p data-line="110"><img src="./images/Kerning.png" alt="Kerning"></p>
+<h3 id="extra-spacing" data-line="112">Extra spacing(여분의 간격 두기)</h3>
+<p data-line="114">모든 글자 사이에 여분의 공간을 삽입해서 텍스트를 넓힘. 1 픽셀이 안 되는 값(소수점이 있는 수) 사용
 가능.
 경로의 부경로에 타이트한 곡선이 있거나, <code>tilt wiggle</code> 옵션을 사용할 때, 문자 사이에 약간 더 여유
 공간을 주어서 문자가 겹치지 않게 할 때 유용함.
 <code>양쪽 맞춤</code> 레이아웃에서는 이 값을 무시. <code>반복됨</code> 레이아웃에서는 최소값으로 사용(실제
 문자 간격은 넓어질 수 있음).</p>
-<h3 id="height-reference" data-line="119">Height reference(높이 기준)</h3>
-<p data-line="121">유도선 기준의 수직 위치. <code>box(상자)</code>는 텍스트 도구였으면 텍스트 레이어의 바운더리였을 부분.</p>
-<p data-line="123"><img src="./images/HeightReference.png" alt="HeightReference"></p>
-<p data-line="125"><code>대문자 상단</code>, <code>대문자 중간</code>,
+<h3 id="height-reference" data-line="121">Height reference(높이 기준)</h3>
+<p data-line="123">유도선 기준의 수직 위치. <code>box(상자)</code>는 텍스트 도구였으면 텍스트 레이어의 바운더리였을 부분.</p>
+<p data-line="125"><img src="./images/HeightReference.png" alt="HeightReference"></p>
+<p data-line="127"><code>대문자 상단</code>, <code>대문자 중간</code>,
 <code>소문자 상단</code>, <code>소문자 중간</code>의 실제 높이는
 <code>X</code>의 대문자, 소문자를 그려 낸 것을 검사해서 계산됨. "예술적" 글꼴에는 잘 맞지 않음.</p>
-<h3 id="vertical-adjust" data-line="129">Vertical adjust(수직 조정)</h3>
-<p data-line="131">높이 조정. <code>높이 기준</code> 옵션에 더해짐. 1픽셀이 안 되는 값도 허용됨.</p>
-<h3 id="keep-upright" data-line="133">Keep upright(똑바로 있게 하기)</h3>
-<p data-line="135">'예'이면, 글자를 기울이지 않음.</p>
-<p data-line="137"><img src="./images/KeepUpright.png" alt="KeepUpright"></p>
-<h3 id="lateral-wiggle" data-line="139">Lateral wiggle(옆쪽 꿈틀)</h3>
-<p data-line="141">무작위로 좌우로 위치를 바꿀 최댓값. 평균 문자 너비에 대한 퍼센트로 표시.</p>
-<h3 id="vertical-wiggle" data-line="143">Vertical wiggle(수직 꿈틀)</h3>
-<p data-line="145">무작위로 상하로 위치를 바꿀 최댓값. <code>문자 상자</code>의 높이에 대한 퍼센트로 표시.</p>
-<h3 id="tilt-wiggle" data-line="148">Tilt wiggle(기울이기 꿈틀)</h3>
-<p data-line="150">각 문자를 무작위로 더 기울일 최댓값. 각도 단위로 표시.</p>
-<p data-line="152"><img src="./images/Wiggles.png" alt="Wiggles"></p>
-<h3 id="reverse-stroke-direction" data-line="154">Reverse stroke direction(부경로 방향 뒤집기)</h3>
-<p data-line="156">"예"로 하면 부경로의 방향과 반대로 문자를 배치함. 또한 문자가 부경로의 반대 편에 문자가 놓이게 됨.</p>
-<p data-line="158"><img src="./images/Reversed.png" alt="Reverse"></p>
-<h3 id="section-2" data-line="160">상자를 경로로 생성 및 표시</h3>
-<p data-line="162"><code>상자를 경로로 표시</code>는 최초에는 디버깅용이었음. 문자 상자에 사각형 경로를 생성해서,
+<h3 id="vertical-adjust" data-line="131">Vertical adjust(수직 조정)</h3>
+<p data-line="133">높이 조정. <code>높이 기준</code> 옵션에 더해짐. 1픽셀이 안 되는 값도 허용됨.</p>
+<h3 id="keep-upright" data-line="135">Keep upright(똑바로 있게 하기)</h3>
+<p data-line="137">'예'이면, 글자를 기울이지 않음.</p>
+<p data-line="139"><img src="./images/KeepUpright.png" alt="KeepUpright"></p>
+<h3 id="lateral-wiggle" data-line="141">Lateral wiggle(옆쪽 꿈틀)</h3>
+<p data-line="143">무작위로 좌우로 위치를 바꿀 최댓값. 평균 문자 너비에 대한 퍼센트로 표시.</p>
+<h3 id="vertical-wiggle" data-line="145">Vertical wiggle(수직 꿈틀)</h3>
+<p data-line="147">무작위로 상하로 위치를 바꿀 최댓값. <code>문자 상자</code>의 높이에 대한 퍼센트로 표시.</p>
+<h3 id="tilt-wiggle" data-line="150">Tilt wiggle(기울이기 꿈틀)</h3>
+<p data-line="152">각 문자를 무작위로 더 기울일 최댓값. 각도 단위로 표시.</p>
+<p data-line="154"><img src="./images/Wiggles.png" alt="Wiggles"></p>
+<h3 id="reverse-stroke-direction" data-line="156">Reverse stroke direction(부경로 방향 뒤집기)</h3>
+<p data-line="158">"예"로 하면 부경로의 방향과 반대로 문자를 배치함. 또한 문자가 부경로의 반대 편에 문자가 놓이게 됨.</p>
+<p data-line="160"><img src="./images/Reversed.png" alt="Reverse"></p>
+<h3 id="section-2" data-line="162">상자를 경로로 생성 및 표시</h3>
+<p data-line="164"><code>상자를 경로로 표시</code>는 최초에는 디버깅용이었음. 문자 상자에 사각형 경로를 생성해서,
 문자 경로의 위치가 정해진 방법과 이유를 더 확실하게 보여줌. 예술적 용도로 사용하도록 남겨 놓았음.
 실제 출력은 <code>생성하기</code> 선택에 따라 달라짐.</p>
-<p data-line="166"><code>생성하기</code>가 주 옵션임:</p>
-<ul data-line="168">
-<li data-line="168"><code>단일 경로 하나</code>:  경로 하나를 만들어서 모든 문자 출력을 담음. '상자'가
+<p data-line="168"><code>생성하기</code>가 주 옵션임:</p>
+<ul data-line="170">
+<li data-line="170"><code>단일 경로 하나</code>:  경로 하나를 만들어서 모든 문자 출력을 담음. '상자'가
 요청되면, 그 문자들에 대해 추가 경로가 하나가 만들어짐.</li>
-<li data-line="170"><code>부경로마다 경로 하나</code>: 유도선 경로 안에서, 문자들이 배치된 부경로마다 경로
+<li data-line="172"><code>부경로마다 경로 하나</code>: 유도선 경로 안에서, 문자들이 배치된 부경로마다 경로
 하나가 만들어짐. 움직그림에 특히 유용.
 '상자'가 요청되면, 각 부경로마다 추가로 경로 하나가 만들어짐.</li>
-<li data-line="173"><code>텍스트와 스페이서 경로를 분리</code>: 경로 두 개 생성. 하나는
+<li data-line="175"><code>텍스트와 스페이서 경로를 분리</code>: 경로 두 개 생성. 하나는
 <code>텍스트</code> 입력란의 모든
 문자용이고, 다른 하나는 <code>스페이서</code> 입력란의 모든 문자용임. 이 두 문자 부류의
 처리(색 등등)를 나중에 다르게 할 때 유용.
 '상자'가 요청되면, 경로 두 개가 더 생성됨. 하나는 텍스트 상자용이고 하나는 스페이서용임</li>
-<li data-line="178"><code>문자당 경로 하나</code>: 문자마다 경로 하나 생성. '상자'가 요청되면, 같은
+<li data-line="180"><code>문자당 경로 하나</code>: 문자마다 경로 하나 생성. '상자'가 요청되면, 같은
 경로에 상자가 추가됨. 즉, 각 경로가
 문자와 그 문자의 상자를 담음.</li>
 </ul>
-<p data-line="182"><img src="./images/RansomNote.png" alt="Boxes"></p>
-<h2 id="section-3" data-line="184">사용법 노트</h2>
-<h3 id="section-4" data-line="186">문자들</h3>
-<p data-line="188">대화창에 입력할 수 있고 글꼴 안에 있는 문자는 모두 사용 가능.
+<p data-line="184"><img src="./images/RansomNote.png" alt="Boxes"></p>
+<h2 id="section-3" data-line="186">사용법 노트</h2>
+<h3 id="section-4" data-line="188">문자들</h3>
+<p data-line="190">대화창에 입력할 수 있고 글꼴 안에 있는 문자는 모두 사용 가능.
 이것은 이모지 등등 가능한 유니코드 심볼 전체를 사용할 수 있음을 의미함.
 일반 키보드로 입력할 수 없는 문자는 문자표(또는 웹 페이지)에서 복사해서 붙여 넣을 수 있음.</p>
-<h3 id="section-5" data-line="192">경로</h3>
-<p data-line="194">이 플러그인은 경로 안의 모든 부경로를 사용함. 각 부경로는 독립된 단위로 간주함.
+<h3 id="section-5" data-line="194">경로</h3>
+<p data-line="196">이 플러그인은 경로 안의 모든 부경로를 사용함. 각 부경로는 독립된 단위로 간주함.
 이 플러그인이 제대로 작동하지 않으면, 간과된 부경로를 찾아 볼 것(특히, 단일-포인트 부경로들<a id="fnref:1" href="#fn:1" class="footnote-ref"><sup>1</sup></a>).</p>
-<h3 id="stroke-origin-and-direction" data-line="199">Stroke origin and direction(부경로 원점과 방향)</h3>
-<p data-line="201">텍스트는 부경로의 시작점부터 끝점까지 사용하여 배치됩니다.
+<h3 id="stroke-origin-and-direction" data-line="201">Stroke origin and direction(부경로 원점과 방향)</h3>
+<p data-line="203">텍스트는 부경로의 시작점부터 끝점까지 사용하여 배치됩니다.
 대부분의 겨우, 열린 부경로는 왼쪽에서 오른쪽으로 진행하고, 닫힌 경로는 시계방향으로 진행합니다.
 부경로가 하나뿐인 경로는, <code>뒤집기</code> 옵션으로 진행 방향을 바꿀 수 있습니다.
 부경로가 여러 개이면, 이 옵션은 부경로가 모두 잘못된 방향일 때만 유용합니다.</p>
-<p data-line="206">원처럼 닫힌 부경로의 원점은 결정하기 어려움.
+<p data-line="208">원처럼 닫힌 부경로의 원점은 결정하기 어려움.
 <span class="link-with-icon"><img src="./icons/external_link_icon.svg" alt="external link">
 <a href="https://www.gimp-forum.net/Thread-Paths-Basics">이 짧은 write-up(보충 논평)</a></span>이
 닫힌 경로의 부경로 원점을 변경하는 기교에 대해 상세 설명합니다.<a id="fnref:2" href="#fn:2" class="footnote-ref"><sup>2</sup></a></p>
-<h3 id="section-6" data-line="216">다른 원 둘레에 텍스트 놓기</h3>
-<p data-line="218">텍스트 하나는 위에 하나는 아래에 놓기.
+<h3 id="section-6" data-line="218">다른 원 둘레에 텍스트 놓기</h3>
+<p data-line="220">텍스트 하나는 위에 하나는 아래에 놓기.
 텍스트가 상단 및 하단에서 가운데 맞춤이 되도록 하는 두 가지 방법:</p>
-<ul data-line="221">
-<li data-line="221"><p data-line="221">완전한 원 유지하기:</p>
 <ul data-line="223">
-<li data-line="223">6시 눈금에서 원이 시작하는지 확인.<a id="fnref:3" href="#fn:3" class="footnote-ref"><sup>3</sup></a></li>
-<li data-line="224">경로 위에서 우클릭하고 <span class="menupath">도구 → 경로 따라 텍스트</span>를 실행하여 상단 텍스트를
+<li data-line="223"><p data-line="223">완전한 원 유지하기:</p>
+<ul data-line="225">
+<li data-line="225">6시 눈금에서 원이 시작하는지 확인.<a id="fnref:3" href="#fn:3" class="footnote-ref"><sup>3</sup></a></li>
+<li data-line="226">경로 위에서 우클릭하고 <span class="menupath">도구 → 경로 따라 텍스트</span>를 실행하여 상단 텍스트를
 배치(<code>가운데 맞춤</code> 배치를 사용)</li>
-<li data-line="226">원형 경로를 복제, 뒤집기 도구로 수직으로 뒤집기(도구 옵션에서 <code>경로 뒤집기</code> 옵션을 선택한
+<li data-line="228">원형 경로를 복제, 뒤집기 도구로 수직으로 뒤집기(도구 옵션에서 <code>경로 뒤집기</code> 옵션을 선택한
 상태여야 함)</li>
-<li data-line="228">같은 방법으로 하단 텍스트를 배치. 원을 뒤집으면 방향도 뒤집히므로 <code>경로 방향 뒤집기</code> 옵션
+<li data-line="230">같은 방법으로 하단 텍스트를 배치. 원을 뒤집으면 방향도 뒤집히므로 <code>경로 방향 뒤집기</code> 옵션
 사용 불필요.</li>
 </ul>
 </li>
 </ul>
-<ul data-line="236">
-<li data-line="236"><p data-line="236">원을 반쪽으로 나누기:
+<ul data-line="238">
+<li data-line="238"><p data-line="238">원을 반쪽으로 나누기:
 <br><span style="font-size: smaller">(이 방법을 사용하려면 상단과 하단 텍스트가 각각 반원보다 짧아야 함)</span></p>
-<ul data-line="239">
-<li data-line="239">수평 지름 상에 앵커가 없으면 추가.</li>
-<li data-line="240">원을 복제</li>
-<li data-line="241">하나는 아래 반을 도려 내고, 다른 하나는 위의 반쪽을 도려 냄<a id="fnref:4" href="#fn:4" class="footnote-ref"><sup>4</sup></a></li>
-<li data-line="242">상단 반원 경로를 선택하고 <span class="menupath">도구 → 경로 따라 텍스트</span>로 상단 텍스트를 배치.
+<ul data-line="241">
+<li data-line="241">수평 지름 상에 앵커가 없으면 추가.</li>
+<li data-line="242">원을 복제</li>
+<li data-line="243">하나는 아래 반을 도려 내고, 다른 하나는 위의 반쪽을 도려 냄<a id="fnref:4" href="#fn:4" class="footnote-ref"><sup>4</sup></a></li>
+<li data-line="244">상단 반원 경로를 선택하고 <span class="menupath">도구 → 경로 따라 텍스트</span>로 상단 텍스트를 배치.
 이때 <code>가운데 맞춤</code> 배치 사용.</li>
-<li data-line="244">하단 반원 경로로 선택하고 마찬가지로 하단 텍스트 배치. 이때 보통은
+<li data-line="246">하단 반원 경로로 선택하고 마찬가지로 하단 텍스트 배치. 이때 보통은
 <code>경로 방향 뒤집기</code> 옵션을 사용해야 함.</li>
 </ul>
 </li>
 </ul>
-<p data-line="251">뒤집힌 경로를 사용한 예. 유니코드 "Anchor(닻)" 기호(⚓) (<code>U+2693</code>)와  "Roboto Bold" 글꼴
+<p data-line="253">뒤집힌 경로를 사용한 예. 유니코드 "Anchor(닻)" 기호(⚓) (<code>U+2693</code>)와  "Roboto Bold" 글꼴
 사용:</p>
-<p data-line="254"><img src="./images/CircleAndSymbols.png" alt="Circle and Symbols"></p>
-<p data-line="256">텍스트의 위쪽과 아래쪽 레이아웃이 동일하도록 하려면 두 텍스트 부분 모두에 <code>대문자/소문자 중간</code>을
+<p data-line="256"><img src="./images/CircleAndSymbols.png" alt="Circle and Symbols"></p>
+<p data-line="258">텍스트의 위쪽과 아래쪽 레이아웃이 동일하도록 하려면 두 텍스트 부분 모두에 <code>대문자/소문자 중간</code>을
 사용하거나, 한쪽에는 <code>대문자/소문자 상단</code>을, 다른 쪽에는 <code>기준선</code>을 사용하십시오.</p>
-<h3 id="section-7" data-line="259">경로 생성</h3>
-<p data-line="261">간단하게 설명하기 위해 경로 생성 옵션은 유용한 경우로 제한했습니다.
+<h3 id="section-7" data-line="261">경로 생성</h3>
+<p data-line="263">간단하게 설명하기 위해 경로 생성 옵션은 유용한 경우로 제한했습니다.
 하지만 스크립트를 여러 번 실행하여 생성 옵션을 조합하고 불필요한 출력은 제거할 수 있습니다.</p>
-<h3 id="section-8" data-line="264">기타 유용한 스크립트</h3>
-<p data-line="266">다음과 같은 여러 기능을 제공하는 제
+<h3 id="section-8" data-line="266">기타 유용한 스크립트</h3>
+<p data-line="268">다음과 같은 여러 기능을 제공하는 제
 <span class="link-with-icon"><img src="./icons/external_link_icon.svg" alt="web">
 <a href="https://sourceforge.net/projects/gimp-path-tools/files/scripts/">ofn-path-edits scripts</a></span>를 참조하세요.</p>
-<ul data-line="271">
-<li data-line="271">경로의 스트로크 확인: 개수, 순서, 시작/끝점</li>
-<li data-line="272">스트로크 반전</li>
-<li data-line="273">경로에서 스트로크 추출</li>
-<li data-line="274">스트로크 연결</li>
+<ul data-line="273">
+<li data-line="273">경로의 스트로크 확인: 개수, 순서, 시작/끝점</li>
+<li data-line="274">스트로크 반전</li>
+<li data-line="275">경로에서 스트로크 추출</li>
+<li data-line="276">스트로크 연결</li>
 </ul>
-<p data-line="276">알려진 앵커를 사용하여 원을 쉽게 만들거나 동심원을 쉽게 만들 수 있는 제
+<p data-line="278">알려진 앵커를 사용하여 원을 쉽게 만들거나 동심원을 쉽게 만들 수 있는 제
 <span class="link-with-icon"><img src="./icons/external_link_icon.svg" alt="web">
 <a href="https://sourceforge.net/projects/gimp-path-tools/files/scripts/">ofn-path-to-shape script</a></span>도 참조하세요.</p>
 <div class="footnotes">
 <hr>
 <ol>
 <li id="fn:1">
-<p data-line="197">(역주: 경로 목록 창에서 우클릭하고 '경로 편집'하면 앵커 하나뿐인 부경로가 있을 때, 편집할 수 있음.)<a href="#fnref:1" class="footnote-back-ref">↩</a></p>
+<p data-line="199">(역주: 경로 목록 창에서 우클릭하고 '경로 편집'하면 앵커 하나뿐인 부경로가 있을 때, 편집할 수 있음.)<a href="#fnref:1" class="footnote-back-ref">↩</a></p>
 </li>
 <li id="fn:2">
-<p data-line="211">(역주: 보충 논평 중에서 이 페이지와 관련된 요점은, 닫힌 부경로의 선분 하나를
+<p data-line="213">(역주: 보충 논평 중에서 이 페이지와 관련된 요점은, 닫힌 부경로의 선분 하나를
 Ctrl+Space+클릭으로 지웠다가 끝노드를 클릭, 다른 끝 노드를 Ctrl+클릭 해서 다시 이으면 그 위치가 첫
 앵커와 마지막 앵커로 바뀐다는 것)<a href="#fnref:2" class="footnote-back-ref">↩</a></p>
 </li>
 <li id="fn:3">
-<p data-line="231">(역주: 왼쪽 눈금자에서부터 끌어서 수직 안내선 생성, 경로 도구 선택, 원의 반지름과 원주의
+<p data-line="233">(역주: 왼쪽 눈금자에서부터 끌어서 수직 안내선 생성, 경로 도구 선택, 원의 반지름과 원주의
 6시 눈금이 될 곳을 안내선에 맞추어 클릭해서 경로 생성, 생성된 도구를 우클릭하고 <span class="menupath">도형/선분
 상에 → 원</span>에서 <code>반지름</code>와 <code>연속적</code>을 선택하고 확인을 누르면 정확히 6시 눈금에서
 시작.)<a href="#fnref:3" class="footnote-back-ref">↩</a></p>
 </li>
 <li id="fn:4">
-<p data-line="247">(역주: 경로 도구로, 도려낼 부분에서 지름과 가까운 선분 두 개를 Ctrl+Shift+클릭해서 제거.
+<p data-line="249">(역주: 경로 도구로, 도려낼 부분에서 지름과 가까운 선분 두 개를 Ctrl+Shift+클릭해서 제거.
 선택 도구로 도려낼 부경로의 일부를 선택. 경로를 우클릭. <span class="menupath">편집 → 부경로 삭제</span><a href="#fnref:4" class="footnote-back-ref">↩</a></p>
 </li>
 </ol>

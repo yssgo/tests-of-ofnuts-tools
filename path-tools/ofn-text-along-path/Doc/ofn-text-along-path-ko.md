@@ -62,6 +62,8 @@ ofn-text-along-path
 
 **경로 목록 창**에서 유도선 경로로 사용될 경로에서 우클릭해서 호출. `도구` 하위 메뉴에 있음. 
 
+![Menu](./images/Menu.png)
+
 ## 선택 사항
 
 ### Text(글)
